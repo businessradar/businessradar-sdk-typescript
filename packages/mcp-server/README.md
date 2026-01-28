@@ -9,8 +9,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:stainless-sdks/businessradar-typescript.git
-cd businessradar-typescript
+git clone git@github.com:businessradar/businessradar-sdk-typescript.git
+cd businessradar-sdk-typescript
 ./scripts/bootstrap
 ./scripts/build
 ```
@@ -40,7 +40,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "businessradar_api": {
       "command": "node",
-      "args": ["/path/to/local/businessradar-typescript/packages/mcp-server"],
+      "args": ["/path/to/local/businessradar-sdk-typescript/packages/mcp-server"],
       "env": {
         "BUSINESSRADAR_API_KEY": "My API Key"
       }
