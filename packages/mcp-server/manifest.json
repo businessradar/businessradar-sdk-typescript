@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stainless-sdks/businessradar-typescript.git"
+    "url": "git+https://github.com/businessradar/businessradar-sdk-typescript.git"
   },
-  "homepage": "https://github.com/stainless-sdks/businessradar-typescript/tree/main/packages/mcp-server#readme",
+  "homepage": "https://github.com/businessradar/businessradar-sdk-typescript/tree/main/packages/mcp-server#readme",
   "documentation": "https://api.businessradar.com/ext/v3/",
   "server": {
     "type": "node",
