@@ -1,12 +1,12 @@
 {
   "name": "businessradar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The official TypeScript library for the Business Radar API",
   "author": "Business Radar <support@businessradar.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/businessradar-typescript",
+  "repository": "github:businessradar/businessradar-sdk-typescript",
   "license": "Apache-2.0",
   "packageManager": "pnpm@10.24.0",
   "files": [
