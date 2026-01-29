@@ -9,7 +9,10 @@ export class Compliance extends APIResource {
   /**
    * Create a new compliance check.
    */
-  create(body: ComplianceCreateParams, options?: RequestOptions): APIPromise<ComplianceCreateResponse> {
+  create(
+    body: ComplianceCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ComplianceCreateResponse> {
     return this._client.post('/ext/v3/compliance', { body, ...options });
   }
 
@@ -545,13 +548,13 @@ export namespace ComplianceRetrieveResponse {
 }
 
 export interface ComplianceCreateParams {
-  company_id: string;
-
   /**
    * If enabled all found entities UBOs, directors, shareholders will be screened.
    * This can have an high cost impact.
    */
   all_entities_screening_enabled?: boolean;
+
+  company_id?: string | null;
 
   directors_screening_enabled?: boolean;
 
