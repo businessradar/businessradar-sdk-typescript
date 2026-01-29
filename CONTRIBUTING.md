@@ -55,12 +55,12 @@ $ cd businessradar-sdk-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link businessradar
+$ yarn link @businessradar/businessradar
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global businessradar
+$ pnpm link -—global @businessradar/businessradar
 ```
 
 ## Running tests

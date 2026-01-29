@@ -1,5 +1,5 @@
 {
-  "name": "businessradar",
+  "name": "@businessradar/businessradar",
   "version": "0.0.2",
   "description": "The official TypeScript library for the Business Radar API",
   "author": "Business Radar <support@businessradar.com>",

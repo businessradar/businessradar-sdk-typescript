@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "businessradar/*": ["./dist/src/*"],
-      "businessradar": ["./dist/src/index.ts"]
+      "@businessradar/businessradar/*": ["./dist/src/*"],
+      "@businessradar/businessradar": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

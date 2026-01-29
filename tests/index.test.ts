@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'businessradar/core/api-promise';
+import { APIPromise } from '@businessradar/businessradar/core/api-promise';
 
 import util from 'node:util';
-import BusinessRadar from 'businessradar';
-import { APIUserAbortError } from 'businessradar';
+import BusinessRadar from '@businessradar/businessradar';
+import { APIUserAbortError } from '@businessradar/businessradar';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

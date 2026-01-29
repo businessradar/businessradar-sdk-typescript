@@ -55,8 +55,8 @@ COPY --from=builder /build/packages/mcp-server/node_modules ./packages/mcp-serve
 # Copy node_modules from root (pnpm hoists dependencies here)
 COPY --from=builder /build/node_modules ./node_modules
 
-# Copy the built businessradar into node_modules
-COPY --from=builder /build/dist ./node_modules/businessradar
+# Copy the built @businessradar/businessradar into node_modules
+COPY --from=builder /build/dist ./node_modules/@businessradar/businessradar
 
 # Change ownership to nodejs user
 RUN chown -R nodejs:nodejs /app

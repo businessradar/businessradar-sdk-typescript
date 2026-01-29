@@ -74,6 +74,9 @@ importers:
 
   packages/mcp-server:
     dependencies:
+      '@businessradar/businessradar':
+        specifier: workspace:*
+        version: link:../..
       '@cloudflare/cabidela':
         specifier: ^0.2.4
         version: 0.2.4
@@ -83,9 +86,6 @@ importers:
       '@valtown/deno-http-worker':
         specifier: ^0.0.21
         version: 0.0.21
-      businessradar:
-        specifier: workspace:*
-        version: link:../..
       cors:
         specifier: ^2.8.5
         version: 2.8.5
