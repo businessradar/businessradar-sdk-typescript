@@ -29,6 +29,17 @@ describe('resource compliance', () => {
           all_entities_screening_enabled: true,
           company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           directors_screening_enabled: true,
+          entities: [
+            {
+              name: 'x',
+              country: 'xx',
+              date_of_birth: '2019-12-27',
+              entity_type: 'individual',
+              first_name: 'first_name',
+              last_name: 'last_name',
+              middle_name: 'middle_name',
+            },
+          ],
           ownership_screening_threshold: 0,
         },
         { path: '/_stainless_unknown_path' },
