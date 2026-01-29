@@ -9,8 +9,8 @@ const client = new BusinessRadar({
 
 describe('resource compliance', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.compliance.create({ company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
+  test.skip('create', async () => {
+    const responsePromise = client.compliance.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,13 +21,19 @@ describe('resource compliance', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.compliance.create({
-      company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      all_entities_screening_enabled: true,
-      directors_screening_enabled: true,
-      ownership_screening_threshold: 0,
-    });
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.compliance.create(
+        {
+          all_entities_screening_enabled: true,
+          company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          directors_screening_enabled: true,
+          ownership_screening_threshold: 0,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Prism tests are disabled
