@@ -1,6 +1,6 @@
 {
-  "name": "businessradar-mcp",
-  "version": "0.1.0",
+  "name": "@businessradar/businessradar-mcp",
+  "version": "0.2.0",
   "description": "The official MCP Server for the Business Radar API",
   "author": "Business Radar <support@businessradar.com>",
   "types": "dist/index.d.ts",
@@ -68,8 +68,8 @@
     "tsconfig-paths": "^4.0.0"
   },
   "imports": {
-    "businessradar-mcp": ".",
-    "businessradar-mcp/*": "./src/*"
+    "@businessradar/businessradar-mcp": ".",
+    "@businessradar/businessradar-mcp/*": "./src/*"
   },
   "exports": {
     ".": {

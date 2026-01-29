@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "businessradar-mcp/*": ["./src/*"],
-      "businessradar-mcp": ["./src/index.ts"]
+      "@businessradar/businessradar-mcp/*": ["./src/*"],
+      "@businessradar/businessradar-mcp": ["./src/index.ts"]
     },
     "noEmit": true,
 

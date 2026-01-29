@@ -1,6 +1,6 @@
 {
   "dxt_version": "0.2",
-  "name": "businessradar-mcp",
+  "name": "@businessradar/businessradar-mcp",
   "version": "0.0.1",
   "description": "The official MCP Server for the Business Radar API",
   "author": {

@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^businessradar-mcp$': '<rootDir>/src/index.ts',
-    '^businessradar-mcp/(.*)$': '<rootDir>/src/$1',
+    '^@businessradar/businessradar-mcp$': '<rootDir>/src/index.ts',
+    '^@businessradar/businessradar-mcp/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['scripts'],
