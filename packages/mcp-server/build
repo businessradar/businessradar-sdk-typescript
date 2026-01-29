@@ -29,7 +29,7 @@ cp tsconfig.dist-src.json dist/src/tsconfig.json
 
 chmod +x dist/index.js
 
-DIST_PATH=./dist PKG_IMPORT_PATH=businessradar-mcp/ node ../../scripts/utils/postprocess-files.cjs
+DIST_PATH=./dist PKG_IMPORT_PATH=@businessradar/businessradar-mcp/ node ../../scripts/utils/postprocess-files.cjs
 
 # mcp bundle
 rm -rf dist-bundle businessradar_businessradar_api.mcpb; mkdir dist-bundle
