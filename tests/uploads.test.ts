@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'businessradar/internal/to-file';
-import { toFile } from 'businessradar/core/uploads';
+import type { ResponseLike } from '@businessradar/businessradar/internal/to-file';
+import { toFile } from '@businessradar/businessradar/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('businessradar/core/uploads');
+    const uploads = await import('@businessradar/businessradar/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(
