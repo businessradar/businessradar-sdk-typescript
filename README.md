@@ -6,7 +6,7 @@ This library provides convenient access to the Business Radar REST API from serv
 
 The REST API documentation can be found on [api.businessradar.com](https://api.businessradar.com/ext/v3/). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainless.com/).
+Reach out to support@businessradar.com for any technical questions/suggestions.
 
 ## MCP Server
 
@@ -393,9 +393,3 @@ The following runtimes are supported:
 - Nitro v2.6 or greater.
 
 Note that React Native is not supported at this time.
-
-If you are interested in other runtime environments, please open or upvote an issue on GitHub.
-
-## Contributing
-
-See [the contributing documentation](./CONTRIBUTING.md).
