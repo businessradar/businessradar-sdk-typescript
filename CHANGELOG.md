@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-01-29)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([2d6ceb0](https://github.com/businessradar/businessradar-sdk-typescript/commit/2d6ceb0137e5e9610a6f7c7bca3515710fd4f264))
+
 ## 0.2.0 (2026-01-29)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.1.0...v0.2.0)
