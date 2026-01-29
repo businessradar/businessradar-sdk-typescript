@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0 (2026-01-29)
+
+Full Changelog: [v0.0.2...v0.1.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.0.2...v0.1.0)
+
+### Features
+
+* **api:** manual updates ([af28d24](https://github.com/businessradar/businessradar-sdk-typescript/commit/af28d240073892d819cb9492da909b605315c311))
+* **api:** manual updates ([0a71f60](https://github.com/businessradar/businessradar-sdk-typescript/commit/0a71f6055d1bec0d37a1e41d7a47bd09fbfdd37d))
+
+
+### Chores
+
+* **mcp:** up tsconfig lib version to es2022 ([6249487](https://github.com/businessradar/businessradar-sdk-typescript/commit/6249487c6454a4a0057bfcc72f607390571daa35))
+
 ## 0.0.2 (2026-01-28)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.0.1...v0.0.2)
