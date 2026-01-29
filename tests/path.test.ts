@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'businessradar/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from '@businessradar/businessradar/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

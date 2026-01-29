@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'businessradar/internal/uploads';
-import { toFile } from 'businessradar/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@businessradar/businessradar/internal/uploads';
+import { toFile } from '@businessradar/businessradar/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

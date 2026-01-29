@@ -7,21 +7,21 @@ import {
   ListToolsRequestSchema,
   SetLevelRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from 'businessradar';
-import BusinessRadar from 'businessradar';
+import { ClientOptions } from '@businessradar/businessradar';
+import BusinessRadar from '@businessradar/businessradar';
 import { codeTool } from './code-tool';
 import docsSearchTool from './docs-search-tool';
 import { McpOptions } from './options';
 import { HandlerFunction, McpTool } from './types';
 
 export { McpOptions } from './options';
-export { ClientOptions } from 'businessradar';
+export { ClientOptions } from '@businessradar/businessradar';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'businessradar_api',
-      version: '0.0.2',
+      name: 'businessradar_businessradar_api',
+      version: '0.1.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );

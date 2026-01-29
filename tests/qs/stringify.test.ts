@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from 'businessradar/internal/qs';
-import { encode } from 'businessradar/internal/qs/utils';
-import { StringifyOptions } from 'businessradar/internal/qs/types';
+import { stringify } from '@businessradar/businessradar/internal/qs';
+import { encode } from '@businessradar/businessradar/internal/qs/utils';
+import { StringifyOptions } from '@businessradar/businessradar/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 

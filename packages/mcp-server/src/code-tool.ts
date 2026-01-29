@@ -4,7 +4,7 @@ import { McpTool, Metadata, ToolCallResult, asErrorResult, asTextContentResult }
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { readEnv, requireValue } from './server';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
-import { BusinessRadar } from 'businessradar';
+import { BusinessRadar } from '@businessradar/businessradar';
 
 const prompt = `Runs JavaScript code to interact with the Business Radar API.
 
