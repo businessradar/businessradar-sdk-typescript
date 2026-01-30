@@ -76,11 +76,13 @@ Types:
 - <code><a href="./src/resources/compliance.ts">ComplianceCheckScoreEnum</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceCreateResponse</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceRetrieveResponse</a></code>
+- <code><a href="./src/resources/compliance.ts">ComplianceListResultsResponse</a></code>
 
 Methods:
 
 - <code title="post /ext/v3/compliance">client.compliance.<a href="./src/resources/compliance.ts">create</a>({ ...params }) -> ComplianceCreateResponse</code>
 - <code title="get /ext/v3/compliance/{external_id}">client.compliance.<a href="./src/resources/compliance.ts">retrieve</a>(externalID) -> ComplianceRetrieveResponse</code>
+- <code title="get /ext/v3/compliance/{external_id}/results">client.compliance.<a href="./src/resources/compliance.ts">listResults</a>(externalID, { ...params }) -> ComplianceListResultsResponsesNextKey</code>
 
 # Portfolios
 
