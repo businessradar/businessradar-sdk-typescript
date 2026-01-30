@@ -10,8 +10,9 @@ export class Compliance extends APIResource {
   /**
    * ### Create Compliance Check (Asynchronous)
    *
-   * Initiate a new compliance screening. Once posted, Business Radar processes the
-   * request in the background.
+   * Initiate a new compliance screening for either a specific company or a custom
+   * list of entities. Once posted, Business Radar processes the request in the
+   * background.
    *
    * To check the progress and/or retrieve the final result, you can use the
    * [GET /compliance/{external_id}](/ext/v3/#/ext/ext_v3_compliance_retrieve)
