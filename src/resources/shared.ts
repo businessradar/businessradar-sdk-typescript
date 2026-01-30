@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 /**
- * Portfolio Company Detail Serializer.
+ * ### Portfolio Company Detail (Simplified)
  *
- * Alternative serializer for the Company model which is limited.
+ * A lightweight data structure for company identification (UUID, DUNS, Name,
+ * Country).
  */
 export interface PortfolioCompanyDetailRequest {
   external_id: string;

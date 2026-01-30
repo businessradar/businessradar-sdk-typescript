@@ -8,7 +8,24 @@ import { path } from '../internal/utils/path';
 
 export class Compliance extends APIResource {
   /**
-   * Create a new compliance check.
+   * ### Create Compliance Check (Asynchronous)
+   *
+   * Initiate a new compliance screening using one of two methods:
+   *
+   * 1. **Company-based screening**: Provide a `company_id` to automatically screen
+   *    the company and its associated entities (like UBOs and directors). You can
+   *    optionally include a list of additional `entities` to be screened alongside
+   *    the company.
+   *
+   * 2. **Custom entity screening**: Provide a list of `entities` without a
+   *    `company_id` to screen specific individuals or organizations that are not
+   *    necessarily affiliated with a company in our database.
+   *
+   * Once posted, Business Radar processes the request in the background.
+   *
+   * To check the progress and/or retrieve the final result, you can use the
+   * [GET /compliance/{external_id}](/ext/v3/#/ext/ext_v3_compliance_retrieve)
+   * endpoint.
    */
   create(
     body: ComplianceCreateParams | null | undefined = {},
@@ -18,14 +35,20 @@ export class Compliance extends APIResource {
   }
 
   /**
-   * Get compliance check details.
+   * ### Compliance Check Status
+   *
+   * Check the current status, progress, and high-level scores of a specific
+   * compliance check.
    */
   retrieve(externalID: string, options?: RequestOptions): APIPromise<ComplianceRetrieveResponse> {
     return this._client.get(path`/ext/v3/compliance/${externalID}`, options);
   }
 
   /**
-   * List compliance results.
+   * ### List Compliance Results
+   *
+   * Retrieve all findings for a compliance check. Results can be filtered by entity,
+   * type of finding (e.g., Sanction, PEP), and confidence score.
    */
   listResults(
     externalID: string,
@@ -50,7 +73,9 @@ export type ComplianceListResultsResponsesNextKey = NextKey<ComplianceListResult
 export type ComplianceCheckScoreEnum = 'low' | 'medium' | 'high';
 
 /**
- * Compliance check create serializer.
+ * ### Compliance Check
+ *
+ * Used for creating a minimal compliance check record.
  */
 export interface ComplianceCreateResponse {
   external_id: string;
@@ -151,7 +176,7 @@ export namespace ComplianceRetrieveResponse {
 }
 
 /**
- * Compliance entity result serializer.
+ * Compliance entity result.
  */
 export interface ComplianceListResultsResponse {
   addresses: Array<ComplianceListResultsResponse.Address>;
@@ -289,7 +314,7 @@ export interface ComplianceListResultsResponse {
 
 export namespace ComplianceListResultsResponse {
   /**
-   * Compliance entity result address serializer.
+   * Compliance entity result address.
    */
   export interface Address {
     city?: string | null;
@@ -615,7 +640,7 @@ export namespace ComplianceListResultsResponse {
   }
 
   /**
-   * Compliance entity result source serializer.
+   * Compliance entity result source.
    */
   export interface Source {
     url: string;
@@ -632,7 +657,7 @@ export namespace ComplianceListResultsResponse {
   }
 
   /**
-   * Compliance entity result tag serializer.
+   * Compliance entity result tag.
    */
   export interface Tag {
     tag: string;
@@ -663,7 +688,10 @@ export interface ComplianceCreateParams {
 
 export namespace ComplianceCreateParams {
   /**
-   * Compliance entity request serializer.
+   * ### Compliance Entity Request
+   *
+   * Represents an entity (individual or organization) to be included in a compliance
+   * screening.
    */
   export interface Entity {
     name: string;

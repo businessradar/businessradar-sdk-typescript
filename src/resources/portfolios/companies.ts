@@ -11,7 +11,14 @@ import { path } from '../../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Register a new Portfolio Company.
+   * ### Register Portfolio Company (Asynchronous)
+   *
+   * Register and add a new company to the portfolio. Once posted, Business Radar
+   * processes the request in the background.
+   *
+   * To check the progress and/or retrieve the final result, you can use the
+   * [GET /registrations/{registration_id}](/ext/v3/#/ext/ext_v3_registrations_retrieve)
+   * endpoint.
    */
   create(
     portfolioID: string,
@@ -22,7 +29,11 @@ export class Companies extends APIResource {
   }
 
   /**
-   * List And Create Portfolio Companies.
+   * ### Portfolio Companies
+   *
+   * Manage companies within a specific portfolio. - **GET**: List all companies
+   * currently in the portfolio. - **POST**: Register and add a new company to the
+   * portfolio.
    */
   list(
     portfolioID: string,
@@ -37,7 +48,9 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Remove Portfolio Companies.
+   * ### Remove Portfolio Company
+   *
+   * Remove a company from a portfolio using its internal `external_id`.
    */
   delete(externalID: string, params: CompanyDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { portfolio_id } = params;
@@ -51,11 +64,17 @@ export class Companies extends APIResource {
 export type CompanyListResponsesNextKey = NextKey<CompanyListResponse>;
 
 /**
- * Portfolio Company Instance.
+ * ### Portfolio-Company
+ *
+ * Represents the association between a company and a portfolio, including
+ * portfolio- specific data such as `customer_reference`.
  */
 export interface CompanyListResponse {
   /**
-   * Company List.
+   * ### Company List
+   *
+   * Provides a detailed overview of a company, including identification, contact
+   * info, and aggregated news/review metrics.
    */
   company: CompanyListResponse.Company;
 
@@ -69,7 +88,10 @@ export interface CompanyListResponse {
 
 export namespace CompanyListResponse {
   /**
-   * Company List.
+   * ### Company List
+   *
+   * Provides a detailed overview of a company, including identification, contact
+   * info, and aggregated news/review metrics.
    */
   export interface Company {
     /**
@@ -401,9 +423,10 @@ export namespace CompanyListResponse {
 
 export interface CompanyCreateParams {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Shared.PortfolioCompanyDetailRequest | null;
 

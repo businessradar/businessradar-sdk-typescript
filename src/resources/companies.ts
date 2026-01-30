@@ -10,7 +10,17 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Register new Company to Business Radar.
+   * ### Register Company (Asynchronous)
+   *
+   * Register a new company to Business Radar using its identification details. Once
+   * posted, Business Radar processes the request in the background.
+   *
+   * To check the progress and/or retrieve the final result, you can use the
+   * [GET /registrations/{registration_id}](/ext/v3/#/ext/ext_v3_registrations_retrieve)
+   * endpoint.
+   *
+   * If the company is already registered, the existing registration will be
+   * returned.
    */
   create(
     body: CompanyCreateParams | null | undefined = {},
@@ -20,20 +30,27 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Get Company Information.
+   * ### Retrieve Company Information
+   *
+   * Fetch detailed information about a specific company using its `external_id`.
    */
   retrieve(externalID: string, options?: RequestOptions): APIPromise<CompanyRetrieveResponse> {
     return this._client.get(path`/ext/v3/companies/${externalID}`, options);
   }
 
   /**
-   * Search all companies using Dun and Bradstreet.
+   * ### Search Companies
    *
-   * Companies will contain an optional external_id, which is null if company is not
-   * registered in Business Radar.
+   * Search for companies across internal and external databases.
    *
-   * When you pass query and optional country it will search using dun and
-   * bradstreet, otherwise using internal search.
+   * - If `query` and an optional `country` are provided, the search is primarily
+   *   conducted via Dun & Bradstreet.
+   *
+   * - If other filters (like `portfolio_id`) are provided, the search is limited to
+   *   our internal database.
+   *
+   * The results include an `external_id` if the company is already registered in
+   * Business Radar.
    */
   list(
     query: CompanyListParams | null | undefined = {},
@@ -43,7 +60,26 @@ export class Companies extends APIResource {
   }
 
   /**
-   * List Company Updates.
+   * ### Submit Missing Company Investigation (Asynchronous)
+   *
+   * Submit a new investigation for a company that could not be found. Once
+   * submitted, Business Radar processes the investigation in the background.
+   *
+   * To check the progress and/or retrieve the final result, you can use the GET
+   * endpoint.
+   */
+  createMissingCompanyInvestigation(
+    body: CompanyCreateMissingCompanyInvestigationParams,
+    options?: RequestOptions,
+  ): APIPromise<CompanyCreateMissingCompanyInvestigationResponse> {
+    return this._client.post('/ext/v3/companies/investigations', { body, ...options });
+  }
+
+  /**
+   * ### List Company Updates
+   *
+   * Retrieve a list of attribute changes for companies. This allows monitoring how
+   * company data has evolved over time.
    */
   listAttributeChanges(
     query: CompanyListAttributeChangesParams | null | undefined = {},
@@ -57,7 +93,43 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Get Registration Information.
+   * ### Missing Company Investigations
+   *
+   * List existing investigations or submit a new one for a company that could not be
+   * found.
+   */
+  listMissingCompanyInvestigations(
+    query: CompanyListMissingCompanyInvestigationsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<
+    CompanyListMissingCompanyInvestigationsResponsesNextKey,
+    CompanyListMissingCompanyInvestigationsResponse
+  > {
+    return this._client.getAPIList(
+      '/ext/v3/companies/investigations',
+      NextKey<CompanyListMissingCompanyInvestigationsResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * ### Retrieve Missing Company Investigation
+   *
+   * Fetch details about a specific missing company investigation using its
+   * `external_id`.
+   */
+  retrieveMissingCompanyInvestigation(
+    externalID: string,
+    options?: RequestOptions,
+  ): APIPromise<CompanyRetrieveMissingCompanyInvestigationResponse> {
+    return this._client.get(path`/ext/v3/companies/investigations/${externalID}`, options);
+  }
+
+  /**
+   * ### Retrieve Registration Information
+   *
+   * Fetch details about a specific company registration request using its
+   * `registration_id`.
    */
   retrieveRegistration(registrationID: string, options?: RequestOptions): APIPromise<Registration> {
     return this._client.get(path`/ext/v3/registrations/${registrationID}`, options);
@@ -67,6 +139,9 @@ export class Companies extends APIResource {
 export type CompanyListResponsesNextKey = NextKey<CompanyListResponse>;
 
 export type CompanyListAttributeChangesResponsesNextKey = NextKey<CompanyListAttributeChangesResponse>;
+
+export type CompanyListMissingCompanyInvestigationsResponsesNextKey =
+  NextKey<CompanyListMissingCompanyInvestigationsResponse>;
 
 export type BlankEnum = '';
 
@@ -573,7 +648,9 @@ export type CountryEnum =
   | 'ZW';
 
 /**
- * Industry Code.
+ * ### Industry Code
+ *
+ * Industry classification codes (e.g., NACE, SBI, SIC).
  */
 export interface IndustryCode {
   code: string;
@@ -582,9 +659,10 @@ export interface IndustryCode {
 }
 
 /**
- * Portfolio Registration Serializer.
+ * ### Company Registration
  *
- * Serializer used for registering a new company.
+ * Handles the registration of companies for monitoring. New companies can be
+ * identified by DUNS number, local registration number, or name and country.
  */
 export interface Registration {
   external_id: string;
@@ -649,9 +727,10 @@ export interface Registration {
   status_text: string;
 
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Registration.Company | null;
 
@@ -922,9 +1001,10 @@ export interface Registration {
 
 export namespace Registration {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   export interface Company {
     /**
@@ -1189,15 +1269,17 @@ export namespace Registration {
 }
 
 /**
- * Portfolio Registration Serializer.
+ * ### Company Registration
  *
- * Serializer used for registering a new company.
+ * Handles the registration of companies for monitoring. New companies can be
+ * identified by DUNS number, local registration number, or name and country.
  */
 export interface RegistrationRequest {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Shared.PortfolioCompanyDetailRequest | null;
 
@@ -1467,7 +1549,14 @@ export interface RegistrationRequest {
 }
 
 /**
- * Company.
+ * ### Company
+ *
+ * Detailed representation of a company in Business Radar.
+ *
+ * This data includes: - Basic info (name, country, website) - Identification
+ * (DUNS, external ID, registration numbers) - Industry classifications -
+ * Geographical data (address, coordinates) - Social and online presence - Summary
+ * metrics (article count, review scores, etc.)
  */
 export interface CompanyRetrieveResponse {
   /**
@@ -1809,7 +1898,9 @@ export interface CompanyRetrieveResponse {
 
 export namespace CompanyRetrieveResponse {
   /**
-   * Registration Number.
+   * ### Registration Number
+   *
+   * Company registration numbers, such as Chamber of Commerce (KvK) or VAT numbers.
    */
   export interface RegistrationNumber {
     description: string;
@@ -1824,7 +1915,14 @@ export namespace CompanyRetrieveResponse {
 }
 
 /**
- * Universal Company.
+ * ### Universal Company Data
+ *
+ * Handles company data from both internal and external sources (e.g., Dun &
+ * Bradstreet). Provides a unified representation of a company.
+ *
+ * - **DUNS Number**: Unique 9-digit identifier. - **External ID**: Internal unique
+ *   identifier if the company is registered. - **Industry Codes**: List of
+ *   industry classifications.
  */
 export interface CompanyListResponse {
   address_place: string;
@@ -1861,7 +1959,331 @@ export namespace CompanyListResponse {
 }
 
 /**
- * Company Attribute Change Serializer.
+ * ### Missing Company Investigation
+ *
+ * Used to request and track investigations for companies not currently in the
+ * database. This is typically used when a search for a company yields no results,
+ * allowing users to provide known details for a manual or automated investigation.
+ */
+export interface CompanyCreateMissingCompanyInvestigationResponse {
+  company_external_id: string | null;
+
+  /**
+   * - `AF` - Afghanistan
+   * - `AX` - Aland Islands
+   * - `AL` - Albania
+   * - `DZ` - Algeria
+   * - `AS` - American Samoa
+   * - `AD` - Andorra
+   * - `AO` - Angola
+   * - `AI` - Anguilla
+   * - `AQ` - Antarctica
+   * - `AG` - Antigua and Barbuda
+   * - `AR` - Argentina
+   * - `AM` - Armenia
+   * - `AW` - Aruba
+   * - `AU` - Australia
+   * - `AT` - Austria
+   * - `AZ` - Azerbaijan
+   * - `BS` - Bahamas
+   * - `BH` - Bahrain
+   * - `BD` - Bangladesh
+   * - `BB` - Barbados
+   * - `BY` - Belarus
+   * - `BE` - Belgium
+   * - `BZ` - Belize
+   * - `BJ` - Benin
+   * - `BM` - Bermuda
+   * - `BT` - Bhutan
+   * - `BO` - Bolivia
+   * - `BQ` - Bonaire
+   * - `BA` - Bosnia and Herzegovina
+   * - `BW` - Botswana
+   * - `BV` - Bouvet Island
+   * - `BR` - Brazil
+   * - `IO` - British Indian Ocean Territory
+   * - `BN` - Brunei Darussalam
+   * - `BG` - Bulgaria
+   * - `BF` - Burkina Faso
+   * - `BI` - Burundi
+   * - `CV` - Cabo Verde
+   * - `KH` - Cambodia
+   * - `CM` - Cameroon
+   * - `CA` - Canada
+   * - `KY` - Cayman Islands
+   * - `CF` - Central African Republic
+   * - `TD` - Chad
+   * - `CL` - Chile
+   * - `CN` - China
+   * - `CX` - Christmas Island
+   * - `CC` - Cocos Keeling Islands
+   * - `CO` - Colombia
+   * - `KM` - Comoros
+   * - `CG` - Congo
+   * - `CD` - Congo Democratic Republic
+   * - `CK` - Cook Islands
+   * - `CR` - Costa Rica
+   * - `CI` - Cote d'Ivoire
+   * - `HR` - Croatia
+   * - `CU` - Cuba
+   * - `CW` - Curacao
+   * - `CY` - Cyprus
+   * - `CZ` - Czechia
+   * - `DK` - Denmark
+   * - `DJ` - Djibouti
+   * - `DM` - Dominica
+   * - `DO` - Dominican Republic
+   * - `EC` - Ecuador
+   * - `EG` - Egypt
+   * - `SV` - El Salvador
+   * - `GQ` - Equatorial Guinea
+   * - `ER` - Eritrea
+   * - `EE` - Estonia
+   * - `SZ` - Eswatini
+   * - `ET` - Ethiopia
+   * - `FK` - Falkland Islands
+   * - `FO` - Faroe Islands
+   * - `FJ` - Fiji
+   * - `FI` - Finland
+   * - `FR` - France
+   * - `GF` - French Guiana
+   * - `PF` - French Polynesia
+   * - `TF` - French Southern Territories
+   * - `GA` - Gabon
+   * - `GM` - Gambia
+   * - `GE` - Georgia
+   * - `DE` - Germany
+   * - `GH` - Ghana
+   * - `GI` - Gibraltar
+   * - `GR` - Greece
+   * - `GL` - Greenland
+   * - `GD` - Grenada
+   * - `GP` - Guadeloupe
+   * - `GU` - Guam
+   * - `GT` - Guatemala
+   * - `GG` - Guernsey
+   * - `GN` - Guinea
+   * - `GW` - Guinea-Bissau
+   * - `GY` - Guyana
+   * - `HT` - Haiti
+   * - `HM` - Heard Island and McDonald Islands
+   * - `VA` - Holy See
+   * - `HN` - Honduras
+   * - `HK` - Hong Kong
+   * - `HU` - Hungary
+   * - `IS` - Iceland
+   * - `IN` - India
+   * - `ID` - Indonesia
+   * - `IR` - Iran (Islamic Republic of)
+   * - `IQ` - Iraq
+   * - `IE` - Ireland
+   * - `IM` - Isle of Man
+   * - `IL` - Israel
+   * - `IT` - Italy
+   * - `JM` - Jamaica
+   * - `JP` - Japan
+   * - `JE` - Jersey
+   * - `JO` - Jordan
+   * - `KZ` - Kazakhstan
+   * - `KE` - Kenya
+   * - `KI` - Kiribati
+   * - `KP` - Korea (the Democratic People's Republic of)
+   * - `KR` - Korea (the Republic of)
+   * - `KW` - Kuwait
+   * - `KG` - Kyrgyzstan
+   * - `LA` - Lao People's Democratic Republic
+   * - `LV` - Latvia
+   * - `LB` - Lebanon
+   * - `LS` - Lesotho
+   * - `LR` - Liberia
+   * - `LY` - Libya
+   * - `LI` - Liechtenstein
+   * - `LT` - Lithuania
+   * - `LU` - Luxembourg
+   * - `MO` - Macao
+   * - `MG` - Madagascar
+   * - `MW` - Malawi
+   * - `MY` - Malaysia
+   * - `MV` - Maldives
+   * - `ML` - Mali
+   * - `MT` - Malta
+   * - `MH` - Marshall Islands
+   * - `MQ` - Martinique
+   * - `MR` - Mauritania
+   * - `MU` - Mauritius
+   * - `YT` - Mayotte
+   * - `MX` - Mexico
+   * - `FM` - Micronesia
+   * - `MD` - Moldova
+   * - `MC` - Monaco
+   * - `MN` - Mongolia
+   * - `ME` - Montenegro
+   * - `MS` - Montserrat
+   * - `MA` - Morocco
+   * - `MZ` - Mozambique
+   * - `MM` - Myanmar
+   * - `NA` - Namibia
+   * - `NR` - Nauru
+   * - `NP` - Nepal
+   * - `NL` - Netherlands
+   * - `NC` - New Caledonia
+   * - `NZ` - New Zealand
+   * - `NI` - Nicaragua
+   * - `NE` - Niger
+   * - `NG` - Nigeria
+   * - `NU` - Niue
+   * - `NF` - Norfolk Island
+   * - `MK` - North Macedonia
+   * - `MP` - Northern Mariana Islands
+   * - `NO` - Norway
+   * - `OM` - Oman
+   * - `PK` - Pakistan
+   * - `PW` - Palau
+   * - `PS` - Palestine, State of
+   * - `PA` - Panama
+   * - `PG` - Papua New Guinea
+   * - `PY` - Paraguay
+   * - `PE` - Peru
+   * - `PH` - Philippines
+   * - `PN` - Pitcairn
+   * - `PL` - Poland
+   * - `PT` - Portugal
+   * - `PR` - Puerto Rico
+   * - `QA` - Qatar
+   * - `RE` - Réunion
+   * - `RO` - Romania
+   * - `RU` - Russian Federation
+   * - `RW` - Rwanda
+   * - `BL` - Saint Barthélemy
+   * - `SH` - Saint Helena
+   * - `KN` - Saint Kitts and Nevis
+   * - `LC` - Saint Lucia
+   * - `MF` - Saint Martin
+   * - `PM` - Saint Pierre and Miquelon
+   * - `VC` - Saint Vincent and the Grenadines
+   * - `WS` - Samoa
+   * - `SM` - San Marino
+   * - `ST` - Sao Tome and Principe
+   * - `SA` - Saudi Arabia
+   * - `SN` - Senegal
+   * - `RS` - Serbia
+   * - `SC` - Seychelles
+   * - `SL` - Sierra Leone
+   * - `SG` - Singapore
+   * - `SX` - Sint Maarten
+   * - `SK` - Slovakia
+   * - `SI` - Slovenia
+   * - `SB` - Solomon Islands
+   * - `SO` - Somalia
+   * - `ZA` - South Africa
+   * - `GS` - South Georgia and the South Sandwich Islands
+   * - `SS` - South Sudan
+   * - `ES` - Spain
+   * - `LK` - Sri Lanka
+   * - `SD` - Sudan
+   * - `SR` - Suriname
+   * - `SJ` - Svalbard and Jan Mayen
+   * - `SE` - Sweden
+   * - `CH` - Switzerland
+   * - `SY` - Syrian Arab Republic
+   * - `TW` - Taiwan
+   * - `TJ` - Tajikistan
+   * - `TZ` - Tanzania
+   * - `TH` - Thailand
+   * - `TL` - Timor-Leste
+   * - `TG` - Togo
+   * - `TK` - Tokelau
+   * - `TO` - Tonga
+   * - `TT` - Trinidad and Tobago
+   * - `TN` - Tunisia
+   * - `TR` - Turkey
+   * - `TM` - Turkmenistan
+   * - `TC` - Turks and Caicos Islands
+   * - `TV` - Tuvalu
+   * - `UG` - Uganda
+   * - `UA` - Ukraine
+   * - `AE` - United Arab Emirates
+   * - `GB` - United Kingdom
+   * - `UM` - United States Minor Outlying Islands
+   * - `US` - United States of America
+   * - `UY` - Uruguay
+   * - `UZ` - Uzbekistan
+   * - `VU` - Vanuatu
+   * - `VE` - Venezuela
+   * - `VN` - Viet Nam
+   * - `VG` - Virgin Islands
+   * - `VI` - Virgin Islands
+   * - `WF` - Wallis and Futuna
+   * - `EH` - Western Sahara
+   * - `YE` - Yemen
+   * - `ZM` - Zambia
+   * - `ZW` - Zimbabwe
+   */
+  country: CountryEnum;
+
+  /**
+   * The date and time when this missing company record was created.
+   */
+  created_at: string;
+
+  external_id: string;
+
+  last_status_update: string;
+
+  /**
+   * Official name of the company as registered in legal documents.
+   */
+  legal_name: string;
+
+  status: string;
+
+  address_number?: string | null;
+
+  /**
+   * Phone number should include international code prefix, e.g., +31.
+   */
+  address_phone?: string | null;
+
+  address_place?: string | null;
+
+  address_postal?: string | null;
+
+  address_region?: string | null;
+
+  address_street?: string | null;
+
+  /**
+   * Any additional notes or details about the company.
+   */
+  description?: string | null;
+
+  /**
+   * Name of the primary officer or CEO of the company.
+   */
+  officer_name?: string | null;
+
+  /**
+   * Title or position of the named officer in the company.
+   */
+  officer_title?: string | null;
+
+  /**
+   * Alternate name the company might use in its operations, distinct from the legal
+   * name.
+   */
+  trade_name?: string | null;
+
+  /**
+   * Provide the official website of the company if available.
+   */
+  website_url?: string | null;
+}
+
+/**
+ * ### Company Attribute Change
+ *
+ * Tracks changes to specific attributes of a company over time. Used for
+ * monitoring updates and maintaining a history of company data.
  */
 export interface CompanyListAttributeChangesResponse {
   attribute: string;
@@ -1875,11 +2297,654 @@ export interface CompanyListAttributeChangesResponse {
   old_value?: string | null;
 }
 
+/**
+ * ### Missing Company Investigation
+ *
+ * Used to request and track investigations for companies not currently in the
+ * database. This is typically used when a search for a company yields no results,
+ * allowing users to provide known details for a manual or automated investigation.
+ */
+export interface CompanyListMissingCompanyInvestigationsResponse {
+  company_external_id: string | null;
+
+  /**
+   * - `AF` - Afghanistan
+   * - `AX` - Aland Islands
+   * - `AL` - Albania
+   * - `DZ` - Algeria
+   * - `AS` - American Samoa
+   * - `AD` - Andorra
+   * - `AO` - Angola
+   * - `AI` - Anguilla
+   * - `AQ` - Antarctica
+   * - `AG` - Antigua and Barbuda
+   * - `AR` - Argentina
+   * - `AM` - Armenia
+   * - `AW` - Aruba
+   * - `AU` - Australia
+   * - `AT` - Austria
+   * - `AZ` - Azerbaijan
+   * - `BS` - Bahamas
+   * - `BH` - Bahrain
+   * - `BD` - Bangladesh
+   * - `BB` - Barbados
+   * - `BY` - Belarus
+   * - `BE` - Belgium
+   * - `BZ` - Belize
+   * - `BJ` - Benin
+   * - `BM` - Bermuda
+   * - `BT` - Bhutan
+   * - `BO` - Bolivia
+   * - `BQ` - Bonaire
+   * - `BA` - Bosnia and Herzegovina
+   * - `BW` - Botswana
+   * - `BV` - Bouvet Island
+   * - `BR` - Brazil
+   * - `IO` - British Indian Ocean Territory
+   * - `BN` - Brunei Darussalam
+   * - `BG` - Bulgaria
+   * - `BF` - Burkina Faso
+   * - `BI` - Burundi
+   * - `CV` - Cabo Verde
+   * - `KH` - Cambodia
+   * - `CM` - Cameroon
+   * - `CA` - Canada
+   * - `KY` - Cayman Islands
+   * - `CF` - Central African Republic
+   * - `TD` - Chad
+   * - `CL` - Chile
+   * - `CN` - China
+   * - `CX` - Christmas Island
+   * - `CC` - Cocos Keeling Islands
+   * - `CO` - Colombia
+   * - `KM` - Comoros
+   * - `CG` - Congo
+   * - `CD` - Congo Democratic Republic
+   * - `CK` - Cook Islands
+   * - `CR` - Costa Rica
+   * - `CI` - Cote d'Ivoire
+   * - `HR` - Croatia
+   * - `CU` - Cuba
+   * - `CW` - Curacao
+   * - `CY` - Cyprus
+   * - `CZ` - Czechia
+   * - `DK` - Denmark
+   * - `DJ` - Djibouti
+   * - `DM` - Dominica
+   * - `DO` - Dominican Republic
+   * - `EC` - Ecuador
+   * - `EG` - Egypt
+   * - `SV` - El Salvador
+   * - `GQ` - Equatorial Guinea
+   * - `ER` - Eritrea
+   * - `EE` - Estonia
+   * - `SZ` - Eswatini
+   * - `ET` - Ethiopia
+   * - `FK` - Falkland Islands
+   * - `FO` - Faroe Islands
+   * - `FJ` - Fiji
+   * - `FI` - Finland
+   * - `FR` - France
+   * - `GF` - French Guiana
+   * - `PF` - French Polynesia
+   * - `TF` - French Southern Territories
+   * - `GA` - Gabon
+   * - `GM` - Gambia
+   * - `GE` - Georgia
+   * - `DE` - Germany
+   * - `GH` - Ghana
+   * - `GI` - Gibraltar
+   * - `GR` - Greece
+   * - `GL` - Greenland
+   * - `GD` - Grenada
+   * - `GP` - Guadeloupe
+   * - `GU` - Guam
+   * - `GT` - Guatemala
+   * - `GG` - Guernsey
+   * - `GN` - Guinea
+   * - `GW` - Guinea-Bissau
+   * - `GY` - Guyana
+   * - `HT` - Haiti
+   * - `HM` - Heard Island and McDonald Islands
+   * - `VA` - Holy See
+   * - `HN` - Honduras
+   * - `HK` - Hong Kong
+   * - `HU` - Hungary
+   * - `IS` - Iceland
+   * - `IN` - India
+   * - `ID` - Indonesia
+   * - `IR` - Iran (Islamic Republic of)
+   * - `IQ` - Iraq
+   * - `IE` - Ireland
+   * - `IM` - Isle of Man
+   * - `IL` - Israel
+   * - `IT` - Italy
+   * - `JM` - Jamaica
+   * - `JP` - Japan
+   * - `JE` - Jersey
+   * - `JO` - Jordan
+   * - `KZ` - Kazakhstan
+   * - `KE` - Kenya
+   * - `KI` - Kiribati
+   * - `KP` - Korea (the Democratic People's Republic of)
+   * - `KR` - Korea (the Republic of)
+   * - `KW` - Kuwait
+   * - `KG` - Kyrgyzstan
+   * - `LA` - Lao People's Democratic Republic
+   * - `LV` - Latvia
+   * - `LB` - Lebanon
+   * - `LS` - Lesotho
+   * - `LR` - Liberia
+   * - `LY` - Libya
+   * - `LI` - Liechtenstein
+   * - `LT` - Lithuania
+   * - `LU` - Luxembourg
+   * - `MO` - Macao
+   * - `MG` - Madagascar
+   * - `MW` - Malawi
+   * - `MY` - Malaysia
+   * - `MV` - Maldives
+   * - `ML` - Mali
+   * - `MT` - Malta
+   * - `MH` - Marshall Islands
+   * - `MQ` - Martinique
+   * - `MR` - Mauritania
+   * - `MU` - Mauritius
+   * - `YT` - Mayotte
+   * - `MX` - Mexico
+   * - `FM` - Micronesia
+   * - `MD` - Moldova
+   * - `MC` - Monaco
+   * - `MN` - Mongolia
+   * - `ME` - Montenegro
+   * - `MS` - Montserrat
+   * - `MA` - Morocco
+   * - `MZ` - Mozambique
+   * - `MM` - Myanmar
+   * - `NA` - Namibia
+   * - `NR` - Nauru
+   * - `NP` - Nepal
+   * - `NL` - Netherlands
+   * - `NC` - New Caledonia
+   * - `NZ` - New Zealand
+   * - `NI` - Nicaragua
+   * - `NE` - Niger
+   * - `NG` - Nigeria
+   * - `NU` - Niue
+   * - `NF` - Norfolk Island
+   * - `MK` - North Macedonia
+   * - `MP` - Northern Mariana Islands
+   * - `NO` - Norway
+   * - `OM` - Oman
+   * - `PK` - Pakistan
+   * - `PW` - Palau
+   * - `PS` - Palestine, State of
+   * - `PA` - Panama
+   * - `PG` - Papua New Guinea
+   * - `PY` - Paraguay
+   * - `PE` - Peru
+   * - `PH` - Philippines
+   * - `PN` - Pitcairn
+   * - `PL` - Poland
+   * - `PT` - Portugal
+   * - `PR` - Puerto Rico
+   * - `QA` - Qatar
+   * - `RE` - Réunion
+   * - `RO` - Romania
+   * - `RU` - Russian Federation
+   * - `RW` - Rwanda
+   * - `BL` - Saint Barthélemy
+   * - `SH` - Saint Helena
+   * - `KN` - Saint Kitts and Nevis
+   * - `LC` - Saint Lucia
+   * - `MF` - Saint Martin
+   * - `PM` - Saint Pierre and Miquelon
+   * - `VC` - Saint Vincent and the Grenadines
+   * - `WS` - Samoa
+   * - `SM` - San Marino
+   * - `ST` - Sao Tome and Principe
+   * - `SA` - Saudi Arabia
+   * - `SN` - Senegal
+   * - `RS` - Serbia
+   * - `SC` - Seychelles
+   * - `SL` - Sierra Leone
+   * - `SG` - Singapore
+   * - `SX` - Sint Maarten
+   * - `SK` - Slovakia
+   * - `SI` - Slovenia
+   * - `SB` - Solomon Islands
+   * - `SO` - Somalia
+   * - `ZA` - South Africa
+   * - `GS` - South Georgia and the South Sandwich Islands
+   * - `SS` - South Sudan
+   * - `ES` - Spain
+   * - `LK` - Sri Lanka
+   * - `SD` - Sudan
+   * - `SR` - Suriname
+   * - `SJ` - Svalbard and Jan Mayen
+   * - `SE` - Sweden
+   * - `CH` - Switzerland
+   * - `SY` - Syrian Arab Republic
+   * - `TW` - Taiwan
+   * - `TJ` - Tajikistan
+   * - `TZ` - Tanzania
+   * - `TH` - Thailand
+   * - `TL` - Timor-Leste
+   * - `TG` - Togo
+   * - `TK` - Tokelau
+   * - `TO` - Tonga
+   * - `TT` - Trinidad and Tobago
+   * - `TN` - Tunisia
+   * - `TR` - Turkey
+   * - `TM` - Turkmenistan
+   * - `TC` - Turks and Caicos Islands
+   * - `TV` - Tuvalu
+   * - `UG` - Uganda
+   * - `UA` - Ukraine
+   * - `AE` - United Arab Emirates
+   * - `GB` - United Kingdom
+   * - `UM` - United States Minor Outlying Islands
+   * - `US` - United States of America
+   * - `UY` - Uruguay
+   * - `UZ` - Uzbekistan
+   * - `VU` - Vanuatu
+   * - `VE` - Venezuela
+   * - `VN` - Viet Nam
+   * - `VG` - Virgin Islands
+   * - `VI` - Virgin Islands
+   * - `WF` - Wallis and Futuna
+   * - `EH` - Western Sahara
+   * - `YE` - Yemen
+   * - `ZM` - Zambia
+   * - `ZW` - Zimbabwe
+   */
+  country: CountryEnum;
+
+  /**
+   * The date and time when this missing company record was created.
+   */
+  created_at: string;
+
+  external_id: string;
+
+  last_status_update: string;
+
+  /**
+   * Official name of the company as registered in legal documents.
+   */
+  legal_name: string;
+
+  status: string;
+
+  address_number?: string | null;
+
+  /**
+   * Phone number should include international code prefix, e.g., +31.
+   */
+  address_phone?: string | null;
+
+  address_place?: string | null;
+
+  address_postal?: string | null;
+
+  address_region?: string | null;
+
+  address_street?: string | null;
+
+  /**
+   * Any additional notes or details about the company.
+   */
+  description?: string | null;
+
+  /**
+   * Name of the primary officer or CEO of the company.
+   */
+  officer_name?: string | null;
+
+  /**
+   * Title or position of the named officer in the company.
+   */
+  officer_title?: string | null;
+
+  /**
+   * Alternate name the company might use in its operations, distinct from the legal
+   * name.
+   */
+  trade_name?: string | null;
+
+  /**
+   * Provide the official website of the company if available.
+   */
+  website_url?: string | null;
+}
+
+/**
+ * ### Missing Company Investigation
+ *
+ * Used to request and track investigations for companies not currently in the
+ * database. This is typically used when a search for a company yields no results,
+ * allowing users to provide known details for a manual or automated investigation.
+ */
+export interface CompanyRetrieveMissingCompanyInvestigationResponse {
+  company_external_id: string | null;
+
+  /**
+   * - `AF` - Afghanistan
+   * - `AX` - Aland Islands
+   * - `AL` - Albania
+   * - `DZ` - Algeria
+   * - `AS` - American Samoa
+   * - `AD` - Andorra
+   * - `AO` - Angola
+   * - `AI` - Anguilla
+   * - `AQ` - Antarctica
+   * - `AG` - Antigua and Barbuda
+   * - `AR` - Argentina
+   * - `AM` - Armenia
+   * - `AW` - Aruba
+   * - `AU` - Australia
+   * - `AT` - Austria
+   * - `AZ` - Azerbaijan
+   * - `BS` - Bahamas
+   * - `BH` - Bahrain
+   * - `BD` - Bangladesh
+   * - `BB` - Barbados
+   * - `BY` - Belarus
+   * - `BE` - Belgium
+   * - `BZ` - Belize
+   * - `BJ` - Benin
+   * - `BM` - Bermuda
+   * - `BT` - Bhutan
+   * - `BO` - Bolivia
+   * - `BQ` - Bonaire
+   * - `BA` - Bosnia and Herzegovina
+   * - `BW` - Botswana
+   * - `BV` - Bouvet Island
+   * - `BR` - Brazil
+   * - `IO` - British Indian Ocean Territory
+   * - `BN` - Brunei Darussalam
+   * - `BG` - Bulgaria
+   * - `BF` - Burkina Faso
+   * - `BI` - Burundi
+   * - `CV` - Cabo Verde
+   * - `KH` - Cambodia
+   * - `CM` - Cameroon
+   * - `CA` - Canada
+   * - `KY` - Cayman Islands
+   * - `CF` - Central African Republic
+   * - `TD` - Chad
+   * - `CL` - Chile
+   * - `CN` - China
+   * - `CX` - Christmas Island
+   * - `CC` - Cocos Keeling Islands
+   * - `CO` - Colombia
+   * - `KM` - Comoros
+   * - `CG` - Congo
+   * - `CD` - Congo Democratic Republic
+   * - `CK` - Cook Islands
+   * - `CR` - Costa Rica
+   * - `CI` - Cote d'Ivoire
+   * - `HR` - Croatia
+   * - `CU` - Cuba
+   * - `CW` - Curacao
+   * - `CY` - Cyprus
+   * - `CZ` - Czechia
+   * - `DK` - Denmark
+   * - `DJ` - Djibouti
+   * - `DM` - Dominica
+   * - `DO` - Dominican Republic
+   * - `EC` - Ecuador
+   * - `EG` - Egypt
+   * - `SV` - El Salvador
+   * - `GQ` - Equatorial Guinea
+   * - `ER` - Eritrea
+   * - `EE` - Estonia
+   * - `SZ` - Eswatini
+   * - `ET` - Ethiopia
+   * - `FK` - Falkland Islands
+   * - `FO` - Faroe Islands
+   * - `FJ` - Fiji
+   * - `FI` - Finland
+   * - `FR` - France
+   * - `GF` - French Guiana
+   * - `PF` - French Polynesia
+   * - `TF` - French Southern Territories
+   * - `GA` - Gabon
+   * - `GM` - Gambia
+   * - `GE` - Georgia
+   * - `DE` - Germany
+   * - `GH` - Ghana
+   * - `GI` - Gibraltar
+   * - `GR` - Greece
+   * - `GL` - Greenland
+   * - `GD` - Grenada
+   * - `GP` - Guadeloupe
+   * - `GU` - Guam
+   * - `GT` - Guatemala
+   * - `GG` - Guernsey
+   * - `GN` - Guinea
+   * - `GW` - Guinea-Bissau
+   * - `GY` - Guyana
+   * - `HT` - Haiti
+   * - `HM` - Heard Island and McDonald Islands
+   * - `VA` - Holy See
+   * - `HN` - Honduras
+   * - `HK` - Hong Kong
+   * - `HU` - Hungary
+   * - `IS` - Iceland
+   * - `IN` - India
+   * - `ID` - Indonesia
+   * - `IR` - Iran (Islamic Republic of)
+   * - `IQ` - Iraq
+   * - `IE` - Ireland
+   * - `IM` - Isle of Man
+   * - `IL` - Israel
+   * - `IT` - Italy
+   * - `JM` - Jamaica
+   * - `JP` - Japan
+   * - `JE` - Jersey
+   * - `JO` - Jordan
+   * - `KZ` - Kazakhstan
+   * - `KE` - Kenya
+   * - `KI` - Kiribati
+   * - `KP` - Korea (the Democratic People's Republic of)
+   * - `KR` - Korea (the Republic of)
+   * - `KW` - Kuwait
+   * - `KG` - Kyrgyzstan
+   * - `LA` - Lao People's Democratic Republic
+   * - `LV` - Latvia
+   * - `LB` - Lebanon
+   * - `LS` - Lesotho
+   * - `LR` - Liberia
+   * - `LY` - Libya
+   * - `LI` - Liechtenstein
+   * - `LT` - Lithuania
+   * - `LU` - Luxembourg
+   * - `MO` - Macao
+   * - `MG` - Madagascar
+   * - `MW` - Malawi
+   * - `MY` - Malaysia
+   * - `MV` - Maldives
+   * - `ML` - Mali
+   * - `MT` - Malta
+   * - `MH` - Marshall Islands
+   * - `MQ` - Martinique
+   * - `MR` - Mauritania
+   * - `MU` - Mauritius
+   * - `YT` - Mayotte
+   * - `MX` - Mexico
+   * - `FM` - Micronesia
+   * - `MD` - Moldova
+   * - `MC` - Monaco
+   * - `MN` - Mongolia
+   * - `ME` - Montenegro
+   * - `MS` - Montserrat
+   * - `MA` - Morocco
+   * - `MZ` - Mozambique
+   * - `MM` - Myanmar
+   * - `NA` - Namibia
+   * - `NR` - Nauru
+   * - `NP` - Nepal
+   * - `NL` - Netherlands
+   * - `NC` - New Caledonia
+   * - `NZ` - New Zealand
+   * - `NI` - Nicaragua
+   * - `NE` - Niger
+   * - `NG` - Nigeria
+   * - `NU` - Niue
+   * - `NF` - Norfolk Island
+   * - `MK` - North Macedonia
+   * - `MP` - Northern Mariana Islands
+   * - `NO` - Norway
+   * - `OM` - Oman
+   * - `PK` - Pakistan
+   * - `PW` - Palau
+   * - `PS` - Palestine, State of
+   * - `PA` - Panama
+   * - `PG` - Papua New Guinea
+   * - `PY` - Paraguay
+   * - `PE` - Peru
+   * - `PH` - Philippines
+   * - `PN` - Pitcairn
+   * - `PL` - Poland
+   * - `PT` - Portugal
+   * - `PR` - Puerto Rico
+   * - `QA` - Qatar
+   * - `RE` - Réunion
+   * - `RO` - Romania
+   * - `RU` - Russian Federation
+   * - `RW` - Rwanda
+   * - `BL` - Saint Barthélemy
+   * - `SH` - Saint Helena
+   * - `KN` - Saint Kitts and Nevis
+   * - `LC` - Saint Lucia
+   * - `MF` - Saint Martin
+   * - `PM` - Saint Pierre and Miquelon
+   * - `VC` - Saint Vincent and the Grenadines
+   * - `WS` - Samoa
+   * - `SM` - San Marino
+   * - `ST` - Sao Tome and Principe
+   * - `SA` - Saudi Arabia
+   * - `SN` - Senegal
+   * - `RS` - Serbia
+   * - `SC` - Seychelles
+   * - `SL` - Sierra Leone
+   * - `SG` - Singapore
+   * - `SX` - Sint Maarten
+   * - `SK` - Slovakia
+   * - `SI` - Slovenia
+   * - `SB` - Solomon Islands
+   * - `SO` - Somalia
+   * - `ZA` - South Africa
+   * - `GS` - South Georgia and the South Sandwich Islands
+   * - `SS` - South Sudan
+   * - `ES` - Spain
+   * - `LK` - Sri Lanka
+   * - `SD` - Sudan
+   * - `SR` - Suriname
+   * - `SJ` - Svalbard and Jan Mayen
+   * - `SE` - Sweden
+   * - `CH` - Switzerland
+   * - `SY` - Syrian Arab Republic
+   * - `TW` - Taiwan
+   * - `TJ` - Tajikistan
+   * - `TZ` - Tanzania
+   * - `TH` - Thailand
+   * - `TL` - Timor-Leste
+   * - `TG` - Togo
+   * - `TK` - Tokelau
+   * - `TO` - Tonga
+   * - `TT` - Trinidad and Tobago
+   * - `TN` - Tunisia
+   * - `TR` - Turkey
+   * - `TM` - Turkmenistan
+   * - `TC` - Turks and Caicos Islands
+   * - `TV` - Tuvalu
+   * - `UG` - Uganda
+   * - `UA` - Ukraine
+   * - `AE` - United Arab Emirates
+   * - `GB` - United Kingdom
+   * - `UM` - United States Minor Outlying Islands
+   * - `US` - United States of America
+   * - `UY` - Uruguay
+   * - `UZ` - Uzbekistan
+   * - `VU` - Vanuatu
+   * - `VE` - Venezuela
+   * - `VN` - Viet Nam
+   * - `VG` - Virgin Islands
+   * - `VI` - Virgin Islands
+   * - `WF` - Wallis and Futuna
+   * - `EH` - Western Sahara
+   * - `YE` - Yemen
+   * - `ZM` - Zambia
+   * - `ZW` - Zimbabwe
+   */
+  country: CountryEnum;
+
+  /**
+   * The date and time when this missing company record was created.
+   */
+  created_at: string;
+
+  external_id: string;
+
+  last_status_update: string;
+
+  /**
+   * Official name of the company as registered in legal documents.
+   */
+  legal_name: string;
+
+  status: string;
+
+  address_number?: string | null;
+
+  /**
+   * Phone number should include international code prefix, e.g., +31.
+   */
+  address_phone?: string | null;
+
+  address_place?: string | null;
+
+  address_postal?: string | null;
+
+  address_region?: string | null;
+
+  address_street?: string | null;
+
+  /**
+   * Any additional notes or details about the company.
+   */
+  description?: string | null;
+
+  /**
+   * Name of the primary officer or CEO of the company.
+   */
+  officer_name?: string | null;
+
+  /**
+   * Title or position of the named officer in the company.
+   */
+  officer_title?: string | null;
+
+  /**
+   * Alternate name the company might use in its operations, distinct from the legal
+   * name.
+   */
+  trade_name?: string | null;
+
+  /**
+   * Provide the official website of the company if available.
+   */
+  website_url?: string | null;
+}
+
 export interface CompanyCreateParams {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Shared.PortfolioCompanyDetailRequest | null;
 
@@ -2150,17 +3215,17 @@ export interface CompanyCreateParams {
 
 export interface CompanyListParams extends NextKeyParams {
   /**
-   * ISO 2-letter Country Code
+   * ISO 2-letter Country Code (e.g., NL, US)
    */
   country?: Array<string>;
 
   /**
-   * 9-digit Dun And Bradstreet Number
+   * 9-digit Dun And Bradstreet Number (can be multiple)
    */
   duns_number?: Array<string>;
 
   /**
-   * Portfolio ID to filter companies
+   * Filter companies belonging to specific Portfolio IDs (UUID)
    */
   portfolio_id?: Array<string>;
 
@@ -2170,14 +3235,315 @@ export interface CompanyListParams extends NextKeyParams {
   query?: string;
 
   /**
-   * Local Registration Number
+   * Local Registration Number (can be multiple)
    */
   registration_number?: Array<string>;
 
   /**
-   * Website URL to search
+   * Website URL to search for the company
    */
   website_url?: string;
+}
+
+export interface CompanyCreateMissingCompanyInvestigationParams {
+  /**
+   * - `AF` - Afghanistan
+   * - `AX` - Aland Islands
+   * - `AL` - Albania
+   * - `DZ` - Algeria
+   * - `AS` - American Samoa
+   * - `AD` - Andorra
+   * - `AO` - Angola
+   * - `AI` - Anguilla
+   * - `AQ` - Antarctica
+   * - `AG` - Antigua and Barbuda
+   * - `AR` - Argentina
+   * - `AM` - Armenia
+   * - `AW` - Aruba
+   * - `AU` - Australia
+   * - `AT` - Austria
+   * - `AZ` - Azerbaijan
+   * - `BS` - Bahamas
+   * - `BH` - Bahrain
+   * - `BD` - Bangladesh
+   * - `BB` - Barbados
+   * - `BY` - Belarus
+   * - `BE` - Belgium
+   * - `BZ` - Belize
+   * - `BJ` - Benin
+   * - `BM` - Bermuda
+   * - `BT` - Bhutan
+   * - `BO` - Bolivia
+   * - `BQ` - Bonaire
+   * - `BA` - Bosnia and Herzegovina
+   * - `BW` - Botswana
+   * - `BV` - Bouvet Island
+   * - `BR` - Brazil
+   * - `IO` - British Indian Ocean Territory
+   * - `BN` - Brunei Darussalam
+   * - `BG` - Bulgaria
+   * - `BF` - Burkina Faso
+   * - `BI` - Burundi
+   * - `CV` - Cabo Verde
+   * - `KH` - Cambodia
+   * - `CM` - Cameroon
+   * - `CA` - Canada
+   * - `KY` - Cayman Islands
+   * - `CF` - Central African Republic
+   * - `TD` - Chad
+   * - `CL` - Chile
+   * - `CN` - China
+   * - `CX` - Christmas Island
+   * - `CC` - Cocos Keeling Islands
+   * - `CO` - Colombia
+   * - `KM` - Comoros
+   * - `CG` - Congo
+   * - `CD` - Congo Democratic Republic
+   * - `CK` - Cook Islands
+   * - `CR` - Costa Rica
+   * - `CI` - Cote d'Ivoire
+   * - `HR` - Croatia
+   * - `CU` - Cuba
+   * - `CW` - Curacao
+   * - `CY` - Cyprus
+   * - `CZ` - Czechia
+   * - `DK` - Denmark
+   * - `DJ` - Djibouti
+   * - `DM` - Dominica
+   * - `DO` - Dominican Republic
+   * - `EC` - Ecuador
+   * - `EG` - Egypt
+   * - `SV` - El Salvador
+   * - `GQ` - Equatorial Guinea
+   * - `ER` - Eritrea
+   * - `EE` - Estonia
+   * - `SZ` - Eswatini
+   * - `ET` - Ethiopia
+   * - `FK` - Falkland Islands
+   * - `FO` - Faroe Islands
+   * - `FJ` - Fiji
+   * - `FI` - Finland
+   * - `FR` - France
+   * - `GF` - French Guiana
+   * - `PF` - French Polynesia
+   * - `TF` - French Southern Territories
+   * - `GA` - Gabon
+   * - `GM` - Gambia
+   * - `GE` - Georgia
+   * - `DE` - Germany
+   * - `GH` - Ghana
+   * - `GI` - Gibraltar
+   * - `GR` - Greece
+   * - `GL` - Greenland
+   * - `GD` - Grenada
+   * - `GP` - Guadeloupe
+   * - `GU` - Guam
+   * - `GT` - Guatemala
+   * - `GG` - Guernsey
+   * - `GN` - Guinea
+   * - `GW` - Guinea-Bissau
+   * - `GY` - Guyana
+   * - `HT` - Haiti
+   * - `HM` - Heard Island and McDonald Islands
+   * - `VA` - Holy See
+   * - `HN` - Honduras
+   * - `HK` - Hong Kong
+   * - `HU` - Hungary
+   * - `IS` - Iceland
+   * - `IN` - India
+   * - `ID` - Indonesia
+   * - `IR` - Iran (Islamic Republic of)
+   * - `IQ` - Iraq
+   * - `IE` - Ireland
+   * - `IM` - Isle of Man
+   * - `IL` - Israel
+   * - `IT` - Italy
+   * - `JM` - Jamaica
+   * - `JP` - Japan
+   * - `JE` - Jersey
+   * - `JO` - Jordan
+   * - `KZ` - Kazakhstan
+   * - `KE` - Kenya
+   * - `KI` - Kiribati
+   * - `KP` - Korea (the Democratic People's Republic of)
+   * - `KR` - Korea (the Republic of)
+   * - `KW` - Kuwait
+   * - `KG` - Kyrgyzstan
+   * - `LA` - Lao People's Democratic Republic
+   * - `LV` - Latvia
+   * - `LB` - Lebanon
+   * - `LS` - Lesotho
+   * - `LR` - Liberia
+   * - `LY` - Libya
+   * - `LI` - Liechtenstein
+   * - `LT` - Lithuania
+   * - `LU` - Luxembourg
+   * - `MO` - Macao
+   * - `MG` - Madagascar
+   * - `MW` - Malawi
+   * - `MY` - Malaysia
+   * - `MV` - Maldives
+   * - `ML` - Mali
+   * - `MT` - Malta
+   * - `MH` - Marshall Islands
+   * - `MQ` - Martinique
+   * - `MR` - Mauritania
+   * - `MU` - Mauritius
+   * - `YT` - Mayotte
+   * - `MX` - Mexico
+   * - `FM` - Micronesia
+   * - `MD` - Moldova
+   * - `MC` - Monaco
+   * - `MN` - Mongolia
+   * - `ME` - Montenegro
+   * - `MS` - Montserrat
+   * - `MA` - Morocco
+   * - `MZ` - Mozambique
+   * - `MM` - Myanmar
+   * - `NA` - Namibia
+   * - `NR` - Nauru
+   * - `NP` - Nepal
+   * - `NL` - Netherlands
+   * - `NC` - New Caledonia
+   * - `NZ` - New Zealand
+   * - `NI` - Nicaragua
+   * - `NE` - Niger
+   * - `NG` - Nigeria
+   * - `NU` - Niue
+   * - `NF` - Norfolk Island
+   * - `MK` - North Macedonia
+   * - `MP` - Northern Mariana Islands
+   * - `NO` - Norway
+   * - `OM` - Oman
+   * - `PK` - Pakistan
+   * - `PW` - Palau
+   * - `PS` - Palestine, State of
+   * - `PA` - Panama
+   * - `PG` - Papua New Guinea
+   * - `PY` - Paraguay
+   * - `PE` - Peru
+   * - `PH` - Philippines
+   * - `PN` - Pitcairn
+   * - `PL` - Poland
+   * - `PT` - Portugal
+   * - `PR` - Puerto Rico
+   * - `QA` - Qatar
+   * - `RE` - Réunion
+   * - `RO` - Romania
+   * - `RU` - Russian Federation
+   * - `RW` - Rwanda
+   * - `BL` - Saint Barthélemy
+   * - `SH` - Saint Helena
+   * - `KN` - Saint Kitts and Nevis
+   * - `LC` - Saint Lucia
+   * - `MF` - Saint Martin
+   * - `PM` - Saint Pierre and Miquelon
+   * - `VC` - Saint Vincent and the Grenadines
+   * - `WS` - Samoa
+   * - `SM` - San Marino
+   * - `ST` - Sao Tome and Principe
+   * - `SA` - Saudi Arabia
+   * - `SN` - Senegal
+   * - `RS` - Serbia
+   * - `SC` - Seychelles
+   * - `SL` - Sierra Leone
+   * - `SG` - Singapore
+   * - `SX` - Sint Maarten
+   * - `SK` - Slovakia
+   * - `SI` - Slovenia
+   * - `SB` - Solomon Islands
+   * - `SO` - Somalia
+   * - `ZA` - South Africa
+   * - `GS` - South Georgia and the South Sandwich Islands
+   * - `SS` - South Sudan
+   * - `ES` - Spain
+   * - `LK` - Sri Lanka
+   * - `SD` - Sudan
+   * - `SR` - Suriname
+   * - `SJ` - Svalbard and Jan Mayen
+   * - `SE` - Sweden
+   * - `CH` - Switzerland
+   * - `SY` - Syrian Arab Republic
+   * - `TW` - Taiwan
+   * - `TJ` - Tajikistan
+   * - `TZ` - Tanzania
+   * - `TH` - Thailand
+   * - `TL` - Timor-Leste
+   * - `TG` - Togo
+   * - `TK` - Tokelau
+   * - `TO` - Tonga
+   * - `TT` - Trinidad and Tobago
+   * - `TN` - Tunisia
+   * - `TR` - Turkey
+   * - `TM` - Turkmenistan
+   * - `TC` - Turks and Caicos Islands
+   * - `TV` - Tuvalu
+   * - `UG` - Uganda
+   * - `UA` - Ukraine
+   * - `AE` - United Arab Emirates
+   * - `GB` - United Kingdom
+   * - `UM` - United States Minor Outlying Islands
+   * - `US` - United States of America
+   * - `UY` - Uruguay
+   * - `UZ` - Uzbekistan
+   * - `VU` - Vanuatu
+   * - `VE` - Venezuela
+   * - `VN` - Viet Nam
+   * - `VG` - Virgin Islands
+   * - `VI` - Virgin Islands
+   * - `WF` - Wallis and Futuna
+   * - `EH` - Western Sahara
+   * - `YE` - Yemen
+   * - `ZM` - Zambia
+   * - `ZW` - Zimbabwe
+   */
+  country: CountryEnum;
+
+  /**
+   * Official name of the company as registered in legal documents.
+   */
+  legal_name: string;
+
+  address_number?: string | null;
+
+  /**
+   * Phone number should include international code prefix, e.g., +31.
+   */
+  address_phone?: string | null;
+
+  address_place?: string | null;
+
+  address_postal?: string | null;
+
+  address_region?: string | null;
+
+  address_street?: string | null;
+
+  /**
+   * Any additional notes or details about the company.
+   */
+  description?: string | null;
+
+  /**
+   * Name of the primary officer or CEO of the company.
+   */
+  officer_name?: string | null;
+
+  /**
+   * Title or position of the named officer in the company.
+   */
+  officer_title?: string | null;
+
+  /**
+   * Alternate name the company might use in its operations, distinct from the legal
+   * name.
+   */
+  trade_name?: string | null;
+
+  /**
+   * Provide the official website of the company if available.
+   */
+  website_url?: string | null;
 }
 
 export interface CompanyListAttributeChangesParams extends NextKeyParams {
@@ -2192,6 +3558,8 @@ export interface CompanyListAttributeChangesParams extends NextKeyParams {
   min_created_at?: string;
 }
 
+export interface CompanyListMissingCompanyInvestigationsParams extends NextKeyParams {}
+
 export declare namespace Companies {
   export {
     type BlankEnum as BlankEnum,
@@ -2201,11 +3569,17 @@ export declare namespace Companies {
     type RegistrationRequest as RegistrationRequest,
     type CompanyRetrieveResponse as CompanyRetrieveResponse,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateMissingCompanyInvestigationResponse as CompanyCreateMissingCompanyInvestigationResponse,
     type CompanyListAttributeChangesResponse as CompanyListAttributeChangesResponse,
+    type CompanyListMissingCompanyInvestigationsResponse as CompanyListMissingCompanyInvestigationsResponse,
+    type CompanyRetrieveMissingCompanyInvestigationResponse as CompanyRetrieveMissingCompanyInvestigationResponse,
     type CompanyListResponsesNextKey as CompanyListResponsesNextKey,
     type CompanyListAttributeChangesResponsesNextKey as CompanyListAttributeChangesResponsesNextKey,
+    type CompanyListMissingCompanyInvestigationsResponsesNextKey as CompanyListMissingCompanyInvestigationsResponsesNextKey,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyListParams as CompanyListParams,
+    type CompanyCreateMissingCompanyInvestigationParams as CompanyCreateMissingCompanyInvestigationParams,
     type CompanyListAttributeChangesParams as CompanyListAttributeChangesParams,
+    type CompanyListMissingCompanyInvestigationsParams as CompanyListMissingCompanyInvestigationsParams,
   };
 }

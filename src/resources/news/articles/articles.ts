@@ -17,10 +17,10 @@ export class Articles extends APIResource {
   export: ExportAPI.Export = new ExportAPI.Export(this._client);
 
   /**
-   * Search News Articles.
+   * ### Search News Articles
    *
-   * List Articles from the Business Radar platform, search using advanced queries or
-   * check articles that have been published since last check.
+   * Retrieve articles matching the specified search criteria. Advanced queries and
+   * incremental checks (using publication/creation dates) are supported.
    */
   list(
     query: ArticleListParams | null | undefined = {},
@@ -30,7 +30,10 @@ export class Articles extends APIResource {
   }
 
   /**
-   * Create Article Feedback.
+   * ### Submit Article Feedback
+   *
+   * Submit feedback for a specific article. This helps improve our analysis and
+   * relevance.
    */
   createFeedback(
     body: ArticleCreateFeedbackParams,
@@ -40,7 +43,11 @@ export class Articles extends APIResource {
   }
 
   /**
-   * List Create Saved Article Filter.
+   * ### Saved Article Filters
+   *
+   * Retrieve a list of all search filters saved by the current profile. These
+   * filters can be applied to article search requests using the
+   * `saved_article_filter_id` parameter.
    */
   listSavedArticleFilters(
     query: ArticleListSavedArticleFiltersParams | null | undefined = {},
@@ -54,7 +61,10 @@ export class Articles extends APIResource {
   }
 
   /**
-   * Retrieve Article Embedding Search.
+   * ### Find Related Articles
+   *
+   * Retrieve a list of articles that are semantically similar to the specified
+   * article, ranked by similarity distance.
    */
   retrieveRelated(articleID: string, options?: RequestOptions): APIPromise<ArticleRetrieveRelatedResponse> {
     return this._client.get(path`/ext/v3/articles/${articleID}/related/`, options);
@@ -66,7 +76,13 @@ export type ArticlesNextKey = NextKey<Article>;
 export type ArticleListSavedArticleFiltersResponsesNextKey = NextKey<ArticleListSavedArticleFiltersResponse>;
 
 /**
- * Custom Serializer for the Article Model.
+ * ### Article
+ *
+ * The primary data structure for news articles. It provides comprehensive data,
+ * including: - Metadata (URLs, publication dates, languages, countries) - Content
+ * (titles, snippets, summaries - both original and translated) - Relationships
+ * (source, related companies, categories) - Analysis (sentiment, clustering
+ * status)
  */
 export interface Article {
   categories: Array<CategoryTree>;
@@ -184,7 +200,9 @@ export interface Article {
   snippet_en: string;
 
   /**
-   * Serializer for Source Information.
+   * ### Source
+   *
+   * Represents the origin of a news article, including its domain, URL, and name.
    */
   source: Article.Source;
 
@@ -464,13 +482,19 @@ export interface Article {
 
 export namespace Article {
   /**
-   * Serialize Company Article.
+   * ### Company-Article
+   *
+   * The relationship between a company and a specific article, including snippets
+   * and sentiment analysis relevant to that company.
    */
   export interface CompanyArticle {
     categories: Array<ArticlesAPI.CategoryTree>;
 
     /**
-     * Custom Company Serializer for News Articles.
+     * ### News Company
+     *
+     * Company information when associated with news articles. Includes DUNS numbers
+     * and an optional customer reference.
      */
     company: CompanyArticle.Company;
 
@@ -483,7 +507,10 @@ export namespace Article {
 
   export namespace CompanyArticle {
     /**
-     * Custom Company Serializer for News Articles.
+     * ### News Company
+     *
+     * Company information when associated with news articles. Includes DUNS numbers
+     * and an optional customer reference.
      */
     export interface Company {
       /**
@@ -757,7 +784,9 @@ export namespace Article {
   }
 
   /**
-   * Serializer for Source Information.
+   * ### Source
+   *
+   * Represents the origin of a news article, including its domain, URL, and name.
    */
   export interface Source {
     domain: string;
@@ -768,7 +797,10 @@ export namespace Article {
   }
 
   /**
-   * Serializer for snippet of Sub Article.
+   * ### Sub-Article
+   *
+   * A lightweight representation of an article that is part of a larger cluster or
+   * related to a main article.
    */
   export interface SubArticle {
     url: string;
@@ -965,7 +997,10 @@ export type LanguageEnum =
   | 'zh';
 
 /**
- * External Article Feedback Serializer.
+ * ### External Article Feedback
+ *
+ * Allows users to provide feedback on specific articles, including feedback type,
+ * comments, and contact information.
  */
 export interface ArticleCreateFeedbackResponse {
   article: string;
@@ -985,7 +1020,9 @@ export interface ArticleCreateFeedbackResponse {
 }
 
 /**
- * SavedArticleFilter Instance.
+ * ### Saved Article Filter
+ *
+ * Represents a named set of article search filters that can be reused.
  */
 export interface ArticleListSavedArticleFiltersResponse {
   external_id: string;
@@ -998,11 +1035,20 @@ export type ArticleRetrieveRelatedResponse =
 
 export namespace ArticleRetrieveRelatedResponse {
   /**
-   * Related Article Serializer.
+   * ### Related Article
+   *
+   * An article that is semantically related to another, including a distance score
+   * indicating the degree of similarity.
    */
   export interface ArticleRetrieveRelatedResponseItem {
     /**
-     * Custom Serializer for the Article Model.
+     * ### Article
+     *
+     * The primary data structure for news articles. It provides comprehensive data,
+     * including: - Metadata (URLs, publication dates, languages, countries) - Content
+     * (titles, snippets, summaries - both original and translated) - Relationships
+     * (source, related companies, categories) - Analysis (sentiment, clustering
+     * status)
      */
     article: ArticlesAPI.Article;
 
@@ -1012,94 +1058,93 @@ export namespace ArticleRetrieveRelatedResponse {
 
 export interface ArticleListParams extends NextKeyParams {
   /**
-   * Category ID to filter articles
+   * Filter by article Category IDs (UUIDs).
    */
   category?: Array<string>;
 
   /**
-   * Company ID's
+   * Filter by internal Company UUIDs.
    */
   company?: Array<string>;
 
   /**
-   * ISO 2-letter Country Code
+   * Filter by ISO 2-letter Country Codes (e.g., 'US', 'GB').
    */
   country?: Array<string>;
 
   /**
-   * By default companies with the same trade names are grouped and the best one is
-   * picked, the other ones are not included. By disabling this the amount of company
-   * articles will grow significantly.
+   * By default, companies with the same trade names are grouped and the best match
+   * is selected. Enable this to see all associated companies.
    */
   disable_company_article_deduplication?: boolean;
 
   /**
-   * 9-digit Dun And Bradstreet Number
+   * Filter by one or more 9-digit Dun & Bradstreet Numbers.
    */
   duns_number?: Array<string>;
 
   /**
-   * 9-digit Dun And Bradstreet Number
+   * Filter by Global Ultimate DUNS Numbers.
    */
   global_ultimate?: Array<string>;
 
   /**
-   * Include clustered articles
+   * Include articles that are part of a cluster (reprints or similar articles).
    */
   include_clustered_articles?: boolean;
 
   /**
-   * Filter articles by materiality flag (true/false)
+   * Filter by materiality flag (relevance to business risk).
    */
   is_material?: boolean;
 
   /**
-   * ISO 2-letter Language Code
+   * Filter by ISO 2-letter Language Codes (e.g., 'en', 'nl').
    */
   language?: Array<string>;
 
   /**
-   * Filter articles created before this date
+   * Filter articles added to our database at or before this date/time.
    */
   max_creation_date?: string;
 
   /**
-   * Filter articles published before this date
+   * Filter articles published at or before this date/time.
    */
   max_publication_date?: string;
 
   /**
-   * Filter articles created after this date
+   * Filter articles added to our database at or after this date/time.
    */
   min_creation_date?: string;
 
   /**
-   * Filter articles published after this date
+   * Filter articles published at or after this date/time.
    */
   min_publication_date?: string;
 
   /**
-   * Portfolio ID to filter articles
+   * Filter articles related to companies in specific Portfolios (UUIDs).
    */
   portfolio_id?: Array<string>;
 
   /**
-   * Custom search filters to text search all articles.
+   * Full-text search query for filtering articles by content.
    */
   query?: string;
 
   /**
-   * Local Registration Number
+   * Filter by local company registration numbers.
    */
   registration_number?: Array<string>;
 
   /**
-   * Filter articles on already saved article filter id
+   * Apply a previously saved set of article filters (UUID).
    */
   saved_article_filter_id?: string;
 
   /**
-   * Filter articles with sentiment
+   * Filter by sentiment: `true` for positive, `false` for negative.
    */
   sentiment?: boolean;
 

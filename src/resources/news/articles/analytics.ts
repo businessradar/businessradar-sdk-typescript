@@ -6,7 +6,9 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class Analytics extends APIResource {
   /**
-   * Get Count of Articles published by Date.
+   * ### Get Article Aggregations
+   *
+   * Retrieve the number of articles and their average sentiment, grouped by date.
    */
   getCountByDate(
     query: AnalyticsGetCountByDateParams | null | undefined = {},
@@ -21,7 +23,11 @@ export type AnalyticsGetCountByDateResponse =
 
 export namespace AnalyticsGetCountByDateResponse {
   /**
-   * Article Date Aggregation Serializer.
+   * ### Article Date Aggregation
+   *
+   * Provides aggregated metrics for articles on a per-date basis. - **count**: Total
+   * articles found for the given date. - **average_sentiment**: Average sentiment
+   * score of these articles. - **date**: The specific date of the aggregation.
    */
   export interface AnalyticsGetCountByDateResponseItem {
     average_sentiment: number;
@@ -34,96 +40,98 @@ export namespace AnalyticsGetCountByDateResponse {
 
 export interface AnalyticsGetCountByDateParams {
   /**
-   * Category ID to filter articles
+   * Filter by article Category IDs (UUIDs).
    */
   category?: Array<string>;
 
   /**
-   * Company ID's
+   * Filter by internal Company UUIDs.
    */
   company?: Array<string>;
 
   /**
-   * ISO 2-letter Country Code
+   * Filter by ISO 2-letter Country Codes (e.g., 'US', 'GB').
    */
   country?: Array<string>;
 
   /**
-   * By default companies with the same trade names are grouped and the best one is
-   * picked, the other ones are not included. By disabling this the amount of company
-   * articles will grow significantly.
+   * By default, companies with the same trade names are grouped and the best match
+   * is selected. Enable this to see all associated companies.
    */
   disable_company_article_deduplication?: boolean;
 
   /**
-   * 9-digit Dun And Bradstreet Number
+   * Filter by one or more 9-digit Dun & Bradstreet Numbers.
    */
   duns_number?: Array<string>;
 
   /**
-   * 9-digit Dun And Bradstreet Number
+   * Filter by Global Ultimate DUNS Numbers.
    */
   global_ultimate?: Array<string>;
 
   /**
-   * Include clustered articles
+   * Include articles that are part of a cluster (reprints or similar articles).
    */
   include_clustered_articles?: boolean;
 
+  /**
+   * The time interval for aggregation.
+   */
   interval?: 'day' | 'month' | 'week' | 'year';
 
   /**
-   * Filter articles by materiality flag (true/false)
+   * Filter by materiality flag (relevance to business risk).
    */
   is_material?: boolean;
 
   /**
-   * ISO 2-letter Language Code
+   * Filter by ISO 2-letter Language Codes (e.g., 'en', 'nl').
    */
   language?: Array<string>;
 
   /**
-   * Filter articles created before this date
+   * Filter articles added to our database at or before this date/time.
    */
   max_creation_date?: string;
 
   /**
-   * Filter articles published before this date
+   * Filter articles published at or before this date/time.
    */
   max_publication_date?: string;
 
   /**
-   * Filter articles created after this date
+   * Filter articles added to our database at or after this date/time.
    */
   min_creation_date?: string;
 
   /**
-   * Filter articles published after this date
+   * Filter articles published at or after this date/time.
    */
   min_publication_date?: string;
 
   /**
-   * Portfolio ID to filter articles
+   * Filter articles related to companies in specific Portfolios (UUIDs).
    */
   portfolio_id?: Array<string>;
 
   /**
-   * Custom search filters to text search all articles.
+   * Full-text search query for filtering articles by content.
    */
   query?: string;
 
   /**
-   * Local Registration Number
+   * Filter by local company registration numbers.
    */
   registration_number?: Array<string>;
 
   /**
-   * Filter articles on already saved article filter id
+   * Apply a previously saved set of article filters (UUID).
    */
   saved_article_filter_id?: string;
 
   /**
-   * Filter articles with sentiment
+   * Filter by sentiment: `true` for positive, `false` for negative.
    */
   sentiment?: boolean;
 }
