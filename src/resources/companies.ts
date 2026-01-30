@@ -10,7 +10,17 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Register new Company to Business Radar.
+   * ### Register Company (Asynchronous)
+   *
+   * Register a new company to Business Radar using its identification details. Once
+   * posted, Business Radar processes the request in the background.
+   *
+   * To check the progress and/or retrieve the final result, you can use the
+   * [GET /registrations/{registration_id}](/ext/v3/#/ext/ext_v3_registrations_retrieve)
+   * endpoint.
+   *
+   * If the company is already registered, the existing registration will be
+   * returned.
    */
   create(
     body: CompanyCreateParams | null | undefined = {},
@@ -20,20 +30,27 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Get Company Information.
+   * ### Retrieve Company Information
+   *
+   * Fetch detailed information about a specific company using its `external_id`.
    */
   retrieve(externalID: string, options?: RequestOptions): APIPromise<CompanyRetrieveResponse> {
     return this._client.get(path`/ext/v3/companies/${externalID}`, options);
   }
 
   /**
-   * Search all companies using Dun and Bradstreet.
+   * ### Search Companies
    *
-   * Companies will contain an optional external_id, which is null if company is not
-   * registered in Business Radar.
+   * Search for companies across internal and external databases.
    *
-   * When you pass query and optional country it will search using dun and
-   * bradstreet, otherwise using internal search.
+   * - If `query` and an optional `country` are provided, the search is primarily
+   *   conducted via Dun & Bradstreet.
+   *
+   * - If other filters (like `portfolio_id`) are provided, the search is limited to
+   *   our internal database.
+   *
+   * The results include an `external_id` if the company is already registered in
+   * Business Radar.
    */
   list(
     query: CompanyListParams | null | undefined = {},
@@ -43,7 +60,10 @@ export class Companies extends APIResource {
   }
 
   /**
-   * List Company Updates.
+   * ### List Company Updates
+   *
+   * Retrieve a list of attribute changes for companies. This allows monitoring how
+   * company data has evolved over time.
    */
   listAttributeChanges(
     query: CompanyListAttributeChangesParams | null | undefined = {},
@@ -57,7 +77,10 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Get Registration Information.
+   * ### Retrieve Registration Information
+   *
+   * Fetch details about a specific company registration request using its
+   * `registration_id`.
    */
   retrieveRegistration(registrationID: string, options?: RequestOptions): APIPromise<Registration> {
     return this._client.get(path`/ext/v3/registrations/${registrationID}`, options);
@@ -573,7 +596,9 @@ export type CountryEnum =
   | 'ZW';
 
 /**
- * Industry Code.
+ * ### Industry Code
+ *
+ * Industry classification codes (e.g., NACE, SBI, SIC).
  */
 export interface IndustryCode {
   code: string;
@@ -582,9 +607,10 @@ export interface IndustryCode {
 }
 
 /**
- * Portfolio Registration Serializer.
+ * ### Company Registration
  *
- * Serializer used for registering a new company.
+ * Handles the registration of companies for monitoring. New companies can be
+ * identified by DUNS number, local registration number, or name and country.
  */
 export interface Registration {
   external_id: string;
@@ -649,9 +675,10 @@ export interface Registration {
   status_text: string;
 
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Registration.Company | null;
 
@@ -922,9 +949,10 @@ export interface Registration {
 
 export namespace Registration {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   export interface Company {
     /**
@@ -1189,15 +1217,17 @@ export namespace Registration {
 }
 
 /**
- * Portfolio Registration Serializer.
+ * ### Company Registration
  *
- * Serializer used for registering a new company.
+ * Handles the registration of companies for monitoring. New companies can be
+ * identified by DUNS number, local registration number, or name and country.
  */
 export interface RegistrationRequest {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Shared.PortfolioCompanyDetailRequest | null;
 
@@ -1467,7 +1497,14 @@ export interface RegistrationRequest {
 }
 
 /**
- * Company.
+ * ### Company
+ *
+ * Detailed representation of a company in Business Radar.
+ *
+ * This data includes: - Basic info (name, country, website) - Identification
+ * (DUNS, external ID, registration numbers) - Industry classifications -
+ * Geographical data (address, coordinates) - Social and online presence - Summary
+ * metrics (article count, review scores, etc.)
  */
 export interface CompanyRetrieveResponse {
   /**
@@ -1809,7 +1846,9 @@ export interface CompanyRetrieveResponse {
 
 export namespace CompanyRetrieveResponse {
   /**
-   * Registration Number.
+   * ### Registration Number
+   *
+   * Company registration numbers, such as Chamber of Commerce (KvK) or VAT numbers.
    */
   export interface RegistrationNumber {
     description: string;
@@ -1824,7 +1863,14 @@ export namespace CompanyRetrieveResponse {
 }
 
 /**
- * Universal Company.
+ * ### Universal Company Data
+ *
+ * Handles company data from both internal and external sources (e.g., Dun &
+ * Bradstreet). Provides a unified representation of a company.
+ *
+ * - **DUNS Number**: Unique 9-digit identifier. - **External ID**: Internal unique
+ *   identifier if the company is registered. - **Industry Codes**: List of
+ *   industry classifications.
  */
 export interface CompanyListResponse {
   address_place: string;
@@ -1861,7 +1907,10 @@ export namespace CompanyListResponse {
 }
 
 /**
- * Company Attribute Change Serializer.
+ * ### Company Attribute Change
+ *
+ * Tracks changes to specific attributes of a company over time. Used for
+ * monitoring updates and maintaining a history of company data.
  */
 export interface CompanyListAttributeChangesResponse {
   attribute: string;
@@ -1877,9 +1926,10 @@ export interface CompanyListAttributeChangesResponse {
 
 export interface CompanyCreateParams {
   /**
-   * Portfolio Company Detail Serializer.
+   * ### Portfolio Company Detail (Simplified)
    *
-   * Alternative serializer for the Company model which is limited.
+   * A lightweight data structure for company identification (UUID, DUNS, Name,
+   * Country).
    */
   company?: Shared.PortfolioCompanyDetailRequest | null;
 
@@ -2150,17 +2200,17 @@ export interface CompanyCreateParams {
 
 export interface CompanyListParams extends NextKeyParams {
   /**
-   * ISO 2-letter Country Code
+   * ISO 2-letter Country Code (e.g., NL, US)
    */
   country?: Array<string>;
 
   /**
-   * 9-digit Dun And Bradstreet Number
+   * 9-digit Dun And Bradstreet Number (can be multiple)
    */
   duns_number?: Array<string>;
 
   /**
-   * Portfolio ID to filter companies
+   * Filter companies belonging to specific Portfolio IDs (UUID)
    */
   portfolio_id?: Array<string>;
 
@@ -2170,12 +2220,12 @@ export interface CompanyListParams extends NextKeyParams {
   query?: string;
 
   /**
-   * Local Registration Number
+   * Local Registration Number (can be multiple)
    */
   registration_number?: Array<string>;
 
   /**
-   * Website URL to search
+   * Website URL to search for the company
    */
   website_url?: string;
 }
