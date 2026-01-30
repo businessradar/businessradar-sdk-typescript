@@ -7,20 +7,29 @@ import { path } from '../../../internal/utils/path';
 
 export class Export extends APIResource {
   /**
-   * Export articles, get status using get Export details API.
+   * ### Export Articles (Asynchronous)
    *
-   * The export returns the location to an JSON-Lines file located on our S3 bucket.
-   * The file is available for 7 days.
+   * Request an asynchronous export of articles matching specific filters. Once
+   * requested, Business Radar processes the export in the background.
    *
-   * There is a max restriction of 25.000 articles per export. No pagination
-   * supported. For larger exports please contact support@businessradar.com
+   * To check the status and retrieve the download link, you can use the
+   * [GET /articles/export/{external_id}](/ext/v3/#/ext/ext_v3_articles_export_retrieve)
+   * endpoint.
+   *
+   * The export process returns a reference to a JSON-Lines file stored on S3, which
+   * remains available for 7 days.
+   *
+   * _Limit: 25,000 articles per export._
    */
   create(body: ExportCreateParams, options?: RequestOptions): APIPromise<ArticleExport> {
     return this._client.post('/ext/v3/articles/export/', { body, ...options });
   }
 
   /**
-   * Export article details.
+   * ### Export Status & Details
+   *
+   * Check the status of an ongoing export or retrieve the download link for a
+   * completed export.
    */
   retrieve(externalID: string, options?: RequestOptions): APIPromise<ArticleExport> {
     return this._client.get(path`/ext/v3/articles/export/${externalID}`, options);
@@ -53,7 +62,10 @@ export interface ArticleExport {
   file_type: DataExportFileType;
 
   /**
-   * Article Filter Serializer.
+   * ### Article Filters
+   *
+   * Used to validate and process filters for article searches. Supports filtering by
+   * query text, countries, languages, specific companies (DUNS), and portfolios.
    */
   filters: ArticleExport.Filters;
 
@@ -77,7 +89,10 @@ export interface ArticleExport {
 
 export namespace ArticleExport {
   /**
-   * Article Filter Serializer.
+   * ### Article Filters
+   *
+   * Used to validate and process filters for article searches. Supports filtering by
+   * query text, countries, languages, specific companies (DUNS), and portfolios.
    */
   export interface Filters {
     categories?: Array<string> | null;
@@ -144,14 +159,20 @@ export interface ExportCreateParams {
   file_type: DataExportFileType;
 
   /**
-   * Article Filter Serializer.
+   * ### Article Filters
+   *
+   * Used to validate and process filters for article searches. Supports filtering by
+   * query text, countries, languages, specific companies (DUNS), and portfolios.
    */
   filters: ExportCreateParams.Filters;
 }
 
 export namespace ExportCreateParams {
   /**
-   * Article Filter Serializer.
+   * ### Article Filters
+   *
+   * Used to validate and process filters for article searches. Supports filtering by
+   * query text, countries, languages, specific companies (DUNS), and portfolios.
    */
   export interface Filters {
     categories?: Array<string> | null;

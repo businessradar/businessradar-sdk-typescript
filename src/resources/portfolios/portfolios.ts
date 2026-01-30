@@ -18,14 +18,20 @@ export class Portfolios extends APIResource {
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
 
   /**
-   * List Create Portfolio.
+   * ### Portfolios
+   *
+   * Manage collections of companies. This view allows you to list existing
+   * portfolios associated with your profile or create new ones.
    */
   create(body: PortfolioCreateParams, options?: RequestOptions): APIPromise<Portfolio> {
     return this._client.post('/ext/v3/portfolios', { body, ...options });
   }
 
   /**
-   * List Create Portfolio.
+   * ### Portfolios
+   *
+   * Manage collections of companies. This view allows you to list existing
+   * portfolios associated with your profile or create new ones.
    */
   list(
     query: PortfolioListParams | null | undefined = {},
@@ -46,7 +52,10 @@ export type PortfoliosNextKey = NextKey<Portfolio>;
 export type PermissionEnum = 'view_only' | 'write' | 'admin' | 'owner';
 
 /**
- * Portfolio Instance.
+ * ### Portfolio
+ *
+ * Represents a collection of companies (a portfolio) managed by a user or profile.
+ * Includes basic metadata and default permission settings.
  */
 export interface Portfolio {
   external_id: string;
