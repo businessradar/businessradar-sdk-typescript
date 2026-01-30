@@ -22,7 +22,10 @@ export {
   type ComplianceCheckScoreEnum,
   type ComplianceCreateResponse,
   type ComplianceRetrieveResponse,
+  type ComplianceListResultsResponse,
   type ComplianceCreateParams,
+  type ComplianceListResultsParams,
+  type ComplianceListResultsResponsesNextKey,
 } from './compliance';
 export { News } from './news/news';
 export {

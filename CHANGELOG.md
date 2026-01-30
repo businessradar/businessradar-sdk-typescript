@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0 (2026-01-30)
+
+Full Changelog: [v0.4.1...v0.5.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.4.1...v0.5.0)
+
+### Features
+
+* **api:** api update ([98958fc](https://github.com/businessradar/businessradar-sdk-typescript/commit/98958fcdc6435105cc495e6847d4bdaa5955190e))
+* **api:** api update ([37251c8](https://github.com/businessradar/businessradar-sdk-typescript/commit/37251c8cb185ebd236fd824813430e8d6e527451))
+* **api:** manual updates ([f66ebb0](https://github.com/businessradar/businessradar-sdk-typescript/commit/f66ebb0d9a4c9be281a22d43d18d791168c0d90e))
+
 ## 0.4.1 (2026-01-29)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.4.0...v0.4.1)
