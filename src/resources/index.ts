@@ -10,12 +10,18 @@ export {
   type RegistrationRequest,
   type CompanyRetrieveResponse,
   type CompanyListResponse,
+  type CompanyCreateMissingCompanyInvestigationResponse,
   type CompanyListAttributeChangesResponse,
+  type CompanyListMissingCompanyInvestigationsResponse,
+  type CompanyRetrieveMissingCompanyInvestigationResponse,
   type CompanyCreateParams,
   type CompanyListParams,
+  type CompanyCreateMissingCompanyInvestigationParams,
   type CompanyListAttributeChangesParams,
+  type CompanyListMissingCompanyInvestigationsParams,
   type CompanyListResponsesNextKey,
   type CompanyListAttributeChangesResponsesNextKey,
+  type CompanyListMissingCompanyInvestigationsResponsesNextKey,
 } from './companies';
 export {
   Compliance,

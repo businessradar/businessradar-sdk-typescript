@@ -59,14 +59,20 @@ Types:
 - <code><a href="./src/resources/companies.ts">RegistrationRequest</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyRetrieveResponse</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
+- <code><a href="./src/resources/companies.ts">CompanyCreateMissingCompanyInvestigationResponse</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListAttributeChangesResponse</a></code>
+- <code><a href="./src/resources/companies.ts">CompanyListMissingCompanyInvestigationsResponse</a></code>
+- <code><a href="./src/resources/companies.ts">CompanyRetrieveMissingCompanyInvestigationResponse</a></code>
 
 Methods:
 
 - <code title="post /ext/v3/companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Registration</code>
 - <code title="get /ext/v3/companies/{external_id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(externalID) -> CompanyRetrieveResponse</code>
 - <code title="get /ext/v3/companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesNextKey</code>
+- <code title="post /ext/v3/companies/investigations">client.companies.<a href="./src/resources/companies.ts">createMissingCompanyInvestigation</a>({ ...params }) -> CompanyCreateMissingCompanyInvestigationResponse</code>
 - <code title="get /ext/v3/companies/attribute_changes">client.companies.<a href="./src/resources/companies.ts">listAttributeChanges</a>({ ...params }) -> CompanyListAttributeChangesResponsesNextKey</code>
+- <code title="get /ext/v3/companies/investigations">client.companies.<a href="./src/resources/companies.ts">listMissingCompanyInvestigations</a>({ ...params }) -> CompanyListMissingCompanyInvestigationsResponsesNextKey</code>
+- <code title="get /ext/v3/companies/investigations/{external_id}">client.companies.<a href="./src/resources/companies.ts">retrieveMissingCompanyInvestigation</a>(externalID) -> CompanyRetrieveMissingCompanyInvestigationResponse</code>
 - <code title="get /ext/v3/registrations/{registration_id}">client.companies.<a href="./src/resources/companies.ts">retrieveRegistration</a>(registrationID) -> Registration</code>
 
 # Compliance
