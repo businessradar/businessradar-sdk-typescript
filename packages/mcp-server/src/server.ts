@@ -21,7 +21,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'businessradar_businessradar_api',
-      version: '0.4.1',
+      version: '0.5.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
