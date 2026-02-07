@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.7.0 (2026-02-07)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **mcp:** add initial server instructions ([a00ce6a](https://github.com/businessradar/businessradar-sdk-typescript/commit/a00ce6a543f712488e3db8e181e8db58560bbda1))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([8c66051](https://github.com/businessradar/businessradar-sdk-typescript/commit/8c66051496ac2c15c8ef17878fcf55809d5e642c))
+* **client:** avoid removing abort listener too early ([1245592](https://github.com/businessradar/businessradar-sdk-typescript/commit/124559267d81b1196d8e881987db74e2c0faa0f1))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([13e2868](https://github.com/businessradar/businessradar-sdk-typescript/commit/13e2868ab0d32680b7f02f1df1b05c2ba576e182))
+* **client:** restructure abort controller binding ([7bc1dfe](https://github.com/businessradar/businessradar-sdk-typescript/commit/7bc1dfedd1427749298be3c6ecd61373b4828fd3))
+* **internal:** add health check to MCP server when running in HTTP mode ([0097247](https://github.com/businessradar/businessradar-sdk-typescript/commit/0097247c492e1cc1450f24eadc8770d1c4c85a90))
+* **internal:** fix pagination internals not accepting option promises ([431a27a](https://github.com/businessradar/businessradar-sdk-typescript/commit/431a27a7f0002f748af72dd477114830cbac09bc))
+* **internal:** refactor flag parsing for MCP servers and add debug flag ([597d70b](https://github.com/businessradar/businessradar-sdk-typescript/commit/597d70b4eb879adb36d1110669dff5c4ac4a662c))
+* **internal:** support oauth authorization code flow for MCP servers ([2371142](https://github.com/businessradar/businessradar-sdk-typescript/commit/2371142e9a8883fdaaeba160892bf57f77550ed7))
+* **internal:** upgrade pnpm ([a57abbe](https://github.com/businessradar/businessradar-sdk-typescript/commit/a57abbec67b45ddc5717bc7a2e737495e83a3fb2))
+
 ## 0.6.0 (2026-01-30)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.5.0...v0.6.0)
