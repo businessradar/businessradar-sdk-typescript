@@ -41,6 +41,7 @@ describe('resource compliance', () => {
             },
           ],
           ownership_screening_threshold: 0,
+          ubo_screening_enabled: true,
         },
         { path: '/_stainless_unknown_path' },
       ),
