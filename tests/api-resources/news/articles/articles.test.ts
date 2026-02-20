@@ -8,7 +8,7 @@ const client = new BusinessRadar({
 });
 
 describe('resource articles', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.news.articles.list();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource articles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -53,7 +53,7 @@ describe('resource articles', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createFeedback: only required params', async () => {
     const responsePromise = client.news.articles.createFeedback({
       article: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -67,7 +67,7 @@ describe('resource articles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createFeedback: required and optional params', async () => {
     const response = await client.news.articles.createFeedback({
       article: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -77,7 +77,7 @@ describe('resource articles', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listSavedArticleFilters', async () => {
     const responsePromise = client.news.articles.listSavedArticleFilters();
     const rawResponse = await responsePromise.asResponse();
@@ -89,7 +89,7 @@ describe('resource articles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listSavedArticleFilters: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -100,7 +100,7 @@ describe('resource articles', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveRelated', async () => {
     const responsePromise = client.news.articles.retrieveRelated('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
