@@ -8,7 +8,7 @@ const client = new BusinessRadar({
 });
 
 describe('resource companies', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.companies.create();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -38,7 +38,7 @@ describe('resource companies', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.companies.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +50,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.companies.list();
     const rawResponse = await responsePromise.asResponse();
@@ -62,7 +62,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -81,7 +81,7 @@ describe('resource companies', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createMissingCompanyInvestigation: only required params', async () => {
     const responsePromise = client.companies.createMissingCompanyInvestigation({
       country: 'AF',
@@ -96,7 +96,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createMissingCompanyInvestigation: required and optional params', async () => {
     const response = await client.companies.createMissingCompanyInvestigation({
       country: 'AF',
@@ -115,7 +115,7 @@ describe('resource companies', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAttributeChanges', async () => {
     const responsePromise = client.companies.listAttributeChanges();
     const rawResponse = await responsePromise.asResponse();
@@ -127,7 +127,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAttributeChanges: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -142,7 +142,7 @@ describe('resource companies', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listMissingCompanyInvestigations', async () => {
     const responsePromise = client.companies.listMissingCompanyInvestigations();
     const rawResponse = await responsePromise.asResponse();
@@ -154,7 +154,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listMissingCompanyInvestigations: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -165,7 +165,7 @@ describe('resource companies', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveMissingCompanyInvestigation', async () => {
     const responsePromise = client.companies.retrieveMissingCompanyInvestigation(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -179,7 +179,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveRegistration', async () => {
     const responsePromise = client.companies.retrieveRegistration('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
