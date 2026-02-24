@@ -60,7 +60,7 @@ $ yarn link @businessradar/businessradar
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @businessradar/businessradar
+$ pnpm link --global @businessradar/businessradar
 ```
 
 ## Running tests
