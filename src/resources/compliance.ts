@@ -113,6 +113,8 @@ export interface ComplianceRetrieveResponse {
 
 export namespace ComplianceRetrieveResponse {
   export interface Entity {
+    aliases: Array<string>;
+
     /**
      * - `ubo` - Ultimate Beneficial Owner
      * - `director` - Director
@@ -180,6 +182,10 @@ export namespace ComplianceRetrieveResponse {
  */
 export interface ComplianceListResultsResponse {
   addresses: Array<ComplianceListResultsResponse.Address>;
+
+  automated_false_positive_rating: string | null;
+
+  automated_false_positive_rating_comments: string | null;
 
   created_at: string;
 
@@ -578,6 +584,8 @@ export namespace ComplianceListResultsResponse {
   }
 
   export interface Entity {
+    aliases: Array<string>;
+
     /**
      * - `ubo` - Ultimate Beneficial Owner
      * - `director` - Director
@@ -701,6 +709,11 @@ export namespace ComplianceCreateParams {
   export interface Entity {
     name: string;
 
+    /**
+     * Alternative names or aliases for the compliance entity.
+     */
+    aliases?: Array<string>;
+
     country?: string | null;
 
     date_of_birth?: string | null;
@@ -724,6 +737,11 @@ export interface ComplianceListResultsParams extends NextKeyParams {
    * Filter by entity external ID
    */
   entity?: string;
+
+  /**
+   * Filter out automated false positive rated results
+   */
+  exclude_automated_false_positives?: boolean;
 
   /**
    * Filter by minimum confidence score (0.0 - 1.0)

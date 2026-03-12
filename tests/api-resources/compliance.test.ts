@@ -32,6 +32,7 @@ describe('resource compliance', () => {
           entities: [
             {
               name: 'x',
+              aliases: ['x'],
               country: 'xx',
               date_of_birth: '2019-12-27',
               entity_type: 'individual',
@@ -80,6 +81,7 @@ describe('resource compliance', () => {
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
           entity: 'entity',
+          exclude_automated_false_positives: true,
           min_confidence: 0,
           next_key: 'next_key',
           order: 'asc',
