@@ -673,12 +673,6 @@ export namespace ComplianceListResultsResponse {
 }
 
 export interface ComplianceCreateParams {
-  /**
-   * If enabled all found entities (UBOs, directors, shareholders) will be screened.
-   * This can have a high cost impact.
-   */
-  all_entities_screening_enabled?: boolean;
-
   company_id?: string | null;
 
   /**
