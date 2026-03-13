@@ -20,7 +20,7 @@ export const newMcpServer = async (stainlessApiKey: string | undefined) =>
   new McpServer(
     {
       name: 'businessradar_businessradar_api',
-      version: '0.6.0',
+      version: '0.7.0',
     },
     {
       instructions: await getInstructions(stainlessApiKey),
