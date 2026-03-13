@@ -8,7 +8,7 @@ const client = new BusinessRadar({
 });
 
 describe('resource compliance', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.compliance.create();
     const rawResponse = await responsePromise.asResponse();
@@ -20,18 +20,18 @@ describe('resource compliance', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.compliance.create(
         {
-          all_entities_screening_enabled: true,
           company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           directors_screening_enabled: true,
           entities: [
             {
               name: 'x',
+              aliases: ['x'],
               country: 'xx',
               date_of_birth: '2019-12-27',
               entity_type: 'individual',
@@ -41,13 +41,14 @@ describe('resource compliance', () => {
             },
           ],
           ownership_screening_threshold: 0,
+          ubo_screening_enabled: true,
         },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.compliance.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -59,7 +60,7 @@ describe('resource compliance', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listResults', async () => {
     const responsePromise = client.compliance.listResults('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -71,7 +72,7 @@ describe('resource compliance', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listResults: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -79,6 +80,7 @@ describe('resource compliance', () => {
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
           entity: 'entity',
+          exclude_automated_false_positives: true,
           min_confidence: 0,
           next_key: 'next_key',
           order: 'asc',

@@ -12,10 +12,10 @@ export class Compliance extends APIResource {
    *
    * Initiate a new compliance screening using one of two methods:
    *
-   * 1. **Company-based screening**: Provide a `company_id` to automatically screen
-   *    the company and its associated entities (like UBOs and directors). You can
-   *    optionally include a list of additional `entities` to be screened alongside
-   *    the company.
+   * 1. **Company-based screening**: Provide a `company_id` to screen the company.
+   *    Optionally enable screening of related entities (UBOs and directors) via
+   *    `ubo_screening_enabled` and `directors_screening_enabled`. You can optionally
+   *    include a list of additional `entities` to be screened alongside the company.
    *
    * 2. **Custom entity screening**: Provide a list of `entities` without a
    *    `company_id` to screen specific individuals or organizations that are not
@@ -113,6 +113,8 @@ export interface ComplianceRetrieveResponse {
 
 export namespace ComplianceRetrieveResponse {
   export interface Entity {
+    aliases: Array<string>;
+
     /**
      * - `ubo` - Ultimate Beneficial Owner
      * - `director` - Director
@@ -180,6 +182,10 @@ export namespace ComplianceRetrieveResponse {
  */
 export interface ComplianceListResultsResponse {
   addresses: Array<ComplianceListResultsResponse.Address>;
+
+  automated_false_positive_rating: string | null;
+
+  automated_false_positive_rating_comments: string | null;
 
   created_at: string;
 
@@ -578,6 +584,8 @@ export namespace ComplianceListResultsResponse {
   }
 
   export interface Entity {
+    aliases: Array<string>;
+
     /**
      * - `ubo` - Ultimate Beneficial Owner
      * - `director` - Director
@@ -665,12 +673,6 @@ export namespace ComplianceListResultsResponse {
 }
 
 export interface ComplianceCreateParams {
-  /**
-   * If enabled all found entities UBOs, directors, shareholders will be screened.
-   * This can have an high cost impact.
-   */
-  all_entities_screening_enabled?: boolean;
-
   company_id?: string | null;
 
   /**
@@ -684,6 +686,11 @@ export interface ComplianceCreateParams {
    * The threshold for ultimate ownership to enable for screening.
    */
   ownership_screening_threshold?: number | null;
+
+  /**
+   * If enabled, UBOs discovered for the company will be screened.
+   */
+  ubo_screening_enabled?: boolean;
 }
 
 export namespace ComplianceCreateParams {
@@ -695,6 +702,11 @@ export namespace ComplianceCreateParams {
    */
   export interface Entity {
     name: string;
+
+    /**
+     * Alternative names or aliases for the compliance entity.
+     */
+    aliases?: Array<string>;
 
     country?: string | null;
 
@@ -719,6 +731,11 @@ export interface ComplianceListResultsParams extends NextKeyParams {
    * Filter by entity external ID
    */
   entity?: string;
+
+  /**
+   * Filter out automated false positive rated results
+   */
+  exclude_automated_false_positives?: boolean;
 
   /**
    * Filter by minimum confidence score (0.0 - 1.0)

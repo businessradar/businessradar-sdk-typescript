@@ -22,10 +22,11 @@
 # enables interactive mode, allowing the container to communicate over stdin/stdout.
 
 # Build stage
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 # Enable corepack to use pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
+
 # Install bash for build script
 RUN apk add --no-cache bash openssl
 
@@ -35,12 +36,19 @@ WORKDIR /build
 # Copy entire repository
 COPY . .
 
+# Set CI environment variable so pnpm install runs without prompts
+ENV CI=true
+
 # Install all dependencies and build everything
 RUN pnpm install --frozen-lockfile && \
     pnpm build
 
-# Production stage
-FROM node:20-alpine
+FROM denoland/deno:alpine-2.7.1
+
+# Install node and npm
+RUN apk add --no-cache nodejs npm
+
+ENV LD_LIBRARY_PATH=/usr/lib:/usr/local/lib
 
 # Add non-root user
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
@@ -48,18 +56,15 @@ RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
 # Set working directory
 WORKDIR /app
 
-# Copy the built mcp-server preserving directory structure
-COPY --from=builder /build/packages/mcp-server/dist ./packages/mcp-server/dist
-COPY --from=builder /build/packages/mcp-server/node_modules ./packages/mcp-server/node_modules
-
-# Copy node_modules from root (pnpm hoists dependencies here)
-COPY --from=builder /build/node_modules ./node_modules
+# Copy the build results, preserving directory structure
+COPY --from=builder /build .
 
 # Copy the built @businessradar/businessradar into node_modules
 COPY --from=builder /build/dist ./node_modules/@businessradar/businessradar
 
 # Change ownership to nodejs user
 RUN chown -R nodejs:nodejs /app
+RUN chown -R nodejs:nodejs /deno-dir
 
 # Switch to non-root user
 USER nodejs

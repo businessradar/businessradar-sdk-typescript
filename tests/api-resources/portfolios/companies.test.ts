@@ -8,7 +8,7 @@ const client = new BusinessRadar({
 });
 
 describe('resource companies', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.portfolios.companies.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -39,7 +39,7 @@ describe('resource companies', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.portfolios.companies.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -51,7 +51,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -63,7 +63,7 @@ describe('resource companies', () => {
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.portfolios.companies.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       portfolio_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -77,7 +77,7 @@ describe('resource companies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.portfolios.companies.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       portfolio_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

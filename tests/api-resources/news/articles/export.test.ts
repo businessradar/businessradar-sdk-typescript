@@ -8,7 +8,7 @@ const client = new BusinessRadar({
 });
 
 describe('resource export', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.news.articles.export.create({
       file_type: 'PDF',
@@ -23,7 +23,7 @@ describe('resource export', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.news.articles.export.create({
       file_type: 'PDF',
@@ -52,7 +52,7 @@ describe('resource export', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.news.articles.export.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
