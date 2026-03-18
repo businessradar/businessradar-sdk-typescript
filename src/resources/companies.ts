@@ -1840,6 +1840,8 @@ export interface CompanyRetrieveResponse {
 
   address_longitude?: number | null;
 
+  address_number?: string | null;
+
   address_phone?: string | null;
 
   address_place?: string | null;
