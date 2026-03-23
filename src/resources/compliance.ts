@@ -96,6 +96,11 @@ export interface ComplianceRetrieveResponse {
 
   country_score?: 'low' | 'medium' | 'high' | '' | null;
 
+  /**
+   * Custom name for this compliance check.
+   */
+  name?: string | null;
+
   pep_score?: 'low' | 'medium' | 'high' | '' | null;
 
   sanction_score?: 'low' | 'medium' | 'high' | '' | null;
@@ -681,6 +686,11 @@ export interface ComplianceCreateParams {
   directors_screening_enabled?: boolean;
 
   entities?: Array<ComplianceCreateParams.Entity>;
+
+  /**
+   * Custom name for this compliance check.
+   */
+  name?: string | null;
 
   /**
    * The threshold for ultimate ownership to enable for screening.

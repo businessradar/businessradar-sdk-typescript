@@ -40,6 +40,7 @@ describe('resource compliance', () => {
               middle_name: 'middle_name',
             },
           ],
+          name: 'name',
           ownership_screening_threshold: 0,
           ubo_screening_enabled: true,
         },
