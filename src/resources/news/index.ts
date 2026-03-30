@@ -4,7 +4,6 @@ export {
   Articles,
   type Article,
   type CategoryTree,
-  type FeedbackTypeEnum,
   type LanguageEnum,
   type ArticleCreateFeedbackResponse,
   type ArticleListSavedArticleFiltersResponse,

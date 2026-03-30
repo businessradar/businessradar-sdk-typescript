@@ -12,7 +12,6 @@ Types:
 
 - <code><a href="./src/resources/news/articles/articles.ts">Article</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">CategoryTree</a></code>
-- <code><a href="./src/resources/news/articles/articles.ts">FeedbackTypeEnum</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">LanguageEnum</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleCreateFeedbackResponse</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleListSavedArticleFiltersResponse</a></code>
