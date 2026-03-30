@@ -112,6 +112,7 @@ const fuse = new Fuse(
     'client.news.articles.export.create',
     'client.news.articles.export.retrieve',
     'client.companies.create',
+    'client.companies.createFeedback',
     'client.companies.createMissingCompanyInvestigation',
     'client.companies.list',
     'client.companies.listAttributeChanges',

@@ -71,6 +71,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ext/v3/companies',
   },
   {
+    clientCallName: 'client.companies.createFeedback',
+    fullyQualifiedName: 'companies.createFeedback',
+    httpMethod: 'post',
+    httpPath: '/ext/v3/companies/feedback/',
+  },
+  {
     clientCallName: 'client.companies.createMissingCompanyInvestigation',
     fullyQualifiedName: 'companies.createMissingCompanyInvestigation',
     httpMethod: 'post',

@@ -60,6 +60,22 @@ export class Companies extends APIResource {
   }
 
   /**
+   * ### Submit Company Feedback
+   *
+   * Submit feedback about a specific company. If feedback already exists for the
+   * same company and profile, the existing record is updated.
+   *
+   * Optionally provide a `notification_email` to be notified when the feedback is
+   * resolved.
+   */
+  createFeedback(
+    body: CompanyCreateFeedbackParams,
+    options?: RequestOptions,
+  ): APIPromise<CompanyCreateFeedbackResponse> {
+    return this._client.post('/ext/v3/companies/feedback/', { body, ...options });
+  }
+
+  /**
    * ### Submit Missing Company Investigation (Asynchronous)
    *
    * Submit a new investigation for a company that could not be found. Once
@@ -1961,6 +1977,49 @@ export namespace CompanyListResponse {
 }
 
 /**
+ * ### Company Feedback
+ *
+ * Submit feedback about a specific company, such as outdated information, missing
+ * data, or incorrect details.
+ */
+export interface CompanyCreateFeedbackResponse {
+  company: string;
+
+  /**
+   * - `NOT_ENOUGH_NEWS` - Not Enough News
+   * - `COMPANY_NAME_OUTDATED` - Company Name Outdated
+   * - `INCORRECT_COMPANY_WEBSITE` - Incorrect Company Website
+   * - `MISSING_REGISTRATION_NUMBER` - Missing Registration Number
+   * - `MISSING_TRADE_NAME` - Missing Trade Name
+   * - `INCORRECT_TRADE_NAME` - Incorrect Trade Name
+   * - `NOT_ENOUGH_REVIEWS` - Not Enough Reviews
+   * - `OUTDATED_CORPORATE_LINKAGE` - Outdated Corporate Linkage
+   * - `INCORRECT_CORPORATE_LINKAGE` - Incorrect Corporate Linkage
+   * - `OTHER` - Other
+   */
+  feedback_type:
+    | 'NOT_ENOUGH_NEWS'
+    | 'COMPANY_NAME_OUTDATED'
+    | 'INCORRECT_COMPANY_WEBSITE'
+    | 'MISSING_REGISTRATION_NUMBER'
+    | 'MISSING_TRADE_NAME'
+    | 'INCORRECT_TRADE_NAME'
+    | 'NOT_ENOUGH_REVIEWS'
+    | 'OUTDATED_CORPORATE_LINKAGE'
+    | 'INCORRECT_CORPORATE_LINKAGE'
+    | 'OTHER';
+
+  comment?: string | null;
+
+  /**
+   * Email address to notify when feedback is resolved.
+   */
+  notification_email?: string | null;
+
+  trade_name?: string | null;
+}
+
+/**
  * ### Missing Company Investigation
  *
  * Used to request and track investigations for companies not currently in the
@@ -3247,6 +3306,43 @@ export interface CompanyListParams extends NextKeyParams {
   website_url?: string;
 }
 
+export interface CompanyCreateFeedbackParams {
+  company: string;
+
+  /**
+   * - `NOT_ENOUGH_NEWS` - Not Enough News
+   * - `COMPANY_NAME_OUTDATED` - Company Name Outdated
+   * - `INCORRECT_COMPANY_WEBSITE` - Incorrect Company Website
+   * - `MISSING_REGISTRATION_NUMBER` - Missing Registration Number
+   * - `MISSING_TRADE_NAME` - Missing Trade Name
+   * - `INCORRECT_TRADE_NAME` - Incorrect Trade Name
+   * - `NOT_ENOUGH_REVIEWS` - Not Enough Reviews
+   * - `OUTDATED_CORPORATE_LINKAGE` - Outdated Corporate Linkage
+   * - `INCORRECT_CORPORATE_LINKAGE` - Incorrect Corporate Linkage
+   * - `OTHER` - Other
+   */
+  feedback_type:
+    | 'NOT_ENOUGH_NEWS'
+    | 'COMPANY_NAME_OUTDATED'
+    | 'INCORRECT_COMPANY_WEBSITE'
+    | 'MISSING_REGISTRATION_NUMBER'
+    | 'MISSING_TRADE_NAME'
+    | 'INCORRECT_TRADE_NAME'
+    | 'NOT_ENOUGH_REVIEWS'
+    | 'OUTDATED_CORPORATE_LINKAGE'
+    | 'INCORRECT_CORPORATE_LINKAGE'
+    | 'OTHER';
+
+  comment?: string | null;
+
+  /**
+   * Email address to notify when feedback is resolved.
+   */
+  notification_email?: string | null;
+
+  trade_name?: string | null;
+}
+
 export interface CompanyCreateMissingCompanyInvestigationParams {
   /**
    * - `AF` - Afghanistan
@@ -3571,6 +3667,7 @@ export declare namespace Companies {
     type RegistrationRequest as RegistrationRequest,
     type CompanyRetrieveResponse as CompanyRetrieveResponse,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateFeedbackResponse as CompanyCreateFeedbackResponse,
     type CompanyCreateMissingCompanyInvestigationResponse as CompanyCreateMissingCompanyInvestigationResponse,
     type CompanyListAttributeChangesResponse as CompanyListAttributeChangesResponse,
     type CompanyListMissingCompanyInvestigationsResponse as CompanyListMissingCompanyInvestigationsResponse,
@@ -3580,6 +3677,7 @@ export declare namespace Companies {
     type CompanyListMissingCompanyInvestigationsResponsesNextKey as CompanyListMissingCompanyInvestigationsResponsesNextKey,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyListParams as CompanyListParams,
+    type CompanyCreateFeedbackParams as CompanyCreateFeedbackParams,
     type CompanyCreateMissingCompanyInvestigationParams as CompanyCreateMissingCompanyInvestigationParams,
     type CompanyListAttributeChangesParams as CompanyListAttributeChangesParams,
     type CompanyListMissingCompanyInvestigationsParams as CompanyListMissingCompanyInvestigationsParams,
