@@ -14,7 +14,6 @@ import {
   Articles,
   ArticlesNextKey,
   CategoryTree,
-  FeedbackTypeEnum,
   LanguageEnum,
 } from './articles/articles';
 
@@ -29,7 +28,6 @@ export declare namespace News {
     Articles as Articles,
     type Article as Article,
     type CategoryTree as CategoryTree,
-    type FeedbackTypeEnum as FeedbackTypeEnum,
     type LanguageEnum as LanguageEnum,
     type ArticleCreateFeedbackResponse as ArticleCreateFeedbackResponse,
     type ArticleListSavedArticleFiltersResponse as ArticleListSavedArticleFiltersResponse,

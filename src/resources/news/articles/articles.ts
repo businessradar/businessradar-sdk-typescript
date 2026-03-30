@@ -828,13 +828,6 @@ export interface CategoryTree {
 }
 
 /**
- * - `false_positive` - False Positive
- * - `no_risk` - No Risk
- * - `risk_confirmed` - Risk Confirmed
- */
-export type FeedbackTypeEnum = 'false_positive' | 'no_risk' | 'risk_confirmed';
-
-/**
  * - `af` - Afrikaans
  * - `ar` - Arabic
  * - `az` - Azerbaijani
@@ -1016,7 +1009,7 @@ export interface ArticleCreateFeedbackResponse {
    * - `no_risk` - No Risk
    * - `risk_confirmed` - Risk Confirmed
    */
-  feedback_type?: FeedbackTypeEnum;
+  feedback_type?: 'false_positive' | 'no_risk' | 'risk_confirmed';
 }
 
 /**
@@ -1176,7 +1169,7 @@ export interface ArticleCreateFeedbackParams {
    * - `no_risk` - No Risk
    * - `risk_confirmed` - Risk Confirmed
    */
-  feedback_type?: FeedbackTypeEnum;
+  feedback_type?: 'false_positive' | 'no_risk' | 'risk_confirmed';
 }
 
 export interface ArticleListSavedArticleFiltersParams extends NextKeyParams {}
@@ -1188,7 +1181,6 @@ export declare namespace Articles {
   export {
     type Article as Article,
     type CategoryTree as CategoryTree,
-    type FeedbackTypeEnum as FeedbackTypeEnum,
     type LanguageEnum as LanguageEnum,
     type ArticleCreateFeedbackResponse as ArticleCreateFeedbackResponse,
     type ArticleListSavedArticleFiltersResponse as ArticleListSavedArticleFiltersResponse,
