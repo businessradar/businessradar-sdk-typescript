@@ -26,6 +26,7 @@ describe('resource compliance', () => {
     await expect(
       client.compliance.create(
         {
+          adverse_media_monitoring_enabled: true,
           company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           directors_screening_enabled: true,
           entities: [
@@ -42,6 +43,7 @@ describe('resource compliance', () => {
           ],
           name: 'name',
           ownership_screening_threshold: 0,
+          sanction_monitoring_enabled: true,
           ubo_screening_enabled: true,
         },
         { path: '/_stainless_unknown_path' },

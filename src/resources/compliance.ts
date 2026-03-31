@@ -118,15 +118,11 @@ export interface ComplianceRetrieveResponse {
 
 export namespace ComplianceRetrieveResponse {
   export interface Entity {
+    adverse_media_monitoring_enabled: boolean;
+
     aliases: Array<string>;
 
-    /**
-     * - `ubo` - Ultimate Beneficial Owner
-     * - `director` - Director
-     * - `company` - Company
-     * - `manually_added` - Manually added
-     */
-    entity_role: 'ubo' | 'director' | 'company' | 'manually_added';
+    entity_role: string;
 
     /**
      * - `individual` - Individual
@@ -137,6 +133,8 @@ export namespace ComplianceRetrieveResponse {
     external_id: string;
 
     name: string;
+
+    sanction_monitoring_enabled: boolean;
 
     /**
      * - `on_hold` - On Hold
@@ -589,15 +587,11 @@ export namespace ComplianceListResultsResponse {
   }
 
   export interface Entity {
+    adverse_media_monitoring_enabled: boolean;
+
     aliases: Array<string>;
 
-    /**
-     * - `ubo` - Ultimate Beneficial Owner
-     * - `director` - Director
-     * - `company` - Company
-     * - `manually_added` - Manually added
-     */
-    entity_role: 'ubo' | 'director' | 'company' | 'manually_added';
+    entity_role: string;
 
     /**
      * - `individual` - Individual
@@ -608,6 +602,8 @@ export namespace ComplianceListResultsResponse {
     external_id: string;
 
     name: string;
+
+    sanction_monitoring_enabled: boolean;
 
     /**
      * - `on_hold` - On Hold
@@ -678,6 +674,12 @@ export namespace ComplianceListResultsResponse {
 }
 
 export interface ComplianceCreateParams {
+  /**
+   * If enabled, adverse media monitoring will be activated for all system-created
+   * entities (company, directors, UBOs).
+   */
+  adverse_media_monitoring_enabled?: boolean;
+
   company_id?: string | null;
 
   /**
@@ -696,6 +698,12 @@ export interface ComplianceCreateParams {
    * The threshold for ultimate ownership to enable for screening.
    */
   ownership_screening_threshold?: number | null;
+
+  /**
+   * If enabled, sanctions monitoring will be activated for all system-created
+   * entities (company, directors, UBOs).
+   */
+  sanction_monitoring_enabled?: boolean;
 
   /**
    * If enabled, UBOs discovered for the company will be screened.
