@@ -125,6 +125,7 @@ const fuse = new Fuse(
     'client.companies.retrieveMissingCompanyInvestigation',
     'client.companies.retrieveRegistration',
     'client.compliance.create',
+    'client.compliance.list',
     'client.compliance.listResults',
     'client.compliance.retrieve',
     'client.portfolios.create',

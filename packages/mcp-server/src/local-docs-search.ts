@@ -710,6 +710,54 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list',
+    endpoint: '/ext/v3/compliance',
+    httpMethod: 'get',
+    summary: '',
+    description:
+      '### Compliance Checks\n\n**GET** — Retrieve a paginated list of compliance checks created via this API key.\nSupports filtering by status and date ranges, and sorting by key timestamps.\n\n**POST** — Initiate a new compliance screening using one of two methods:\n\n1. **Company-based screening**: Provide a `company_id` to screen the company.\nOptionally enable screening of related entities (UBOs and directors) via\n`ubo_screening_enabled` and `directors_screening_enabled`. You can also include\nadditional custom `entities` to be screened alongside the company.\n\n2. **Custom entity screening**: Provide a list of `entities` without a `company_id`\nto screen specific individuals or organizations that are not necessarily affiliated\nwith a company in our database.',
+    stainlessPath: '(resource) compliance > (method) list',
+    qualified: 'client.compliance.list',
+    params: [
+      'adverse_media_monitoring_enabled?: boolean;',
+      "compliance_score?: 'high' | 'low' | 'medium';",
+      'created_at__gte?: string;',
+      'created_at__lte?: string;',
+      'next_key?: string;',
+      "order?: 'asc' | 'desc';",
+      'results_changed_at__gte?: string;',
+      'results_changed_at__lte?: string;',
+      'sanction_monitoring_enabled?: boolean;',
+      "sorting?: 'created_at' | 'finished_at' | 'results_changed_at';",
+      "status?: 'completed' | 'failed' | 'in_progress' | 'pending' | 'queued' | 'searching_directors';",
+    ],
+    response:
+      "{ company: { country: string; name: string; external_id?: string; }; created_at: string; external_id: string; activity_score?: 'low' | 'medium' | 'high' | ''; adverse_media_score?: 'low' | 'medium' | 'high' | ''; compliance_score?: 'low' | 'medium' | 'high' | ''; country_score?: 'low' | 'medium' | 'high' | ''; finished_at?: string; name?: string; pep_score?: 'low' | 'medium' | 'high' | ''; results_changed_at?: string; reviewed_results_count?: number; sanction_score?: 'low' | 'medium' | 'high' | ''; status?: 'pending' | 'queued' | 'in_progress' | 'searching_directors' | 'completed' | 'failed'; unreviewed_results_count?: number; }",
+    markdown:
+      "## list\n\n`client.compliance.list(adverse_media_monitoring_enabled?: boolean, compliance_score?: 'high' | 'low' | 'medium', created_at__gte?: string, created_at__lte?: string, next_key?: string, order?: 'asc' | 'desc', results_changed_at__gte?: string, results_changed_at__lte?: string, sanction_monitoring_enabled?: boolean, sorting?: 'created_at' | 'finished_at' | 'results_changed_at', status?: 'completed' | 'failed' | 'in_progress' | 'pending' | 'queued' | 'searching_directors'): { company: object; created_at: string; external_id: string; activity_score?: 'low' | 'medium' | 'high' | ''; adverse_media_score?: 'low' | 'medium' | 'high' | ''; compliance_score?: 'low' | 'medium' | 'high' | ''; country_score?: 'low' | 'medium' | 'high' | ''; finished_at?: string; name?: string; pep_score?: 'low' | 'medium' | 'high' | ''; results_changed_at?: string; reviewed_results_count?: number; sanction_score?: 'low' | 'medium' | 'high' | ''; status?: 'pending' | 'queued' | 'in_progress' | 'searching_directors' | 'completed' | 'failed'; unreviewed_results_count?: number; }`\n\n**get** `/ext/v3/compliance`\n\n### Compliance Checks\n\n**GET** — Retrieve a paginated list of compliance checks created via this API key.\nSupports filtering by status and date ranges, and sorting by key timestamps.\n\n**POST** — Initiate a new compliance screening using one of two methods:\n\n1. **Company-based screening**: Provide a `company_id` to screen the company.\nOptionally enable screening of related entities (UBOs and directors) via\n`ubo_screening_enabled` and `directors_screening_enabled`. You can also include\nadditional custom `entities` to be screened alongside the company.\n\n2. **Custom entity screening**: Provide a list of `entities` without a `company_id`\nto screen specific individuals or organizations that are not necessarily affiliated\nwith a company in our database.\n\n### Parameters\n\n- `adverse_media_monitoring_enabled?: boolean`\n  Filter checks that have entities with adverse media monitoring enabled (pending or active).\n\n- `compliance_score?: 'high' | 'low' | 'medium'`\n  Filter by compliance score.\n\n- `created_at__gte?: string`\n  Filter checks created at or after this time.\n\n- `created_at__lte?: string`\n  Filter checks created at or before this time.\n\n- `next_key?: string`\n  A cursor value used for pagination. Include the `next_key` value from your previous request to retrieve the subsequent page of results. If this value is `null`, the first page of results is returned.\n\n- `order?: 'asc' | 'desc'`\n  Sorting order.\n\n- `results_changed_at__gte?: string`\n  Filter checks with results changed at or after this time.\n\n- `results_changed_at__lte?: string`\n  Filter checks with results changed at or before this time.\n\n- `sanction_monitoring_enabled?: boolean`\n  Filter checks that have entities with sanction monitoring enabled (pending or active).\n\n- `sorting?: 'created_at' | 'finished_at' | 'results_changed_at'`\n  Sorting field.\n\n- `status?: 'completed' | 'failed' | 'in_progress' | 'pending' | 'queued' | 'searching_directors'`\n  Filter by compliance check status.\n\n### Returns\n\n- `{ company: { country: string; name: string; external_id?: string; }; created_at: string; external_id: string; activity_score?: 'low' | 'medium' | 'high' | ''; adverse_media_score?: 'low' | 'medium' | 'high' | ''; compliance_score?: 'low' | 'medium' | 'high' | ''; country_score?: 'low' | 'medium' | 'high' | ''; finished_at?: string; name?: string; pep_score?: 'low' | 'medium' | 'high' | ''; results_changed_at?: string; reviewed_results_count?: number; sanction_score?: 'low' | 'medium' | 'high' | ''; status?: 'pending' | 'queued' | 'in_progress' | 'searching_directors' | 'completed' | 'failed'; unreviewed_results_count?: number; }`\n  ### Compliance Check (List)\n\nLightweight representation used in list responses.\n\n  - `company: { country: string; name: string; external_id?: string; }`\n  - `created_at: string`\n  - `external_id: string`\n  - `activity_score?: 'low' | 'medium' | 'high' | ''`\n  - `adverse_media_score?: 'low' | 'medium' | 'high' | ''`\n  - `compliance_score?: 'low' | 'medium' | 'high' | ''`\n  - `country_score?: 'low' | 'medium' | 'high' | ''`\n  - `finished_at?: string`\n  - `name?: string`\n  - `pep_score?: 'low' | 'medium' | 'high' | ''`\n  - `results_changed_at?: string`\n  - `reviewed_results_count?: number`\n  - `sanction_score?: 'low' | 'medium' | 'high' | ''`\n  - `status?: 'pending' | 'queued' | 'in_progress' | 'searching_directors' | 'completed' | 'failed'`\n  - `unreviewed_results_count?: number`\n\n### Example\n\n```typescript\nimport BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar();\n\n// Automatically fetches more pages as needed.\nfor await (const complianceListResponse of client.compliance.list()) {\n  console.log(complianceListResponse);\n}\n```",
+    perLanguage: {
+      http: {
+        example:
+          'curl https://api.businessradar.com/ext/v3/compliance \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'compliance->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->compliance->list(\n  adverseMediaMonitoringEnabled: true,\n  complianceScore: 'high',\n  createdAtGte: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  createdAtLte: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  nextKey: 'next_key',\n  order: 'asc',\n  resultsChangedAtGte: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  resultsChangedAtLte: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  sanctionMonitoringEnabled: true,\n  sorting: 'created_at',\n  status: 'completed',\n);\n\nvar_dump($page);",
+      },
+      python: {
+        method: 'compliance.list',
+        example:
+          'import os\nfrom businessradar import BusinessRadar\n\nclient = BusinessRadar(\n    api_key=os.environ.get("BUSINESSRADAR_API_KEY"),  # This is the default and can be omitted\n)\npage = client.compliance.list()\npage = page.results[0]\nprint(page.external_id)',
+      },
+      typescript: {
+        method: 'client.compliance.list',
+        example:
+          "import BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar({\n  apiKey: process.env['BUSINESSRADAR_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const complianceListResponse of client.compliance.list()) {\n  console.log(complianceListResponse.external_id);\n}",
+      },
+    },
+  },
+  {
     name: 'create',
     endpoint: '/ext/v3/compliance',
     httpMethod: 'post',

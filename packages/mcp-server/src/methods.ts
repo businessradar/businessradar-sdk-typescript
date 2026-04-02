@@ -119,6 +119,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ext/v3/compliance/{external_id}',
   },
   {
+    clientCallName: 'client.compliance.list',
+    fullyQualifiedName: 'compliance.list',
+    httpMethod: 'get',
+    httpPath: '/ext/v3/compliance',
+  },
+  {
     clientCallName: 'client.compliance.listResults',
     fullyQualifiedName: 'compliance.listResults',
     httpMethod: 'get',
