@@ -30,9 +30,12 @@ export {
   type ComplianceCheckScoreEnum,
   type ComplianceCreateResponse,
   type ComplianceRetrieveResponse,
+  type ComplianceListResponse,
   type ComplianceListResultsResponse,
   type ComplianceCreateParams,
+  type ComplianceListParams,
   type ComplianceListResultsParams,
+  type ComplianceListResponsesNextKey,
   type ComplianceListResultsResponsesNextKey,
 } from './compliance';
 export { News } from './news/news';

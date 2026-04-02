@@ -64,6 +64,41 @@ describe('resource compliance', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.compliance.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.compliance.list(
+        {
+          adverse_media_monitoring_enabled: true,
+          compliance_score: 'high',
+          created_at__gte: '2019-12-27T18:11:19.117Z',
+          created_at__lte: '2019-12-27T18:11:19.117Z',
+          next_key: 'next_key',
+          order: 'asc',
+          results_changed_at__gte: '2019-12-27T18:11:19.117Z',
+          results_changed_at__lte: '2019-12-27T18:11:19.117Z',
+          sanction_monitoring_enabled: true,
+          sorting: 'created_at',
+          status: 'completed',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('listResults', async () => {
     const responsePromise = client.compliance.listResults('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();

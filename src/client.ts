@@ -48,6 +48,9 @@ import {
   ComplianceCheckScoreEnum,
   ComplianceCreateParams,
   ComplianceCreateResponse,
+  ComplianceListParams,
+  ComplianceListResponse,
+  ComplianceListResponsesNextKey,
   ComplianceListResultsParams,
   ComplianceListResultsResponse,
   ComplianceListResultsResponsesNextKey,
@@ -832,9 +835,12 @@ export declare namespace BusinessRadar {
     type ComplianceCheckScoreEnum as ComplianceCheckScoreEnum,
     type ComplianceCreateResponse as ComplianceCreateResponse,
     type ComplianceRetrieveResponse as ComplianceRetrieveResponse,
+    type ComplianceListResponse as ComplianceListResponse,
     type ComplianceListResultsResponse as ComplianceListResultsResponse,
+    type ComplianceListResponsesNextKey as ComplianceListResponsesNextKey,
     type ComplianceListResultsResponsesNextKey as ComplianceListResultsResponsesNextKey,
     type ComplianceCreateParams as ComplianceCreateParams,
+    type ComplianceListParams as ComplianceListParams,
     type ComplianceListResultsParams as ComplianceListResultsParams,
   };
 
