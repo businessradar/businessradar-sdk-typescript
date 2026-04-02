@@ -91,6 +91,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/articles \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'news->articles->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->news->articles->list(\n  category: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  company: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  country: ['string'],\n  disableCompanyArticleDeduplication: true,\n  dunsNumber: ['string'],\n  globalUltimate: ['string'],\n  includeClusteredArticles: true,\n  isMaterial: true,\n  language: ['string'],\n  maxCreationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  maxPublicationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  minCreationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  minPublicationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  nextKey: 'next_key',\n  portfolioID: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  query: 'query',\n  registrationNumber: ['string'],\n  savedArticleFilterID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  sentiment: true,\n  sorting: 'creation_date',\n  sortingOrder: 'asc',\n);\n\nvar_dump($page);",
+      },
       python: {
         method: 'news.articles.list',
         example:
@@ -121,6 +126,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/articles/$ARTICLE_ID/related/ \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'news->articles->retrieveRelated',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$response = $client->news->articles->retrieveRelated(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'news.articles.retrieve_related',
@@ -158,6 +168,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/articles/feedback/ \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY" \\\n    -d \'{\n          "article": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n        }\'',
       },
+      php: {
+        method: 'news->articles->createFeedback',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$response = $client->news->articles->createFeedback(\n  article: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  comment: 'comment',\n  email: 'dev@stainless.com',\n  feedbackType: 'false_positive',\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'news.articles.create_feedback',
         example:
@@ -187,6 +202,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/saved_article_filters \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'news->articles->listSavedArticleFilters',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->news->articles->listSavedArticleFilters(nextKey: 'next_key');\n\nvar_dump($page);",
       },
       python: {
         method: 'news.articles.list_saved_article_filters',
@@ -238,6 +258,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/articles/analytics/dates/ \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'news->articles->analytics->getCountByDate',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$response = $client->news->articles->analytics->getCountByDate(\n  category: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  company: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  country: ['string'],\n  disableCompanyArticleDeduplication: true,\n  dunsNumber: ['string'],\n  globalUltimate: ['string'],\n  includeClusteredArticles: true,\n  interval: 'day',\n  isMaterial: true,\n  language: ['string'],\n  maxCreationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  maxPublicationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  minCreationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  minPublicationDate: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  portfolioID: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  query: 'query',\n  registrationNumber: ['string'],\n  savedArticleFilterID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  sentiment: true,\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'news.articles.analytics.get_count_by_date',
         example:
@@ -272,6 +297,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/articles/export/ \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY" \\\n    -d \'{\n          "file_type": "PDF",\n          "filters": {}\n        }\'',
       },
+      php: {
+        method: 'news->articles->export->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$articleExport = $client->news->articles->export->create(\n  fileType: DataExportFileType::PDF,\n  filters: [\n    'categories' => ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n    'companies' => ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n    'countries' => ['xx'],\n    'disableCompanyArticleDeduplication' => true,\n    'dunsNumbers' => ['xxxxxxxx'],\n    'globalUltimates' => ['xxxxxxxx'],\n    'includeClusteredArticles' => true,\n    'industries' => ['x'],\n    'isMaterial' => true,\n    'languages' => ['xx'],\n    'maxCreationDate' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    'maxPublicationDate' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    'mediaType' => 'GAZETTE',\n    'minCreationDate' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    'minPublicationDate' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    'parentCategory' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    'portfolios' => ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n    'query' => 'query',\n    'registrationNumbers' => ['x'],\n    'sentiment' => true,\n  ],\n);\n\nvar_dump($articleExport);",
+      },
       python: {
         method: 'news.articles.export.create',
         example:
@@ -302,6 +332,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/articles/export/$EXTERNAL_ID \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'news->articles->export->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$articleExport = $client->news->articles->export->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($articleExport);",
       },
       python: {
         method: 'news.articles.export.retrieve',
@@ -342,6 +377,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/companies \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'companies->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->companies->list(\n  country: ['string'],\n  dunsNumber: ['string'],\n  nextKey: 'next_key',\n  portfolioID: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  query: 'query',\n  registrationNumber: ['string'],\n  websiteURL: 'website_url',\n);\n\nvar_dump($page);",
+      },
       python: {
         method: 'companies.list',
         example:
@@ -380,6 +420,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/companies \\\n    -X POST \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'companies->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$registration = $client->companies->create(\n  company: ['externalID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  country: 'AF',\n  customerReference: 'customer_reference',\n  dunsNumber: 'duns_number',\n  primaryName: 'primary_name',\n  registrationNumber: 'registration_number',\n);\n\nvar_dump($registration);",
+      },
       python: {
         method: 'companies.create',
         example:
@@ -417,6 +462,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/companies/feedback/ \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY" \\\n    -d \'{\n          "company": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "feedback_type": "NOT_ENOUGH_NEWS"\n        }\'',
       },
+      php: {
+        method: 'companies->createFeedback',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$response = $client->companies->createFeedback(\n  company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  feedbackType: 'NOT_ENOUGH_NEWS',\n  comment: 'comment',\n  notificationEmail: 'dev@stainless.com',\n  tradeName: 'trade_name',\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'companies.create_feedback',
         example:
@@ -447,6 +497,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/companies/$EXTERNAL_ID \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'companies->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$company = $client->companies->retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nvar_dump($company);",
       },
       python: {
         method: 'companies.retrieve',
@@ -479,6 +534,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/registrations/$REGISTRATION_ID \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'companies->retrieveRegistration',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$registration = $client->companies->retrieveRegistration(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($registration);",
+      },
       python: {
         method: 'companies.retrieve_registration',
         example:
@@ -510,6 +570,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/companies/attribute_changes \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'companies->listAttributeChanges',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->companies->listAttributeChanges(\n  maxCreatedAt: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  minCreatedAt: new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n  nextKey: 'next_key',\n);\n\nvar_dump($page);",
+      },
       python: {
         method: 'companies.list_attribute_changes',
         example:
@@ -540,6 +605,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/companies/investigations \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'companies->listMissingCompanyInvestigations',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->companies->listMissingCompanyInvestigations(\n  nextKey: 'next_key'\n);\n\nvar_dump($page);",
       },
       python: {
         method: 'companies.list_missing_company_investigations',
@@ -586,6 +656,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/companies/investigations \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY" \\\n    -d \'{\n          "country": "AF",\n          "legal_name": "x"\n        }\'',
       },
+      php: {
+        method: 'companies->createMissingCompanyInvestigation',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$response = $client->companies->createMissingCompanyInvestigation(\n  country: CountryEnum::AF,\n  legalName: 'x',\n  addressNumber: 'address_number',\n  addressPhone: 'address_phone',\n  addressPlace: 'address_place',\n  addressPostal: 'address_postal',\n  addressRegion: 'address_region',\n  addressStreet: 'address_street',\n  description: 'description',\n  officerName: 'officer_name',\n  officerTitle: 'officer_title',\n  tradeName: 'trade_name',\n  websiteURL: 'https://example.com',\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'companies.create_missing_company_investigation',
         example:
@@ -616,6 +691,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/companies/investigations/$EXTERNAL_ID \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'companies->retrieveMissingCompanyInvestigation',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$response = $client->companies->retrieveMissingCompanyInvestigation(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'companies.retrieve_missing_company_investigation',
@@ -656,6 +736,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/compliance \\\n    -X POST \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'compliance->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$compliance = $client->compliance->create(\n  adverseMediaMonitoringEnabled: true,\n  companyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  directorsScreeningEnabled: true,\n  entities: [\n    [\n      'name' => 'x',\n      'aliases' => ['x'],\n      'country' => 'xx',\n      'dateOfBirth' => '2019-12-27',\n      'entityType' => 'individual',\n      'firstName' => 'first_name',\n      'lastName' => 'last_name',\n      'middleName' => 'middle_name',\n    ],\n  ],\n  name: 'name',\n  ownershipScreeningThreshold: 0,\n  sanctionMonitoringEnabled: true,\n  uboScreeningEnabled: true,\n);\n\nvar_dump($compliance);",
+      },
       python: {
         method: 'compliance.create',
         example:
@@ -686,6 +771,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/compliance/$EXTERNAL_ID \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'compliance->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$compliance = $client->compliance->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($compliance);",
       },
       python: {
         method: 'compliance.retrieve',
@@ -727,6 +817,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/compliance/$EXTERNAL_ID/results \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'compliance->listResults',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->compliance->listResults(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entity: 'entity',\n  excludeAutomatedFalsePositives: true,\n  minConfidence: 0,\n  nextKey: 'next_key',\n  order: 'asc',\n  resultType: 'adverse_media',\n  sorting: 'confidence',\n);\n\nvar_dump($page);",
+      },
       python: {
         method: 'compliance.list_results',
         example:
@@ -757,6 +852,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/portfolios \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'portfolios->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->portfolios->list(nextKey: 'next_key');\n\nvar_dump($page);",
       },
       python: {
         method: 'portfolios.list',
@@ -793,6 +893,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/portfolios \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY" \\\n    -d \'{\n          "name": "x"\n        }\'',
       },
+      php: {
+        method: 'portfolios->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$portfolio = $client->portfolios->create(\n  name: 'x',\n  customerReference: 'customer_reference',\n  defaultPermission: 'view_only',\n);\n\nvar_dump($portfolio);",
+      },
       python: {
         method: 'portfolios.create',
         example:
@@ -823,6 +928,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.businessradar.com/ext/v3/portfolios/$PORTFOLIO_ID/companies \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
+      },
+      php: {
+        method: 'portfolios->companies->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$page = $client->portfolios->companies->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', nextKey: 'next_key'\n);\n\nvar_dump($page);",
       },
       python: {
         method: 'portfolios.companies.list',
@@ -863,6 +973,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/portfolios/$PORTFOLIO_ID/companies \\\n    -X POST \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'portfolios->companies->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$registration = $client->portfolios->companies->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  company: ['externalID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  country: 'AF',\n  customerReference: 'customer_reference',\n  dunsNumber: 'duns_number',\n  primaryName: 'primary_name',\n  registrationNumber: 'registration_number',\n);\n\nvar_dump($registration);",
+      },
       python: {
         method: 'portfolios.companies.create',
         example:
@@ -892,6 +1007,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.businessradar.com/ext/v3/portfolios/$PORTFOLIO_ID/companies/$EXTERNAL_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $BUSINESSRADAR_API_KEY"',
       },
+      php: {
+        method: 'portfolios->companies->delete',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(apiKey: 'My API Key');\n\n$result = $client->portfolios->companies->delete(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  portfolioID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($result);",
+      },
       python: {
         method: 'portfolios.companies.delete',
         example:
@@ -916,6 +1036,11 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'typescript',
     content:
       "# Business Radar TypeScript API Library\n\n[![NPM version](https://img.shields.io/npm/v/@businessradar/businessradar.svg?label=npm%20(stable))](https://npmjs.org/package/@businessradar/businessradar) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@businessradar/businessradar)\n\nThis library provides convenient access to the Business Radar REST API from server-side TypeScript or JavaScript.\n\n\n\nThe REST API documentation can be found on [api.businessradar.com](https://api.businessradar.com/ext/v3/). The full API of this library can be found in [api.md](api.md).\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Business Radar MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40businessradar%2Fbusinessradar-mcp&config=eyJuYW1lIjoiQGJ1c2luZXNzcmFkYXIvYnVzaW5lc3NyYWRhci1tY3AiLCJ0cmFuc3BvcnQiOiJodHRwIiwidXJsIjoiaHR0cHM6Ly9idXNpbmVzc3JhZGFyLnN0bG1jcC5jb20iLCJoZWFkZXJzIjp7IngtYnVzaW5lc3NyYWRhci1hcGkta2V5IjoiTXkgQVBJIEtleSJ9fQ)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40businessradar%2Fbusinessradar-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fbusinessradar.stlmcp.com%22%2C%22headers%22%3A%7B%22x-businessradar-api-key%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Installation\n\n```sh\nnpm install @businessradar/businessradar\n```\n\n\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n<!-- prettier-ignore -->\n```js\nimport BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar({\n  apiKey: process.env['BUSINESSRADAR_API_KEY'], // This is the default and can be omitted\n});\n\nconst page = await client.news.articles.list();\nconst article = page.results[0];\n\nconsole.log(article.external_id);\n```\n\n\n\n### Request & Response types\n\nThis library includes TypeScript definitions for all request params and response fields. You may import and use them like so:\n\n<!-- prettier-ignore -->\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar({\n  apiKey: process.env['BUSINESSRADAR_API_KEY'], // This is the default and can be omitted\n});\n\nconst [article]: [BusinessRadar.News.Article] = await client.news.articles.list();\n```\n\nDocumentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.\n\n\n\n\n\n## Handling errors\n\nWhen the library is unable to connect to the API,\nor if the API returns a non-success status code (i.e., 4xx or 5xx response),\na subclass of `APIError` will be thrown:\n\n<!-- prettier-ignore -->\n```ts\nconst page = await client.news.articles.list().catch(async (err) => {\n  if (err instanceof BusinessRadar.APIError) {\n    console.log(err.status); // 400\n    console.log(err.name); // BadRequestError\n    console.log(err.headers); // {server: 'nginx', ...}\n  } else {\n    throw err;\n  }\n});\n```\n\nError codes are as follows:\n\n| Status Code | Error Type                 |\n| ----------- | -------------------------- |\n| 400         | `BadRequestError`          |\n| 401         | `AuthenticationError`      |\n| 403         | `PermissionDeniedError`    |\n| 404         | `NotFoundError`            |\n| 422         | `UnprocessableEntityError` |\n| 429         | `RateLimitError`           |\n| >=500       | `InternalServerError`      |\n| N/A         | `APIConnectionError`       |\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\nConnection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,\n429 Rate Limit, and >=500 Internal errors will all be retried by default.\n\nYou can use the `maxRetries` option to configure or disable this:\n\n<!-- prettier-ignore -->\n```js\n// Configure the default for all requests:\nconst client = new BusinessRadar({\n  maxRetries: 0, // default is 2\n});\n\n// Or, configure per-request:\nawait client.news.articles.list({\n  maxRetries: 5,\n});\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default. You can configure this with a `timeout` option:\n\n<!-- prettier-ignore -->\n```ts\n// Configure the default for all requests:\nconst client = new BusinessRadar({\n  timeout: 20 * 1000, // 20 seconds (default is 1 minute)\n});\n\n// Override per-request:\nawait client.news.articles.list({\n  timeout: 5 * 1000,\n});\n```\n\nOn timeout, an `APIConnectionTimeoutError` is thrown.\n\nNote that requests which time out will be [retried twice by default](#retries).\n\n## Auto-pagination\n\nList methods in the BusinessRadar API are paginated.\nYou can use the `for await … of` syntax to iterate through items across all pages:\n\n```ts\nasync function fetchAllArticles(params) {\n  const allArticles = [];\n  // Automatically fetches more pages as needed.\n  for await (const article of client.news.articles.list({ next_key: '24345' })) {\n    allArticles.push(article);\n  }\n  return allArticles;\n}\n```\n\nAlternatively, you can request a single page at a time:\n\n```ts\nlet page = await client.news.articles.list({ next_key: '24345' });\nfor (const article of page.results) {\n  console.log(article);\n}\n\n// Convenience methods are provided for manually paginating:\nwhile (page.hasNextPage()) {\n  page = await page.getNextPage();\n  // ...\n}\n```\n\n\n\n## Advanced Usage\n\n### Accessing raw Response data (e.g., headers)\n\nThe \"raw\" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.\nThis method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.\n\nYou can also use the `.withResponse()` method to get the raw `Response` along with the parsed data.\nUnlike `.asResponse()` this method consumes the body, returning once it is parsed.\n\n<!-- prettier-ignore -->\n```ts\nconst client = new BusinessRadar();\n\nconst response = await client.news.articles.list().asResponse();\nconsole.log(response.headers.get('X-My-Header'));\nconsole.log(response.statusText); // access the underlying Response object\n\nconst { data: page, response: raw } = await client.news.articles.list().withResponse();\nconsole.log(raw.headers.get('X-My-Header'));\nfor await (const article of page) {\n  console.log(article.external_id);\n}\n```\n\n### Logging\n\n> [!IMPORTANT]\n> All log messages are intended for debugging only. The format and content of log messages\n> may change between releases.\n\n#### Log levels\n\nThe log level can be configured in two ways:\n\n1. Via the `BUSINESS_RADAR_LOG` environment variable\n2. Using the `logLevel` client option (overrides the environment variable if set)\n\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar({\n  logLevel: 'debug', // Show all log messages\n});\n```\n\nAvailable log levels, from most to least verbose:\n\n- `'debug'` - Show debug messages, info, warnings, and errors\n- `'info'` - Show info messages, warnings, and errors\n- `'warn'` - Show warnings and errors (default)\n- `'error'` - Show only errors\n- `'off'` - Disable all logging\n\nAt the `'debug'` level, all HTTP requests and responses are logged, including headers and bodies.\nSome authentication-related headers are redacted, but sensitive data in request and response bodies\nmay still be visible.\n\n#### Custom logger\n\nBy default, this library logs to `globalThis.console`. You can also provide a custom logger.\nMost logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.\n\nWhen providing a custom logger, the `logLevel` option still controls which messages are emitted, messages\nbelow the configured level will not be sent to your logger.\n\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\nimport pino from 'pino';\n\nconst logger = pino();\n\nconst client = new BusinessRadar({\n  logger: logger.child({ name: 'BusinessRadar' }),\n  logLevel: 'debug', // Send all messages to pino, allowing it to filter\n});\n```\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API. If you need to access undocumented\nendpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can use `client.get`, `client.post`, and other HTTP verbs.\nOptions on the client, such as retries, will be respected when making these requests.\n\n```ts\nawait client.post('/some/path', {\n  body: { some_prop: 'foo' },\n  query: { some_query_arg: 'bar' },\n});\n```\n\n#### Undocumented request params\n\nTo make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented\nparameter. This library doesn't validate at runtime that the request matches the type, so any extra values you\nsend will be sent as-is.\n\n```ts\nclient.news.articles.list({\n  // ...\n  // @ts-expect-error baz is not yet public\n  baz: 'undocumented option',\n});\n```\n\nFor requests with the `GET` verb, any extra params will be in the query, all other requests will send the\nextra param in the body.\n\nIf you want to explicitly send an extra argument, you can do so with the `query`, `body`, and `headers` request\noptions.\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you may access the response object with `// @ts-expect-error` on\nthe response object, or cast the response object to the requisite type. Like the request params, we do not\nvalidate or strip extra properties from the response from the API.\n\n### Customizing the fetch client\n\nBy default, this library expects a global `fetch` function is defined.\n\nIf you want to use a different `fetch` function, you can either polyfill the global:\n\n```ts\nimport fetch from 'my-fetch';\n\nglobalThis.fetch = fetch;\n```\n\nOr pass it to the client:\n\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\nimport fetch from 'my-fetch';\n\nconst client = new BusinessRadar({ fetch });\n```\n\n### Fetch options\n\nIf you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)\n\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar({\n  fetchOptions: {\n    // `RequestInit` options\n  },\n});\n```\n\n#### Configuring proxies\n\nTo modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy\noptions to requests:\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg\" align=\"top\" width=\"18\" height=\"21\"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>\n\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\nimport * as undici from 'undici';\n\nconst proxyAgent = new undici.ProxyAgent('http://localhost:8888');\nconst client = new BusinessRadar({\n  fetchOptions: {\n    dispatcher: proxyAgent,\n  },\n});\n```\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg\" align=\"top\" width=\"18\" height=\"21\"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>\n\n```ts\nimport BusinessRadar from '@businessradar/businessradar';\n\nconst client = new BusinessRadar({\n  fetchOptions: {\n    proxy: 'http://localhost:8888',\n  },\n});\n```\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg\" align=\"top\" width=\"18\" height=\"21\"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>\n\n```ts\nimport BusinessRadar from 'npm:@businessradar/businessradar';\n\nconst httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });\nconst client = new BusinessRadar({\n  fetchOptions: {\n    client: httpClient,\n  },\n});\n```\n\n## Frequently Asked Questions\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes that only affect static types, without breaking runtime behavior.\n2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n3. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/businessradar/businessradar-sdk-typescript/issues) with questions, bugs, or suggestions.\n\n## Requirements\n\nTypeScript >= 4.9 is supported.\n\nThe following runtimes are supported:\n\n- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)\n- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.\n- Deno v1.28.0 or higher.\n- Bun 1.0 or later.\n- Cloudflare Workers.\n- Vercel Edge Runtime.\n- Jest 28 or greater with the `\"node\"` environment (`\"jsdom\"` is not supported at this time).\n- Nitro v2.6 or greater.\n\nNote that React Native is not supported at this time.\n\nIf you are interested in other runtime environments, please open or upvote an issue on GitHub.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n",
+  },
+  {
+    language: 'php',
+    content:
+      "# Business Radar PHP API Library\n\nThe Business Radar PHP library provides convenient access to the Business Radar REST API from any PHP 8.1.0+ application.\n\n## Installation\n\n<!-- x-release-please-start-version -->\n```\ncomposer require \"businessradar/businessradar 0.0.1\"\n```\n<!-- x-release-please-end -->\n\n## Usage\n\n```php\n<?php\n\n$client = new Client(apiKey: getenv('BUSINESSRADAR_API_KEY') ?: 'My API Key');\n\n$page = $client->news->articles->list();\n\nvar_dump($page->external_id);\n```",
   },
 ];
 
