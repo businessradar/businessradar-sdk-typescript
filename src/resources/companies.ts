@@ -2283,7 +2283,7 @@ export interface CompanyCreateMissingCompanyInvestigationResponse {
   country: CountryEnum;
 
   /**
-   * The date and time when this missing company record was created.
+   * The date and time when this investigation was created.
    */
   created_at: string;
 
@@ -2622,7 +2622,7 @@ export interface CompanyListMissingCompanyInvestigationsResponse {
   country: CountryEnum;
 
   /**
-   * The date and time when this missing company record was created.
+   * The date and time when this investigation was created.
    */
   created_at: string;
 
@@ -2943,7 +2943,7 @@ export interface CompanyRetrieveMissingCompanyInvestigationResponse {
   country: CountryEnum;
 
   /**
-   * The date and time when this missing company record was created.
+   * The date and time when this investigation was created.
    */
   created_at: string;
 
