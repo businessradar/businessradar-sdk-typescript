@@ -49,8 +49,9 @@ export interface ArticleExport {
    * - `REGISTRATIONS` - Registrations
    * - `COMPLIANCE` - Compliance
    * - `BILLING` - Billing
+   * - `KEY_EVENTS` - Key Events
    */
-  export_type: 'NEWS' | 'BINDER' | 'COMPANIES' | 'REGISTRATIONS' | 'COMPLIANCE' | 'BILLING';
+  export_type: 'NEWS' | 'BINDER' | 'COMPANIES' | 'REGISTRATIONS' | 'COMPLIANCE' | 'BILLING' | 'KEY_EVENTS';
 
   external_id: string;
 
