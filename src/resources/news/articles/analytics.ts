@@ -10,16 +10,12 @@ export class Analytics extends APIResource {
    *
    * Retrieve the number of articles and their average sentiment, grouped by date.
    */
-  getCountByDate(
-    query: AnalyticsGetCountByDateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AnalyticsGetCountByDateResponse> {
+  getCountByDate(query: AnalyticsGetCountByDateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AnalyticsGetCountByDateResponse> {
     return this._client.get('/ext/v3/articles/analytics/dates/', { query, ...options });
   }
 }
 
-export type AnalyticsGetCountByDateResponse =
-  Array<AnalyticsGetCountByDateResponse.AnalyticsGetCountByDateResponseItem>;
+export type AnalyticsGetCountByDateResponse = Array<AnalyticsGetCountByDateResponse.AnalyticsGetCountByDateResponseItem>
 
 export namespace AnalyticsGetCountByDateResponse {
   /**
@@ -139,6 +135,6 @@ export interface AnalyticsGetCountByDateParams {
 export declare namespace Analytics {
   export {
     type AnalyticsGetCountByDateResponse as AnalyticsGetCountByDateResponse,
-    type AnalyticsGetCountByDateParams as AnalyticsGetCountByDateParams,
+    type AnalyticsGetCountByDateParams as AnalyticsGetCountByDateParams
   };
 }

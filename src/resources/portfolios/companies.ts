@@ -20,11 +20,7 @@ export class Companies extends APIResource {
    * [GET /registrations/{registration_id}](/ext/v3/#/ext/ext_v3_registrations_retrieve)
    * endpoint.
    */
-  create(
-    portfolioID: string,
-    body: CompanyCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<CompaniesAPI.Registration> {
+  create(portfolioID: string, body: CompanyCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<CompaniesAPI.Registration> {
     return this._client.post(path`/ext/v3/portfolios/${portfolioID}/companies`, { body, ...options });
   }
 
@@ -35,16 +31,8 @@ export class Companies extends APIResource {
    * currently in the portfolio. - **POST**: Register and add a new company to the
    * portfolio.
    */
-  list(
-    portfolioID: string,
-    query: CompanyListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CompanyListResponsesNextKey, CompanyListResponse> {
-    return this._client.getAPIList(
-      path`/ext/v3/portfolios/${portfolioID}/companies`,
-      NextKey<CompanyListResponse>,
-      { query, ...options },
-    );
+  list(portfolioID: string, query: CompanyListParams | null | undefined = {}, options?: RequestOptions): PagePromise<CompanyListResponsesNextKey, CompanyListResponse> {
+    return this._client.getAPIList(path`/ext/v3/portfolios/${portfolioID}/companies`, NextKey<CompanyListResponse>, { query, ...options });
   }
 
   /**
@@ -53,15 +41,12 @@ export class Companies extends APIResource {
    * Remove a company from a portfolio using its internal `external_id`.
    */
   delete(externalID: string, params: CompanyDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { portfolio_id } = params;
-    return this._client.delete(path`/ext/v3/portfolios/${portfolio_id}/companies/${externalID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    const { portfolio_id } = params
+    return this._client.delete(path`/ext/v3/portfolios/${portfolio_id}/companies/${externalID}`, { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
-export type CompanyListResponsesNextKey = NextKey<CompanyListResponse>;
+export type CompanyListResponsesNextKey = NextKey<CompanyListResponse>
 
 /**
  * ### Portfolio-Company
@@ -432,258 +417,7 @@ export interface CompanyCreateParams {
    */
   company?: Shared.PortfolioCompanyDetailRequest | null;
 
-  country?:
-    | 'AF'
-    | 'AX'
-    | 'AL'
-    | 'DZ'
-    | 'AS'
-    | 'AD'
-    | 'AO'
-    | 'AI'
-    | 'AQ'
-    | 'AG'
-    | 'AR'
-    | 'AM'
-    | 'AW'
-    | 'AU'
-    | 'AT'
-    | 'AZ'
-    | 'BS'
-    | 'BH'
-    | 'BD'
-    | 'BB'
-    | 'BY'
-    | 'BE'
-    | 'BZ'
-    | 'BJ'
-    | 'BM'
-    | 'BT'
-    | 'BO'
-    | 'BQ'
-    | 'BA'
-    | 'BW'
-    | 'BV'
-    | 'BR'
-    | 'IO'
-    | 'BN'
-    | 'BG'
-    | 'BF'
-    | 'BI'
-    | 'CV'
-    | 'KH'
-    | 'CM'
-    | 'CA'
-    | 'KY'
-    | 'CF'
-    | 'TD'
-    | 'CL'
-    | 'CN'
-    | 'CX'
-    | 'CC'
-    | 'CO'
-    | 'KM'
-    | 'CG'
-    | 'CD'
-    | 'CK'
-    | 'CR'
-    | 'CI'
-    | 'HR'
-    | 'CU'
-    | 'CW'
-    | 'CY'
-    | 'CZ'
-    | 'DK'
-    | 'DJ'
-    | 'DM'
-    | 'DO'
-    | 'EC'
-    | 'EG'
-    | 'SV'
-    | 'GQ'
-    | 'ER'
-    | 'EE'
-    | 'SZ'
-    | 'ET'
-    | 'FK'
-    | 'FO'
-    | 'FJ'
-    | 'FI'
-    | 'FR'
-    | 'GF'
-    | 'PF'
-    | 'TF'
-    | 'GA'
-    | 'GM'
-    | 'GE'
-    | 'DE'
-    | 'GH'
-    | 'GI'
-    | 'GR'
-    | 'GL'
-    | 'GD'
-    | 'GP'
-    | 'GU'
-    | 'GT'
-    | 'GG'
-    | 'GN'
-    | 'GW'
-    | 'GY'
-    | 'HT'
-    | 'HM'
-    | 'VA'
-    | 'HN'
-    | 'HK'
-    | 'HU'
-    | 'IS'
-    | 'IN'
-    | 'ID'
-    | 'IR'
-    | 'IQ'
-    | 'IE'
-    | 'IM'
-    | 'IL'
-    | 'IT'
-    | 'JM'
-    | 'JP'
-    | 'JE'
-    | 'JO'
-    | 'KZ'
-    | 'KE'
-    | 'KI'
-    | 'KP'
-    | 'KR'
-    | 'KW'
-    | 'KG'
-    | 'LA'
-    | 'LV'
-    | 'LB'
-    | 'LS'
-    | 'LR'
-    | 'LY'
-    | 'LI'
-    | 'LT'
-    | 'LU'
-    | 'MO'
-    | 'MG'
-    | 'MW'
-    | 'MY'
-    | 'MV'
-    | 'ML'
-    | 'MT'
-    | 'MH'
-    | 'MQ'
-    | 'MR'
-    | 'MU'
-    | 'YT'
-    | 'MX'
-    | 'FM'
-    | 'MD'
-    | 'MC'
-    | 'MN'
-    | 'ME'
-    | 'MS'
-    | 'MA'
-    | 'MZ'
-    | 'MM'
-    | 'NA'
-    | 'NR'
-    | 'NP'
-    | 'NL'
-    | 'NC'
-    | 'NZ'
-    | 'NI'
-    | 'NE'
-    | 'NG'
-    | 'NU'
-    | 'NF'
-    | 'MK'
-    | 'MP'
-    | 'NO'
-    | 'OM'
-    | 'PK'
-    | 'PW'
-    | 'PS'
-    | 'PA'
-    | 'PG'
-    | 'PY'
-    | 'PE'
-    | 'PH'
-    | 'PN'
-    | 'PL'
-    | 'PT'
-    | 'PR'
-    | 'QA'
-    | 'RE'
-    | 'RO'
-    | 'RU'
-    | 'RW'
-    | 'BL'
-    | 'SH'
-    | 'KN'
-    | 'LC'
-    | 'MF'
-    | 'PM'
-    | 'VC'
-    | 'WS'
-    | 'SM'
-    | 'ST'
-    | 'SA'
-    | 'SN'
-    | 'RS'
-    | 'SC'
-    | 'SL'
-    | 'SG'
-    | 'SX'
-    | 'SK'
-    | 'SI'
-    | 'SB'
-    | 'SO'
-    | 'ZA'
-    | 'GS'
-    | 'SS'
-    | 'ES'
-    | 'LK'
-    | 'SD'
-    | 'SR'
-    | 'SJ'
-    | 'SE'
-    | 'CH'
-    | 'SY'
-    | 'TW'
-    | 'TJ'
-    | 'TZ'
-    | 'TH'
-    | 'TL'
-    | 'TG'
-    | 'TK'
-    | 'TO'
-    | 'TT'
-    | 'TN'
-    | 'TR'
-    | 'TM'
-    | 'TC'
-    | 'TV'
-    | 'UG'
-    | 'UA'
-    | 'AE'
-    | 'GB'
-    | 'UM'
-    | 'US'
-    | 'UY'
-    | 'UZ'
-    | 'VU'
-    | 'VE'
-    | 'VN'
-    | 'VG'
-    | 'VI'
-    | 'WF'
-    | 'EH'
-    | 'YE'
-    | 'ZM'
-    | 'ZW'
-    | ''
-    | null;
+  country?: 'AF' | 'AX' | 'AL' | 'DZ' | 'AS' | 'AD' | 'AO' | 'AI' | 'AQ' | 'AG' | 'AR' | 'AM' | 'AW' | 'AU' | 'AT' | 'AZ' | 'BS' | 'BH' | 'BD' | 'BB' | 'BY' | 'BE' | 'BZ' | 'BJ' | 'BM' | 'BT' | 'BO' | 'BQ' | 'BA' | 'BW' | 'BV' | 'BR' | 'IO' | 'BN' | 'BG' | 'BF' | 'BI' | 'CV' | 'KH' | 'CM' | 'CA' | 'KY' | 'CF' | 'TD' | 'CL' | 'CN' | 'CX' | 'CC' | 'CO' | 'KM' | 'CG' | 'CD' | 'CK' | 'CR' | 'CI' | 'HR' | 'CU' | 'CW' | 'CY' | 'CZ' | 'DK' | 'DJ' | 'DM' | 'DO' | 'EC' | 'EG' | 'SV' | 'GQ' | 'ER' | 'EE' | 'SZ' | 'ET' | 'FK' | 'FO' | 'FJ' | 'FI' | 'FR' | 'GF' | 'PF' | 'TF' | 'GA' | 'GM' | 'GE' | 'DE' | 'GH' | 'GI' | 'GR' | 'GL' | 'GD' | 'GP' | 'GU' | 'GT' | 'GG' | 'GN' | 'GW' | 'GY' | 'HT' | 'HM' | 'VA' | 'HN' | 'HK' | 'HU' | 'IS' | 'IN' | 'ID' | 'IR' | 'IQ' | 'IE' | 'IM' | 'IL' | 'IT' | 'JM' | 'JP' | 'JE' | 'JO' | 'KZ' | 'KE' | 'KI' | 'KP' | 'KR' | 'KW' | 'KG' | 'LA' | 'LV' | 'LB' | 'LS' | 'LR' | 'LY' | 'LI' | 'LT' | 'LU' | 'MO' | 'MG' | 'MW' | 'MY' | 'MV' | 'ML' | 'MT' | 'MH' | 'MQ' | 'MR' | 'MU' | 'YT' | 'MX' | 'FM' | 'MD' | 'MC' | 'MN' | 'ME' | 'MS' | 'MA' | 'MZ' | 'MM' | 'NA' | 'NR' | 'NP' | 'NL' | 'NC' | 'NZ' | 'NI' | 'NE' | 'NG' | 'NU' | 'NF' | 'MK' | 'MP' | 'NO' | 'OM' | 'PK' | 'PW' | 'PS' | 'PA' | 'PG' | 'PY' | 'PE' | 'PH' | 'PN' | 'PL' | 'PT' | 'PR' | 'QA' | 'RE' | 'RO' | 'RU' | 'RW' | 'BL' | 'SH' | 'KN' | 'LC' | 'MF' | 'PM' | 'VC' | 'WS' | 'SM' | 'ST' | 'SA' | 'SN' | 'RS' | 'SC' | 'SL' | 'SG' | 'SX' | 'SK' | 'SI' | 'SB' | 'SO' | 'ZA' | 'GS' | 'SS' | 'ES' | 'LK' | 'SD' | 'SR' | 'SJ' | 'SE' | 'CH' | 'SY' | 'TW' | 'TJ' | 'TZ' | 'TH' | 'TL' | 'TG' | 'TK' | 'TO' | 'TT' | 'TN' | 'TR' | 'TM' | 'TC' | 'TV' | 'UG' | 'UA' | 'AE' | 'GB' | 'UM' | 'US' | 'UY' | 'UZ' | 'VU' | 'VE' | 'VN' | 'VG' | 'VI' | 'WF' | 'EH' | 'YE' | 'ZM' | 'ZW' | '' | null;
 
   /**
    * Customer reference for the client to understand relationship.
@@ -697,7 +431,8 @@ export interface CompanyCreateParams {
   registration_number?: string | null;
 }
 
-export interface CompanyListParams extends NextKeyParams {}
+export interface CompanyListParams extends NextKeyParams {
+}
 
 export interface CompanyDeleteParams {
   portfolio_id: string;
@@ -709,6 +444,6 @@ export declare namespace Companies {
     type CompanyListResponsesNextKey as CompanyListResponsesNextKey,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyListParams as CompanyListParams,
-    type CompanyDeleteParams as CompanyDeleteParams,
+    type CompanyDeleteParams as CompanyDeleteParams
   };
 }

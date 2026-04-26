@@ -2,10 +2,7 @@
 
 import BusinessRadar from '@businessradar/businessradar';
 
-const client = new BusinessRadar({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new BusinessRadar({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource portfolios', () => {
   // Mock server tests are disabled
@@ -23,10 +20,10 @@ describe('resource portfolios', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.portfolios.create({
-      name: 'x',
-      customer_reference: 'customer_reference',
-      default_permission: 'view_only',
-    });
+    name: 'x',
+    customer_reference: 'customer_reference',
+    default_permission: 'view_only',
+  });
   });
 
   // Mock server tests are disabled
@@ -44,8 +41,8 @@ describe('resource portfolios', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.portfolios.list({ next_key: 'next_key' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(BusinessRadar.NotFoundError);
+    await expect(client.portfolios.list({ next_key: 'next_key' }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(BusinessRadar.NotFoundError);
   });
 });

@@ -87,8 +87,7 @@ export class PagePromise<
     super(
       client,
       request,
-      async (client, props) =>
-        new Page(client, props.response, await defaultParseResponse(client, props), props.options),
+      async (client, props) => new Page(client, props.response, await defaultParseResponse(client, props), props.options)
     );
   }
 
@@ -122,12 +121,7 @@ export class NextKey<Item> extends AbstractPage<Item> implements NextKeyResponse
 
   next_key: string;
 
-  constructor(
-    client: BusinessRadar,
-    response: Response,
-    body: NextKeyResponse<Item>,
-    options: FinalRequestOptions,
-  ) {
+  constructor(client: BusinessRadar, response: Response, body: NextKeyResponse<Item>, options: FinalRequestOptions) {
     super(client, response, body, options);
 
     this.results = body.results || [];
@@ -139,7 +133,7 @@ export class NextKey<Item> extends AbstractPage<Item> implements NextKeyResponse
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const cursor = this.next_key;
+    const cursor = this.next_key
     if (!cursor) {
       return null;
     }
