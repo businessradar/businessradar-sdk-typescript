@@ -2,20 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as ArticlesAPI from './articles/articles';
-import {
-  Article,
-  ArticleCreateFeedbackParams,
-  ArticleCreateFeedbackResponse,
-  ArticleListParams,
-  ArticleListSavedArticleFiltersParams,
-  ArticleListSavedArticleFiltersResponse,
-  ArticleListSavedArticleFiltersResponsesNextKey,
-  ArticleRetrieveRelatedResponse,
-  Articles,
-  ArticlesNextKey,
-  CategoryTree,
-  LanguageEnum,
-} from './articles/articles';
+import { Article, ArticleCreateFeedbackParams, ArticleCreateFeedbackResponse, ArticleListParams, ArticleListSavedArticleFiltersParams, ArticleListSavedArticleFiltersResponse, ArticleListSavedArticleFiltersResponsesNextKey, ArticleRetrieveRelatedResponse, Articles, ArticlesNextKey, CategoryTree, LanguageEnum } from './articles/articles';
 
 export class News extends APIResource {
   articles: ArticlesAPI.Articles = new ArticlesAPI.Articles(this._client);
@@ -36,6 +23,6 @@ export declare namespace News {
     type ArticleListSavedArticleFiltersResponsesNextKey as ArticleListSavedArticleFiltersResponsesNextKey,
     type ArticleListParams as ArticleListParams,
     type ArticleCreateFeedbackParams as ArticleCreateFeedbackParams,
-    type ArticleListSavedArticleFiltersParams as ArticleListSavedArticleFiltersParams,
+    type ArticleListSavedArticleFiltersParams as ArticleListSavedArticleFiltersParams
   };
 }
