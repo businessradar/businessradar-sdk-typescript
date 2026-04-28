@@ -2,7 +2,10 @@
 
 import BusinessRadar from '@businessradar/businessradar';
 
-const client = new BusinessRadar({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new BusinessRadar({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource companies', () => {
   // Mock server tests are disabled
@@ -20,16 +23,19 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.companies.create({
-    company: { external_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-    country: 'AF',
-    customer_reference: 'customer_reference',
-    duns_number: 'duns_number',
-    primary_name: 'primary_name',
-    registration_number: 'registration_number',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.companies.create(
+        {
+          company: { external_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+          country: 'AF',
+          customer_reference: 'customer_reference',
+          duns_number: 'duns_number',
+          primary_name: 'primary_name',
+          registration_number: 'registration_number',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -59,22 +65,28 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.companies.list({
-    country: ['string'],
-    duns_number: ['string'],
-    next_key: 'next_key',
-    portfolio_id: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
-    query: 'query',
-    registration_number: ['string'],
-    website_url: 'website_url',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.companies.list(
+        {
+          country: ['string'],
+          duns_number: ['string'],
+          next_key: 'next_key',
+          portfolio_id: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          query: 'query',
+          registration_number: ['string'],
+          website_url: 'website_url',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('createFeedback: only required params', async () => {
-    const responsePromise = client.companies.createFeedback({ company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', feedback_type: 'NOT_ENOUGH_NEWS' });
+    const responsePromise = client.companies.createFeedback({
+      company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      feedback_type: 'NOT_ENOUGH_NEWS',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -87,17 +99,20 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('createFeedback: required and optional params', async () => {
     const response = await client.companies.createFeedback({
-    company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    feedback_type: 'NOT_ENOUGH_NEWS',
-    comment: 'comment',
-    notification_email: 'dev@stainless.com',
-    trade_name: 'trade_name',
-  });
+      company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      feedback_type: 'NOT_ENOUGH_NEWS',
+      comment: 'comment',
+      notification_email: 'dev@stainless.com',
+      trade_name: 'trade_name',
+    });
   });
 
   // Mock server tests are disabled
   test.skip('createMissingCompanyInvestigation: only required params', async () => {
-    const responsePromise = client.companies.createMissingCompanyInvestigation({ country: 'AF', legal_name: 'x' });
+    const responsePromise = client.companies.createMissingCompanyInvestigation({
+      country: 'AF',
+      legal_name: 'x',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,20 +125,20 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('createMissingCompanyInvestigation: required and optional params', async () => {
     const response = await client.companies.createMissingCompanyInvestigation({
-    country: 'AF',
-    legal_name: 'x',
-    address_number: 'address_number',
-    address_phone: 'address_phone',
-    address_place: 'address_place',
-    address_postal: 'address_postal',
-    address_region: 'address_region',
-    address_street: 'address_street',
-    description: 'description',
-    officer_name: 'officer_name',
-    officer_title: 'officer_title',
-    trade_name: 'trade_name',
-    website_url: 'https://example.com',
-  });
+      country: 'AF',
+      legal_name: 'x',
+      address_number: 'address_number',
+      address_phone: 'address_phone',
+      address_place: 'address_place',
+      address_postal: 'address_postal',
+      address_region: 'address_region',
+      address_street: 'address_street',
+      description: 'description',
+      officer_name: 'officer_name',
+      officer_title: 'officer_title',
+      trade_name: 'trade_name',
+      website_url: 'https://example.com',
+    });
   });
 
   // Mock server tests are disabled
@@ -141,13 +156,16 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('listAttributeChanges: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.companies.listAttributeChanges({
-    max_created_at: '2019-12-27T18:11:19.117Z',
-    min_created_at: '2019-12-27T18:11:19.117Z',
-    next_key: 'next_key',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.companies.listAttributeChanges(
+        {
+          max_created_at: '2019-12-27T18:11:19.117Z',
+          min_created_at: '2019-12-27T18:11:19.117Z',
+          next_key: 'next_key',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -165,14 +183,19 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('listMissingCompanyInvestigations: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.companies.listMissingCompanyInvestigations({ next_key: 'next_key' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.companies.listMissingCompanyInvestigations(
+        { next_key: 'next_key' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('retrieveMissingCompanyInvestigation', async () => {
-    const responsePromise = client.companies.retrieveMissingCompanyInvestigation('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = client.companies.retrieveMissingCompanyInvestigation(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

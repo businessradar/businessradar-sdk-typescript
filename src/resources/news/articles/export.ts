@@ -143,13 +143,13 @@ export namespace ArticleExport {
  * - `EXCEL` - Excel
  * - `JSONL` - JSONL
  */
-export type DataExportFileType = 'PDF' | 'EXCEL' | 'JSONL'
+export type DataExportFileType = 'PDF' | 'EXCEL' | 'JSONL';
 
 /**
  * - `GAZETTE` - GAZETTE
  * - `MAINSTREAM` - MAINSTREAM
  */
-export type MediaTypeEnum = 'GAZETTE' | 'MAINSTREAM'
+export type MediaTypeEnum = 'GAZETTE' | 'MAINSTREAM';
 
 export interface ExportCreateParams {
   /**
@@ -223,6 +223,6 @@ export declare namespace Export {
     type ArticleExport as ArticleExport,
     type DataExportFileType as DataExportFileType,
     type MediaTypeEnum as MediaTypeEnum,
-    type ExportCreateParams as ExportCreateParams
+    type ExportCreateParams as ExportCreateParams,
   };
 }

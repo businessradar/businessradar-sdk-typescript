@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../core/resource';
 import * as CompaniesAPI from './companies';
-import { Companies, CompanyCreateParams, CompanyDeleteParams, CompanyListParams, CompanyListResponse, CompanyListResponsesNextKey } from './companies';
+import {
+  Companies,
+  CompanyCreateParams,
+  CompanyDeleteParams,
+  CompanyListParams,
+  CompanyListResponse,
+  CompanyListResponsesNextKey,
+} from './companies';
 import { APIPromise } from '../../core/api-promise';
 import { NextKey, type NextKeyParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -26,12 +33,15 @@ export class Portfolios extends APIResource {
    * Manage collections of companies. This view allows you to list existing
    * portfolios associated with your profile or create new ones.
    */
-  list(query: PortfolioListParams | null | undefined = {}, options?: RequestOptions): PagePromise<PortfoliosNextKey, Portfolio> {
+  list(
+    query: PortfolioListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PortfoliosNextKey, Portfolio> {
     return this._client.getAPIList('/ext/v3/portfolios', NextKey<Portfolio>, { query, ...options });
   }
 }
 
-export type PortfoliosNextKey = NextKey<Portfolio>
+export type PortfoliosNextKey = NextKey<Portfolio>;
 
 /**
  * - `view_only` - Only Viewing Access
@@ -39,7 +49,7 @@ export type PortfoliosNextKey = NextKey<Portfolio>
  * - `admin` - View, Write and Admin Access
  * - `owner` - Portfolio Owner
  */
-export type PermissionEnum = 'view_only' | 'write' | 'admin' | 'owner'
+export type PermissionEnum = 'view_only' | 'write' | 'admin' | 'owner';
 
 /**
  * ### Portfolio
@@ -87,8 +97,7 @@ export interface PortfolioCreateParams {
   default_permission?: 'view_only' | 'write' | 'admin' | 'owner' | '' | null;
 }
 
-export interface PortfolioListParams extends NextKeyParams {
-}
+export interface PortfolioListParams extends NextKeyParams {}
 
 Portfolios.Companies = Companies;
 
@@ -98,7 +107,7 @@ export declare namespace Portfolios {
     type Portfolio as Portfolio,
     type PortfoliosNextKey as PortfoliosNextKey,
     type PortfolioCreateParams as PortfolioCreateParams,
-    type PortfolioListParams as PortfolioListParams
+    type PortfolioListParams as PortfolioListParams,
   };
 
   export {
@@ -107,6 +116,6 @@ export declare namespace Portfolios {
     type CompanyListResponsesNextKey as CompanyListResponsesNextKey,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyListParams as CompanyListParams,
-    type CompanyDeleteParams as CompanyDeleteParams
+    type CompanyDeleteParams as CompanyDeleteParams,
   };
 }

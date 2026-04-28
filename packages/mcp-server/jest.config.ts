@@ -10,9 +10,7 @@ const config: JestConfigWithTsJest = {
     '^@businessradar/businessradar-mcp$': '<rootDir>/src/index.ts',
     '^@businessradar/businessradar-mcp/(.*)$': '<rootDir>/src/$1',
   },
-  modulePathIgnorePatterns: [
-    '<rootDir>/dist/',
-  ],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['scripts'],
 };
 
