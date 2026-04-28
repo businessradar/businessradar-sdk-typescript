@@ -22,7 +22,10 @@ export class Articles extends APIResource {
    * Retrieve articles matching the specified search criteria. Advanced queries and
    * incremental checks (using publication/creation dates) are supported.
    */
-  list(query: ArticleListParams | null | undefined = {}, options?: RequestOptions): PagePromise<ArticlesNextKey, Article> {
+  list(
+    query: ArticleListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ArticlesNextKey, Article> {
     return this._client.getAPIList('/ext/v3/articles', NextKey<Article>, { query, ...options });
   }
 
@@ -32,7 +35,10 @@ export class Articles extends APIResource {
    * Submit feedback for a specific article. This helps improve our analysis and
    * relevance.
    */
-  createFeedback(body: ArticleCreateFeedbackParams, options?: RequestOptions): APIPromise<ArticleCreateFeedbackResponse> {
+  createFeedback(
+    body: ArticleCreateFeedbackParams,
+    options?: RequestOptions,
+  ): APIPromise<ArticleCreateFeedbackResponse> {
     return this._client.post('/ext/v3/articles/feedback/', { body, ...options });
   }
 
@@ -43,8 +49,15 @@ export class Articles extends APIResource {
    * filters can be applied to article search requests using the
    * `saved_article_filter_id` parameter.
    */
-  listSavedArticleFilters(query: ArticleListSavedArticleFiltersParams | null | undefined = {}, options?: RequestOptions): PagePromise<ArticleListSavedArticleFiltersResponsesNextKey, ArticleListSavedArticleFiltersResponse> {
-    return this._client.getAPIList('/ext/v3/saved_article_filters', NextKey<ArticleListSavedArticleFiltersResponse>, { query, ...options });
+  listSavedArticleFilters(
+    query: ArticleListSavedArticleFiltersParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ArticleListSavedArticleFiltersResponsesNextKey, ArticleListSavedArticleFiltersResponse> {
+    return this._client.getAPIList(
+      '/ext/v3/saved_article_filters',
+      NextKey<ArticleListSavedArticleFiltersResponse>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -58,9 +71,9 @@ export class Articles extends APIResource {
   }
 }
 
-export type ArticlesNextKey = NextKey<Article>
+export type ArticlesNextKey = NextKey<Article>;
 
-export type ArticleListSavedArticleFiltersResponsesNextKey = NextKey<ArticleListSavedArticleFiltersResponse>
+export type ArticleListSavedArticleFiltersResponsesNextKey = NextKey<ArticleListSavedArticleFiltersResponse>;
 
 /**
  * ### Article
@@ -203,7 +216,258 @@ export interface Article {
 
   url: string;
 
-  country?: 'AF' | 'AX' | 'AL' | 'DZ' | 'AS' | 'AD' | 'AO' | 'AI' | 'AQ' | 'AG' | 'AR' | 'AM' | 'AW' | 'AU' | 'AT' | 'AZ' | 'BS' | 'BH' | 'BD' | 'BB' | 'BY' | 'BE' | 'BZ' | 'BJ' | 'BM' | 'BT' | 'BO' | 'BQ' | 'BA' | 'BW' | 'BV' | 'BR' | 'IO' | 'BN' | 'BG' | 'BF' | 'BI' | 'CV' | 'KH' | 'CM' | 'CA' | 'KY' | 'CF' | 'TD' | 'CL' | 'CN' | 'CX' | 'CC' | 'CO' | 'KM' | 'CG' | 'CD' | 'CK' | 'CR' | 'CI' | 'HR' | 'CU' | 'CW' | 'CY' | 'CZ' | 'DK' | 'DJ' | 'DM' | 'DO' | 'EC' | 'EG' | 'SV' | 'GQ' | 'ER' | 'EE' | 'SZ' | 'ET' | 'FK' | 'FO' | 'FJ' | 'FI' | 'FR' | 'GF' | 'PF' | 'TF' | 'GA' | 'GM' | 'GE' | 'DE' | 'GH' | 'GI' | 'GR' | 'GL' | 'GD' | 'GP' | 'GU' | 'GT' | 'GG' | 'GN' | 'GW' | 'GY' | 'HT' | 'HM' | 'VA' | 'HN' | 'HK' | 'HU' | 'IS' | 'IN' | 'ID' | 'IR' | 'IQ' | 'IE' | 'IM' | 'IL' | 'IT' | 'JM' | 'JP' | 'JE' | 'JO' | 'KZ' | 'KE' | 'KI' | 'KP' | 'KR' | 'KW' | 'KG' | 'LA' | 'LV' | 'LB' | 'LS' | 'LR' | 'LY' | 'LI' | 'LT' | 'LU' | 'MO' | 'MG' | 'MW' | 'MY' | 'MV' | 'ML' | 'MT' | 'MH' | 'MQ' | 'MR' | 'MU' | 'YT' | 'MX' | 'FM' | 'MD' | 'MC' | 'MN' | 'ME' | 'MS' | 'MA' | 'MZ' | 'MM' | 'NA' | 'NR' | 'NP' | 'NL' | 'NC' | 'NZ' | 'NI' | 'NE' | 'NG' | 'NU' | 'NF' | 'MK' | 'MP' | 'NO' | 'OM' | 'PK' | 'PW' | 'PS' | 'PA' | 'PG' | 'PY' | 'PE' | 'PH' | 'PN' | 'PL' | 'PT' | 'PR' | 'QA' | 'RE' | 'RO' | 'RU' | 'RW' | 'BL' | 'SH' | 'KN' | 'LC' | 'MF' | 'PM' | 'VC' | 'WS' | 'SM' | 'ST' | 'SA' | 'SN' | 'RS' | 'SC' | 'SL' | 'SG' | 'SX' | 'SK' | 'SI' | 'SB' | 'SO' | 'ZA' | 'GS' | 'SS' | 'ES' | 'LK' | 'SD' | 'SR' | 'SJ' | 'SE' | 'CH' | 'SY' | 'TW' | 'TJ' | 'TZ' | 'TH' | 'TL' | 'TG' | 'TK' | 'TO' | 'TT' | 'TN' | 'TR' | 'TM' | 'TC' | 'TV' | 'UG' | 'UA' | 'AE' | 'GB' | 'UM' | 'US' | 'UY' | 'UZ' | 'VU' | 'VE' | 'VN' | 'VG' | 'VI' | 'WF' | 'EH' | 'YE' | 'ZM' | 'ZW' | '' | null;
+  country?:
+    | 'AF'
+    | 'AX'
+    | 'AL'
+    | 'DZ'
+    | 'AS'
+    | 'AD'
+    | 'AO'
+    | 'AI'
+    | 'AQ'
+    | 'AG'
+    | 'AR'
+    | 'AM'
+    | 'AW'
+    | 'AU'
+    | 'AT'
+    | 'AZ'
+    | 'BS'
+    | 'BH'
+    | 'BD'
+    | 'BB'
+    | 'BY'
+    | 'BE'
+    | 'BZ'
+    | 'BJ'
+    | 'BM'
+    | 'BT'
+    | 'BO'
+    | 'BQ'
+    | 'BA'
+    | 'BW'
+    | 'BV'
+    | 'BR'
+    | 'IO'
+    | 'BN'
+    | 'BG'
+    | 'BF'
+    | 'BI'
+    | 'CV'
+    | 'KH'
+    | 'CM'
+    | 'CA'
+    | 'KY'
+    | 'CF'
+    | 'TD'
+    | 'CL'
+    | 'CN'
+    | 'CX'
+    | 'CC'
+    | 'CO'
+    | 'KM'
+    | 'CG'
+    | 'CD'
+    | 'CK'
+    | 'CR'
+    | 'CI'
+    | 'HR'
+    | 'CU'
+    | 'CW'
+    | 'CY'
+    | 'CZ'
+    | 'DK'
+    | 'DJ'
+    | 'DM'
+    | 'DO'
+    | 'EC'
+    | 'EG'
+    | 'SV'
+    | 'GQ'
+    | 'ER'
+    | 'EE'
+    | 'SZ'
+    | 'ET'
+    | 'FK'
+    | 'FO'
+    | 'FJ'
+    | 'FI'
+    | 'FR'
+    | 'GF'
+    | 'PF'
+    | 'TF'
+    | 'GA'
+    | 'GM'
+    | 'GE'
+    | 'DE'
+    | 'GH'
+    | 'GI'
+    | 'GR'
+    | 'GL'
+    | 'GD'
+    | 'GP'
+    | 'GU'
+    | 'GT'
+    | 'GG'
+    | 'GN'
+    | 'GW'
+    | 'GY'
+    | 'HT'
+    | 'HM'
+    | 'VA'
+    | 'HN'
+    | 'HK'
+    | 'HU'
+    | 'IS'
+    | 'IN'
+    | 'ID'
+    | 'IR'
+    | 'IQ'
+    | 'IE'
+    | 'IM'
+    | 'IL'
+    | 'IT'
+    | 'JM'
+    | 'JP'
+    | 'JE'
+    | 'JO'
+    | 'KZ'
+    | 'KE'
+    | 'KI'
+    | 'KP'
+    | 'KR'
+    | 'KW'
+    | 'KG'
+    | 'LA'
+    | 'LV'
+    | 'LB'
+    | 'LS'
+    | 'LR'
+    | 'LY'
+    | 'LI'
+    | 'LT'
+    | 'LU'
+    | 'MO'
+    | 'MG'
+    | 'MW'
+    | 'MY'
+    | 'MV'
+    | 'ML'
+    | 'MT'
+    | 'MH'
+    | 'MQ'
+    | 'MR'
+    | 'MU'
+    | 'YT'
+    | 'MX'
+    | 'FM'
+    | 'MD'
+    | 'MC'
+    | 'MN'
+    | 'ME'
+    | 'MS'
+    | 'MA'
+    | 'MZ'
+    | 'MM'
+    | 'NA'
+    | 'NR'
+    | 'NP'
+    | 'NL'
+    | 'NC'
+    | 'NZ'
+    | 'NI'
+    | 'NE'
+    | 'NG'
+    | 'NU'
+    | 'NF'
+    | 'MK'
+    | 'MP'
+    | 'NO'
+    | 'OM'
+    | 'PK'
+    | 'PW'
+    | 'PS'
+    | 'PA'
+    | 'PG'
+    | 'PY'
+    | 'PE'
+    | 'PH'
+    | 'PN'
+    | 'PL'
+    | 'PT'
+    | 'PR'
+    | 'QA'
+    | 'RE'
+    | 'RO'
+    | 'RU'
+    | 'RW'
+    | 'BL'
+    | 'SH'
+    | 'KN'
+    | 'LC'
+    | 'MF'
+    | 'PM'
+    | 'VC'
+    | 'WS'
+    | 'SM'
+    | 'ST'
+    | 'SA'
+    | 'SN'
+    | 'RS'
+    | 'SC'
+    | 'SL'
+    | 'SG'
+    | 'SX'
+    | 'SK'
+    | 'SI'
+    | 'SB'
+    | 'SO'
+    | 'ZA'
+    | 'GS'
+    | 'SS'
+    | 'ES'
+    | 'LK'
+    | 'SD'
+    | 'SR'
+    | 'SJ'
+    | 'SE'
+    | 'CH'
+    | 'SY'
+    | 'TW'
+    | 'TJ'
+    | 'TZ'
+    | 'TH'
+    | 'TL'
+    | 'TG'
+    | 'TK'
+    | 'TO'
+    | 'TT'
+    | 'TN'
+    | 'TR'
+    | 'TM'
+    | 'TC'
+    | 'TV'
+    | 'UG'
+    | 'UA'
+    | 'AE'
+    | 'GB'
+    | 'UM'
+    | 'US'
+    | 'UY'
+    | 'UZ'
+    | 'VU'
+    | 'VE'
+    | 'VN'
+    | 'VG'
+    | 'VI'
+    | 'WF'
+    | 'EH'
+    | 'YE'
+    | 'ZM'
+    | 'ZW'
+    | ''
+    | null;
 
   external_id?: string;
 
@@ -644,7 +908,86 @@ export interface CategoryTree {
  * - `vi` - Vietnamese
  * - `zh` - Chinese
  */
-export type LanguageEnum = 'af' | 'ar' | 'az' | 'bg' | 'be' | 'bn' | 'br' | 'bs' | 'ca' | 'cs' | 'cy' | 'da' | 'de' | 'el' | 'en' | 'eo' | 'es' | 'et' | 'eu' | 'fa' | 'fi' | 'fr' | 'fy' | 'ga' | 'gd' | 'gl' | 'he' | 'hi' | 'hr' | 'hu' | 'hy' | 'ia' | 'id' | 'ig' | 'io' | 'is' | 'it' | 'ja' | 'ka' | 'kk' | 'km' | 'no' | 'kn' | 'ko' | 'ky' | 'lb' | 'lt' | 'lv' | 'mk' | 'ml' | 'mn' | 'mr' | 'my' | 'ne' | 'nl' | 'os' | 'pa' | 'pl' | 'pt' | 'ro' | 'ru' | 'sk' | 'sl' | 'sq' | 'sr' | 'sv' | 'sw' | 'ta' | 'te' | 'tg' | 'th' | 'tk' | 'tr' | 'tt' | 'uk' | 'ur' | 'uz' | 'vi' | 'zh'
+export type LanguageEnum =
+  | 'af'
+  | 'ar'
+  | 'az'
+  | 'bg'
+  | 'be'
+  | 'bn'
+  | 'br'
+  | 'bs'
+  | 'ca'
+  | 'cs'
+  | 'cy'
+  | 'da'
+  | 'de'
+  | 'el'
+  | 'en'
+  | 'eo'
+  | 'es'
+  | 'et'
+  | 'eu'
+  | 'fa'
+  | 'fi'
+  | 'fr'
+  | 'fy'
+  | 'ga'
+  | 'gd'
+  | 'gl'
+  | 'he'
+  | 'hi'
+  | 'hr'
+  | 'hu'
+  | 'hy'
+  | 'ia'
+  | 'id'
+  | 'ig'
+  | 'io'
+  | 'is'
+  | 'it'
+  | 'ja'
+  | 'ka'
+  | 'kk'
+  | 'km'
+  | 'no'
+  | 'kn'
+  | 'ko'
+  | 'ky'
+  | 'lb'
+  | 'lt'
+  | 'lv'
+  | 'mk'
+  | 'ml'
+  | 'mn'
+  | 'mr'
+  | 'my'
+  | 'ne'
+  | 'nl'
+  | 'os'
+  | 'pa'
+  | 'pl'
+  | 'pt'
+  | 'ro'
+  | 'ru'
+  | 'sk'
+  | 'sl'
+  | 'sq'
+  | 'sr'
+  | 'sv'
+  | 'sw'
+  | 'ta'
+  | 'te'
+  | 'tg'
+  | 'th'
+  | 'tk'
+  | 'tr'
+  | 'tt'
+  | 'uk'
+  | 'ur'
+  | 'uz'
+  | 'vi'
+  | 'zh';
 
 /**
  * ### External Article Feedback
@@ -680,7 +1023,8 @@ export interface ArticleListSavedArticleFiltersResponse {
   name: string;
 }
 
-export type ArticleRetrieveRelatedResponse = Array<ArticleRetrieveRelatedResponse.ArticleRetrieveRelatedResponseItem>
+export type ArticleRetrieveRelatedResponse =
+  Array<ArticleRetrieveRelatedResponse.ArticleRetrieveRelatedResponseItem>;
 
 export namespace ArticleRetrieveRelatedResponse {
   /**
@@ -800,7 +1144,12 @@ export interface ArticleListParams extends NextKeyParams {
   /**
    * Sort articles
    */
-  sorting?: 'creation_date' | 'publication_date_clustering' | 'publication_date_priority' | 'publication_date_source_references' | 'publication_datetime';
+  sorting?:
+    | 'creation_date'
+    | 'publication_date_clustering'
+    | 'publication_date_priority'
+    | 'publication_date_source_references'
+    | 'publication_datetime';
 
   /**
    * Sort order
@@ -823,8 +1172,7 @@ export interface ArticleCreateFeedbackParams {
   feedback_type?: 'false_positive' | 'no_risk' | 'risk_confirmed';
 }
 
-export interface ArticleListSavedArticleFiltersParams extends NextKeyParams {
-}
+export interface ArticleListSavedArticleFiltersParams extends NextKeyParams {}
 
 Articles.Analytics = Analytics;
 Articles.Export = Export;
@@ -841,13 +1189,13 @@ export declare namespace Articles {
     type ArticleListSavedArticleFiltersResponsesNextKey as ArticleListSavedArticleFiltersResponsesNextKey,
     type ArticleListParams as ArticleListParams,
     type ArticleCreateFeedbackParams as ArticleCreateFeedbackParams,
-    type ArticleListSavedArticleFiltersParams as ArticleListSavedArticleFiltersParams
+    type ArticleListSavedArticleFiltersParams as ArticleListSavedArticleFiltersParams,
   };
 
   export {
     Analytics as Analytics,
     type AnalyticsGetCountByDateResponse as AnalyticsGetCountByDateResponse,
-    type AnalyticsGetCountByDateParams as AnalyticsGetCountByDateParams
+    type AnalyticsGetCountByDateParams as AnalyticsGetCountByDateParams,
   };
 
   export {
@@ -855,6 +1203,6 @@ export declare namespace Articles {
     type ArticleExport as ArticleExport,
     type DataExportFileType as DataExportFileType,
     type MediaTypeEnum as MediaTypeEnum,
-    type ExportCreateParams as ExportCreateParams
+    type ExportCreateParams as ExportCreateParams,
   };
 }

@@ -28,7 +28,10 @@ export class Compliance extends APIResource {
    * [GET /compliance/{external_id}](/ext/v3/#/ext/ext_v3_compliance_retrieve)
    * endpoint.
    */
-  create(body: ComplianceCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<ComplianceCreateResponse> {
+  create(
+    body: ComplianceCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ComplianceCreateResponse> {
     return this._client.post('/ext/v3/compliance', { body, ...options });
   }
 
@@ -60,8 +63,14 @@ export class Compliance extends APIResource {
    *    `company_id` to screen specific individuals or organizations that are not
    *    necessarily affiliated with a company in our database.
    */
-  list(query: ComplianceListParams | null | undefined = {}, options?: RequestOptions): PagePromise<ComplianceListResponsesNextKey, ComplianceListResponse> {
-    return this._client.getAPIList('/ext/v3/compliance', NextKey<ComplianceListResponse>, { query, ...options });
+  list(
+    query: ComplianceListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ComplianceListResponsesNextKey, ComplianceListResponse> {
+    return this._client.getAPIList('/ext/v3/compliance', NextKey<ComplianceListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -70,21 +79,29 @@ export class Compliance extends APIResource {
    * Retrieve all findings for a compliance check. Results can be filtered by entity,
    * type of finding (e.g., Sanction, PEP), and confidence score.
    */
-  listResults(externalID: string, query: ComplianceListResultsParams | null | undefined = {}, options?: RequestOptions): PagePromise<ComplianceListResultsResponsesNextKey, ComplianceListResultsResponse> {
-    return this._client.getAPIList(path`/ext/v3/compliance/${externalID}/results`, NextKey<ComplianceListResultsResponse>, { query, ...options });
+  listResults(
+    externalID: string,
+    query: ComplianceListResultsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ComplianceListResultsResponsesNextKey, ComplianceListResultsResponse> {
+    return this._client.getAPIList(
+      path`/ext/v3/compliance/${externalID}/results`,
+      NextKey<ComplianceListResultsResponse>,
+      { query, ...options },
+    );
   }
 }
 
-export type ComplianceListResponsesNextKey = NextKey<ComplianceListResponse>
+export type ComplianceListResponsesNextKey = NextKey<ComplianceListResponse>;
 
-export type ComplianceListResultsResponsesNextKey = NextKey<ComplianceListResultsResponse>
+export type ComplianceListResultsResponsesNextKey = NextKey<ComplianceListResultsResponse>;
 
 /**
  * - `low` - Low
  * - `medium` - Medium
  * - `high` - High
  */
-export type ComplianceCheckScoreEnum = 'low' | 'medium' | 'high'
+export type ComplianceCheckScoreEnum = 'low' | 'medium' | 'high';
 
 /**
  * ### Compliance Check
@@ -552,7 +569,88 @@ export interface ComplianceListResultsResponse {
 
   image?: string | null;
 
-  language?: 'af' | 'ar' | 'az' | 'bg' | 'be' | 'bn' | 'br' | 'bs' | 'ca' | 'cs' | 'cy' | 'da' | 'de' | 'el' | 'en' | 'eo' | 'es' | 'et' | 'eu' | 'fa' | 'fi' | 'fr' | 'fy' | 'ga' | 'gd' | 'gl' | 'he' | 'hi' | 'hr' | 'hu' | 'hy' | 'ia' | 'id' | 'ig' | 'io' | 'is' | 'it' | 'ja' | 'ka' | 'kk' | 'km' | 'no' | 'kn' | 'ko' | 'ky' | 'lb' | 'lt' | 'lv' | 'mk' | 'ml' | 'mn' | 'mr' | 'my' | 'ne' | 'nl' | 'os' | 'pa' | 'pl' | 'pt' | 'ro' | 'ru' | 'sk' | 'sl' | 'sq' | 'sr' | 'sv' | 'sw' | 'ta' | 'te' | 'tg' | 'th' | 'tk' | 'tr' | 'tt' | 'uk' | 'ur' | 'uz' | 'vi' | 'zh' | '' | null;
+  language?:
+    | 'af'
+    | 'ar'
+    | 'az'
+    | 'bg'
+    | 'be'
+    | 'bn'
+    | 'br'
+    | 'bs'
+    | 'ca'
+    | 'cs'
+    | 'cy'
+    | 'da'
+    | 'de'
+    | 'el'
+    | 'en'
+    | 'eo'
+    | 'es'
+    | 'et'
+    | 'eu'
+    | 'fa'
+    | 'fi'
+    | 'fr'
+    | 'fy'
+    | 'ga'
+    | 'gd'
+    | 'gl'
+    | 'he'
+    | 'hi'
+    | 'hr'
+    | 'hu'
+    | 'hy'
+    | 'ia'
+    | 'id'
+    | 'ig'
+    | 'io'
+    | 'is'
+    | 'it'
+    | 'ja'
+    | 'ka'
+    | 'kk'
+    | 'km'
+    | 'no'
+    | 'kn'
+    | 'ko'
+    | 'ky'
+    | 'lb'
+    | 'lt'
+    | 'lv'
+    | 'mk'
+    | 'ml'
+    | 'mn'
+    | 'mr'
+    | 'my'
+    | 'ne'
+    | 'nl'
+    | 'os'
+    | 'pa'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'sk'
+    | 'sl'
+    | 'sq'
+    | 'sr'
+    | 'sv'
+    | 'sw'
+    | 'ta'
+    | 'te'
+    | 'tg'
+    | 'th'
+    | 'tk'
+    | 'tr'
+    | 'tt'
+    | 'uk'
+    | 'ur'
+    | 'uz'
+    | 'vi'
+    | 'zh'
+    | ''
+    | null;
 
   source_date?: string | null;
 
@@ -576,7 +674,258 @@ export namespace ComplianceListResultsResponse {
   export interface Address {
     city?: string | null;
 
-    country?: 'AF' | 'AX' | 'AL' | 'DZ' | 'AS' | 'AD' | 'AO' | 'AI' | 'AQ' | 'AG' | 'AR' | 'AM' | 'AW' | 'AU' | 'AT' | 'AZ' | 'BS' | 'BH' | 'BD' | 'BB' | 'BY' | 'BE' | 'BZ' | 'BJ' | 'BM' | 'BT' | 'BO' | 'BQ' | 'BA' | 'BW' | 'BV' | 'BR' | 'IO' | 'BN' | 'BG' | 'BF' | 'BI' | 'CV' | 'KH' | 'CM' | 'CA' | 'KY' | 'CF' | 'TD' | 'CL' | 'CN' | 'CX' | 'CC' | 'CO' | 'KM' | 'CG' | 'CD' | 'CK' | 'CR' | 'CI' | 'HR' | 'CU' | 'CW' | 'CY' | 'CZ' | 'DK' | 'DJ' | 'DM' | 'DO' | 'EC' | 'EG' | 'SV' | 'GQ' | 'ER' | 'EE' | 'SZ' | 'ET' | 'FK' | 'FO' | 'FJ' | 'FI' | 'FR' | 'GF' | 'PF' | 'TF' | 'GA' | 'GM' | 'GE' | 'DE' | 'GH' | 'GI' | 'GR' | 'GL' | 'GD' | 'GP' | 'GU' | 'GT' | 'GG' | 'GN' | 'GW' | 'GY' | 'HT' | 'HM' | 'VA' | 'HN' | 'HK' | 'HU' | 'IS' | 'IN' | 'ID' | 'IR' | 'IQ' | 'IE' | 'IM' | 'IL' | 'IT' | 'JM' | 'JP' | 'JE' | 'JO' | 'KZ' | 'KE' | 'KI' | 'KP' | 'KR' | 'KW' | 'KG' | 'LA' | 'LV' | 'LB' | 'LS' | 'LR' | 'LY' | 'LI' | 'LT' | 'LU' | 'MO' | 'MG' | 'MW' | 'MY' | 'MV' | 'ML' | 'MT' | 'MH' | 'MQ' | 'MR' | 'MU' | 'YT' | 'MX' | 'FM' | 'MD' | 'MC' | 'MN' | 'ME' | 'MS' | 'MA' | 'MZ' | 'MM' | 'NA' | 'NR' | 'NP' | 'NL' | 'NC' | 'NZ' | 'NI' | 'NE' | 'NG' | 'NU' | 'NF' | 'MK' | 'MP' | 'NO' | 'OM' | 'PK' | 'PW' | 'PS' | 'PA' | 'PG' | 'PY' | 'PE' | 'PH' | 'PN' | 'PL' | 'PT' | 'PR' | 'QA' | 'RE' | 'RO' | 'RU' | 'RW' | 'BL' | 'SH' | 'KN' | 'LC' | 'MF' | 'PM' | 'VC' | 'WS' | 'SM' | 'ST' | 'SA' | 'SN' | 'RS' | 'SC' | 'SL' | 'SG' | 'SX' | 'SK' | 'SI' | 'SB' | 'SO' | 'ZA' | 'GS' | 'SS' | 'ES' | 'LK' | 'SD' | 'SR' | 'SJ' | 'SE' | 'CH' | 'SY' | 'TW' | 'TJ' | 'TZ' | 'TH' | 'TL' | 'TG' | 'TK' | 'TO' | 'TT' | 'TN' | 'TR' | 'TM' | 'TC' | 'TV' | 'UG' | 'UA' | 'AE' | 'GB' | 'UM' | 'US' | 'UY' | 'UZ' | 'VU' | 'VE' | 'VN' | 'VG' | 'VI' | 'WF' | 'EH' | 'YE' | 'ZM' | 'ZW' | '' | null;
+    country?:
+      | 'AF'
+      | 'AX'
+      | 'AL'
+      | 'DZ'
+      | 'AS'
+      | 'AD'
+      | 'AO'
+      | 'AI'
+      | 'AQ'
+      | 'AG'
+      | 'AR'
+      | 'AM'
+      | 'AW'
+      | 'AU'
+      | 'AT'
+      | 'AZ'
+      | 'BS'
+      | 'BH'
+      | 'BD'
+      | 'BB'
+      | 'BY'
+      | 'BE'
+      | 'BZ'
+      | 'BJ'
+      | 'BM'
+      | 'BT'
+      | 'BO'
+      | 'BQ'
+      | 'BA'
+      | 'BW'
+      | 'BV'
+      | 'BR'
+      | 'IO'
+      | 'BN'
+      | 'BG'
+      | 'BF'
+      | 'BI'
+      | 'CV'
+      | 'KH'
+      | 'CM'
+      | 'CA'
+      | 'KY'
+      | 'CF'
+      | 'TD'
+      | 'CL'
+      | 'CN'
+      | 'CX'
+      | 'CC'
+      | 'CO'
+      | 'KM'
+      | 'CG'
+      | 'CD'
+      | 'CK'
+      | 'CR'
+      | 'CI'
+      | 'HR'
+      | 'CU'
+      | 'CW'
+      | 'CY'
+      | 'CZ'
+      | 'DK'
+      | 'DJ'
+      | 'DM'
+      | 'DO'
+      | 'EC'
+      | 'EG'
+      | 'SV'
+      | 'GQ'
+      | 'ER'
+      | 'EE'
+      | 'SZ'
+      | 'ET'
+      | 'FK'
+      | 'FO'
+      | 'FJ'
+      | 'FI'
+      | 'FR'
+      | 'GF'
+      | 'PF'
+      | 'TF'
+      | 'GA'
+      | 'GM'
+      | 'GE'
+      | 'DE'
+      | 'GH'
+      | 'GI'
+      | 'GR'
+      | 'GL'
+      | 'GD'
+      | 'GP'
+      | 'GU'
+      | 'GT'
+      | 'GG'
+      | 'GN'
+      | 'GW'
+      | 'GY'
+      | 'HT'
+      | 'HM'
+      | 'VA'
+      | 'HN'
+      | 'HK'
+      | 'HU'
+      | 'IS'
+      | 'IN'
+      | 'ID'
+      | 'IR'
+      | 'IQ'
+      | 'IE'
+      | 'IM'
+      | 'IL'
+      | 'IT'
+      | 'JM'
+      | 'JP'
+      | 'JE'
+      | 'JO'
+      | 'KZ'
+      | 'KE'
+      | 'KI'
+      | 'KP'
+      | 'KR'
+      | 'KW'
+      | 'KG'
+      | 'LA'
+      | 'LV'
+      | 'LB'
+      | 'LS'
+      | 'LR'
+      | 'LY'
+      | 'LI'
+      | 'LT'
+      | 'LU'
+      | 'MO'
+      | 'MG'
+      | 'MW'
+      | 'MY'
+      | 'MV'
+      | 'ML'
+      | 'MT'
+      | 'MH'
+      | 'MQ'
+      | 'MR'
+      | 'MU'
+      | 'YT'
+      | 'MX'
+      | 'FM'
+      | 'MD'
+      | 'MC'
+      | 'MN'
+      | 'ME'
+      | 'MS'
+      | 'MA'
+      | 'MZ'
+      | 'MM'
+      | 'NA'
+      | 'NR'
+      | 'NP'
+      | 'NL'
+      | 'NC'
+      | 'NZ'
+      | 'NI'
+      | 'NE'
+      | 'NG'
+      | 'NU'
+      | 'NF'
+      | 'MK'
+      | 'MP'
+      | 'NO'
+      | 'OM'
+      | 'PK'
+      | 'PW'
+      | 'PS'
+      | 'PA'
+      | 'PG'
+      | 'PY'
+      | 'PE'
+      | 'PH'
+      | 'PN'
+      | 'PL'
+      | 'PT'
+      | 'PR'
+      | 'QA'
+      | 'RE'
+      | 'RO'
+      | 'RU'
+      | 'RW'
+      | 'BL'
+      | 'SH'
+      | 'KN'
+      | 'LC'
+      | 'MF'
+      | 'PM'
+      | 'VC'
+      | 'WS'
+      | 'SM'
+      | 'ST'
+      | 'SA'
+      | 'SN'
+      | 'RS'
+      | 'SC'
+      | 'SL'
+      | 'SG'
+      | 'SX'
+      | 'SK'
+      | 'SI'
+      | 'SB'
+      | 'SO'
+      | 'ZA'
+      | 'GS'
+      | 'SS'
+      | 'ES'
+      | 'LK'
+      | 'SD'
+      | 'SR'
+      | 'SJ'
+      | 'SE'
+      | 'CH'
+      | 'SY'
+      | 'TW'
+      | 'TJ'
+      | 'TZ'
+      | 'TH'
+      | 'TL'
+      | 'TG'
+      | 'TK'
+      | 'TO'
+      | 'TT'
+      | 'TN'
+      | 'TR'
+      | 'TM'
+      | 'TC'
+      | 'TV'
+      | 'UG'
+      | 'UA'
+      | 'AE'
+      | 'GB'
+      | 'UM'
+      | 'US'
+      | 'UY'
+      | 'UZ'
+      | 'VU'
+      | 'VE'
+      | 'VN'
+      | 'VG'
+      | 'VI'
+      | 'WF'
+      | 'EH'
+      | 'YE'
+      | 'ZM'
+      | 'ZW'
+      | ''
+      | null;
 
     postal_code?: string | null;
 
@@ -838,6 +1187,6 @@ export declare namespace Compliance {
     type ComplianceListResultsResponsesNextKey as ComplianceListResultsResponsesNextKey,
     type ComplianceCreateParams as ComplianceCreateParams,
     type ComplianceListParams as ComplianceListParams,
-    type ComplianceListResultsParams as ComplianceListResultsParams
+    type ComplianceListResultsParams as ComplianceListResultsParams,
   };
 }

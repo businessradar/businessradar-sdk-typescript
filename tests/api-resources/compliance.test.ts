@@ -2,7 +2,10 @@
 
 import BusinessRadar from '@businessradar/businessradar';
 
-const client = new BusinessRadar({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new BusinessRadar({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource compliance', () => {
   // Mock server tests are disabled
@@ -20,27 +23,32 @@ describe('resource compliance', () => {
   // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.compliance.create({
-    adverse_media_monitoring_enabled: true,
-    company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    directors_screening_enabled: true,
-    entities: [{
-    name: 'x',
-    aliases: ['x'],
-    country: 'xx',
-    date_of_birth: '2019-12-27',
-    entity_type: 'individual',
-    first_name: 'first_name',
-    last_name: 'last_name',
-    middle_name: 'middle_name',
-  }],
-    name: 'name',
-    ownership_screening_threshold: 0,
-    sanction_monitoring_enabled: true,
-    ubo_screening_enabled: true,
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.compliance.create(
+        {
+          adverse_media_monitoring_enabled: true,
+          company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          directors_screening_enabled: true,
+          entities: [
+            {
+              name: 'x',
+              aliases: ['x'],
+              country: 'xx',
+              date_of_birth: '2019-12-27',
+              entity_type: 'individual',
+              first_name: 'first_name',
+              last_name: 'last_name',
+              middle_name: 'middle_name',
+            },
+          ],
+          name: 'name',
+          ownership_screening_threshold: 0,
+          sanction_monitoring_enabled: true,
+          ubo_screening_enabled: true,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -70,21 +78,24 @@ describe('resource compliance', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.compliance.list({
-    adverse_media_monitoring_enabled: true,
-    compliance_score: 'high',
-    created_at__gte: '2019-12-27T18:11:19.117Z',
-    created_at__lte: '2019-12-27T18:11:19.117Z',
-    next_key: 'next_key',
-    order: 'asc',
-    results_changed_at__gte: '2019-12-27T18:11:19.117Z',
-    results_changed_at__lte: '2019-12-27T18:11:19.117Z',
-    sanction_monitoring_enabled: true,
-    sorting: 'created_at',
-    status: 'completed',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.compliance.list(
+        {
+          adverse_media_monitoring_enabled: true,
+          compliance_score: 'high',
+          created_at__gte: '2019-12-27T18:11:19.117Z',
+          created_at__lte: '2019-12-27T18:11:19.117Z',
+          next_key: 'next_key',
+          order: 'asc',
+          results_changed_at__gte: '2019-12-27T18:11:19.117Z',
+          results_changed_at__lte: '2019-12-27T18:11:19.117Z',
+          sanction_monitoring_enabled: true,
+          sorting: 'created_at',
+          status: 'completed',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -102,16 +113,20 @@ describe('resource compliance', () => {
   // Mock server tests are disabled
   test.skip('listResults: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.compliance.listResults('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    entity: 'entity',
-    exclude_automated_false_positives: true,
-    min_confidence: 0,
-    next_key: 'next_key',
-    order: 'asc',
-    result_type: 'adverse_media',
-    sorting: 'confidence',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(BusinessRadar.NotFoundError);
+    await expect(
+      client.compliance.listResults(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        {
+          entity: 'entity',
+          exclude_automated_false_positives: true,
+          min_confidence: 0,
+          next_key: 'next_key',
+          order: 'asc',
+          result_type: 'adverse_media',
+          sorting: 'confidence',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 });
