@@ -29,7 +29,7 @@
   "user_config": {
     "BUSINESSRADAR_API_KEY": {
       "title": "api_key",
-      "description": "Token-based authentication with required prefix 'Token'",
+      "description": "Token-based authentication with required prefix \'Token\'",
       "required": true,
       "type": "string"
     }
