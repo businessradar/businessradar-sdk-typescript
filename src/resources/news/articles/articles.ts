@@ -6,7 +6,14 @@ import * as CompaniesAPI from '../../companies';
 import * as AnalyticsAPI from './analytics';
 import { Analytics, AnalyticsGetCountByDateParams, AnalyticsGetCountByDateResponse } from './analytics';
 import * as ExportAPI from './export';
-import { ArticleExport, DataExportFileType, Export, ExportCreateParams, MediaTypeEnum } from './export';
+import {
+  ArticleExport,
+  ArticleFilters,
+  DataExportFileType,
+  Export,
+  ExportCreateParams,
+  MediaTypeEnum,
+} from './export';
 import { APIPromise } from '../../../core/api-promise';
 import { NextKey, type NextKeyParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -1201,6 +1208,7 @@ export declare namespace Articles {
   export {
     Export as Export,
     type ArticleExport as ArticleExport,
+    type ArticleFilters as ArticleFilters,
     type DataExportFileType as DataExportFileType,
     type MediaTypeEnum as MediaTypeEnum,
     type ExportCreateParams as ExportCreateParams,

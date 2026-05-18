@@ -40,6 +40,7 @@ import {
   CompanyRetrieveResponse,
   CountryEnum,
   IndustryCode,
+  PortfolioCompanyDetail,
   Registration,
   RegistrationRequest,
 } from './resources/companies';
@@ -48,6 +49,7 @@ import {
   ComplianceCheckScoreEnum,
   ComplianceCreateParams,
   ComplianceCreateResponse,
+  ComplianceEntityRetrieve,
   ComplianceListParams,
   ComplianceListResponse,
   ComplianceListResponsesNextKey,
@@ -55,6 +57,7 @@ import {
   ComplianceListResultsResponse,
   ComplianceListResultsResponsesNextKey,
   ComplianceRetrieveResponse,
+  Ubo,
 } from './resources/compliance';
 import { News } from './resources/news/news';
 import {
@@ -822,6 +825,7 @@ export declare namespace BusinessRadar {
     type BlankEnum as BlankEnum,
     type CountryEnum as CountryEnum,
     type IndustryCode as IndustryCode,
+    type PortfolioCompanyDetail as PortfolioCompanyDetail,
     type Registration as Registration,
     type RegistrationRequest as RegistrationRequest,
     type CompanyRetrieveResponse as CompanyRetrieveResponse,
@@ -845,6 +849,8 @@ export declare namespace BusinessRadar {
   export {
     Compliance as Compliance,
     type ComplianceCheckScoreEnum as ComplianceCheckScoreEnum,
+    type ComplianceEntityRetrieve as ComplianceEntityRetrieve,
+    type Ubo as Ubo,
     type ComplianceCreateResponse as ComplianceCreateResponse,
     type ComplianceRetrieveResponse as ComplianceRetrieveResponse,
     type ComplianceListResponse as ComplianceListResponse,
