@@ -1849,6 +1849,8 @@ export interface CompanyRetrieveResponse {
    */
   social_logo: string | null;
 
+  trade_names: Array<string>;
+
   address_latitude?: number | null;
 
   address_longitude?: number | null;
