@@ -68,7 +68,7 @@ export interface ArticleExport {
    * Used to validate and process filters for article searches. Supports filtering by
    * query text, countries, languages, specific companies (DUNS), and portfolios.
    */
-  filters: ArticleExport.Filters;
+  filters: ArticleFilters;
 
   /**
    * Location of exports
@@ -88,54 +88,52 @@ export interface ArticleExport {
   updated_at: string;
 }
 
-export namespace ArticleExport {
-  /**
-   * ### Article Filters
-   *
-   * Used to validate and process filters for article searches. Supports filtering by
-   * query text, countries, languages, specific companies (DUNS), and portfolios.
-   */
-  export interface Filters {
-    categories?: Array<string> | null;
+/**
+ * ### Article Filters
+ *
+ * Used to validate and process filters for article searches. Supports filtering by
+ * query text, countries, languages, specific companies (DUNS), and portfolios.
+ */
+export interface ArticleFilters {
+  categories?: Array<string> | null;
 
-    companies?: Array<string> | null;
+  companies?: Array<string> | null;
 
-    countries?: Array<string> | null;
+  countries?: Array<string> | null;
 
-    disable_company_article_deduplication?: boolean;
+  disable_company_article_deduplication?: boolean;
 
-    duns_numbers?: Array<string> | null;
+  duns_numbers?: Array<string> | null;
 
-    global_ultimates?: Array<string> | null;
+  global_ultimates?: Array<string> | null;
 
-    include_clustered_articles?: boolean;
+  include_clustered_articles?: boolean;
 
-    industries?: Array<string> | null;
+  industries?: Array<string> | null;
 
-    is_material?: boolean | null;
+  is_material?: boolean | null;
 
-    languages?: Array<string> | null;
+  languages?: Array<string> | null;
 
-    max_creation_date?: string | null;
+  max_creation_date?: string | null;
 
-    max_publication_date?: string | null;
+  max_publication_date?: string | null;
 
-    media_type?: 'GAZETTE' | 'MAINSTREAM' | null;
+  media_type?: 'GAZETTE' | 'MAINSTREAM' | null;
 
-    min_creation_date?: string | null;
+  min_creation_date?: string | null;
 
-    min_publication_date?: string | null;
+  min_publication_date?: string | null;
 
-    parent_category?: string | null;
+  parent_category?: string | null;
 
-    portfolios?: Array<string> | null;
+  portfolios?: Array<string> | null;
 
-    query?: string | null;
+  query?: string | null;
 
-    registration_numbers?: Array<string> | null;
+  registration_numbers?: Array<string> | null;
 
-    sentiment?: boolean | null;
-  }
+  sentiment?: boolean | null;
 }
 
 /**
@@ -221,6 +219,7 @@ export namespace ExportCreateParams {
 export declare namespace Export {
   export {
     type ArticleExport as ArticleExport,
+    type ArticleFilters as ArticleFilters,
     type DataExportFileType as DataExportFileType,
     type MediaTypeEnum as MediaTypeEnum,
     type ExportCreateParams as ExportCreateParams,
