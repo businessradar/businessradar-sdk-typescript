@@ -150,7 +150,6 @@ export interface Article {
    * - `ka` - Georgian
    * - `kk` - Kazakh
    * - `km` - Khmer
-   * - `no` - Norwegian
    * - `kn` - Kannada
    * - `ko` - Korean
    * - `ky` - Kyrgyz
@@ -164,6 +163,7 @@ export interface Article {
    * - `my` - Burmese
    * - `ne` - Nepali
    * - `nl` - Dutch
+   * - `no` - Norwegian
    * - `os` - Ossetic
    * - `pa` - Punjabi
    * - `pl` - Polish
@@ -876,7 +876,6 @@ export interface CategoryTree {
  * - `ka` - Georgian
  * - `kk` - Kazakh
  * - `km` - Khmer
- * - `no` - Norwegian
  * - `kn` - Kannada
  * - `ko` - Korean
  * - `ky` - Kyrgyz
@@ -890,6 +889,7 @@ export interface CategoryTree {
  * - `my` - Burmese
  * - `ne` - Nepali
  * - `nl` - Dutch
+ * - `no` - Norwegian
  * - `os` - Ossetic
  * - `pa` - Punjabi
  * - `pl` - Polish
@@ -957,7 +957,6 @@ export type LanguageEnum =
   | 'ka'
   | 'kk'
   | 'km'
-  | 'no'
   | 'kn'
   | 'ko'
   | 'ky'
@@ -971,6 +970,7 @@ export type LanguageEnum =
   | 'my'
   | 'ne'
   | 'nl'
+  | 'no'
   | 'os'
   | 'pa'
   | 'pl'
