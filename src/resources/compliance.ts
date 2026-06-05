@@ -136,6 +136,8 @@ export interface ComplianceEntityRetrieve {
 
   country?: string | null;
 
+  date_of_birth?: string | null;
+
   gender?: 'male' | 'female' | '' | null;
 }
 
