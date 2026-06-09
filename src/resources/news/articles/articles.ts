@@ -6,7 +6,14 @@ import * as CompaniesAPI from '../../companies';
 import * as AnalyticsAPI from './analytics';
 import { Analytics, AnalyticsGetCountByDateParams, AnalyticsGetCountByDateResponse } from './analytics';
 import * as ExportAPI from './export';
-import { ArticleExport, DataExportFileType, Export, ExportCreateParams, MediaTypeEnum } from './export';
+import {
+  ArticleExport,
+  ArticleFilters,
+  DataExportFileType,
+  Export,
+  ExportCreateParams,
+  MediaTypeEnum,
+} from './export';
 import { APIPromise } from '../../../core/api-promise';
 import { NextKey, type NextKeyParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -143,7 +150,6 @@ export interface Article {
    * - `ka` - Georgian
    * - `kk` - Kazakh
    * - `km` - Khmer
-   * - `no` - Norwegian
    * - `kn` - Kannada
    * - `ko` - Korean
    * - `ky` - Kyrgyz
@@ -157,6 +163,7 @@ export interface Article {
    * - `my` - Burmese
    * - `ne` - Nepali
    * - `nl` - Dutch
+   * - `no` - Norwegian
    * - `os` - Ossetic
    * - `pa` - Punjabi
    * - `pl` - Polish
@@ -869,7 +876,6 @@ export interface CategoryTree {
  * - `ka` - Georgian
  * - `kk` - Kazakh
  * - `km` - Khmer
- * - `no` - Norwegian
  * - `kn` - Kannada
  * - `ko` - Korean
  * - `ky` - Kyrgyz
@@ -883,6 +889,7 @@ export interface CategoryTree {
  * - `my` - Burmese
  * - `ne` - Nepali
  * - `nl` - Dutch
+ * - `no` - Norwegian
  * - `os` - Ossetic
  * - `pa` - Punjabi
  * - `pl` - Polish
@@ -950,7 +957,6 @@ export type LanguageEnum =
   | 'ka'
   | 'kk'
   | 'km'
-  | 'no'
   | 'kn'
   | 'ko'
   | 'ky'
@@ -964,6 +970,7 @@ export type LanguageEnum =
   | 'my'
   | 'ne'
   | 'nl'
+  | 'no'
   | 'os'
   | 'pa'
   | 'pl'
@@ -1142,10 +1149,14 @@ export interface ArticleListParams extends NextKeyParams {
   sentiment?: boolean;
 
   /**
-   * Sort articles
+   * Sort articles. Use 'priority' to sort primarily by category priority
+   * (publication date as tiebreaker), surfacing the most important articles across
+   * the whole result set regardless of date. Lower numeric priority values indicate
+   * higher priority, so use sorting_order=asc for best-first ordering.
    */
   sorting?:
     | 'creation_date'
+    | 'priority'
     | 'publication_date_clustering'
     | 'publication_date_priority'
     | 'publication_date_source_references'
@@ -1201,6 +1212,7 @@ export declare namespace Articles {
   export {
     Export as Export,
     type ArticleExport as ArticleExport,
+    type ArticleFilters as ArticleFilters,
     type DataExportFileType as DataExportFileType,
     type MediaTypeEnum as MediaTypeEnum,
     type ExportCreateParams as ExportCreateParams,

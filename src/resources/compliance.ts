@@ -103,6 +103,68 @@ export type ComplianceListResultsResponsesNextKey = NextKey<ComplianceListResult
  */
 export type ComplianceCheckScoreEnum = 'low' | 'medium' | 'high';
 
+export interface ComplianceEntityRetrieve {
+  adverse_media_monitoring_enabled: boolean;
+
+  aliases: Array<string>;
+
+  entity_role: string;
+
+  /**
+   * - `individual` - Individual
+   * - `company` - Company
+   */
+  entity_type: 'individual' | 'company';
+
+  external_id: string;
+
+  name: string;
+
+  sanction_monitoring_enabled: boolean;
+
+  /**
+   * - `on_hold` - On Hold
+   * - `queued` - Queued
+   * - `in_progress` - In Progress
+   * - `completed` - Completed
+   * - `skipped` - Skipped
+   * - `failed` - Failed
+   */
+  status: 'on_hold' | 'queued' | 'in_progress' | 'completed' | 'skipped' | 'failed';
+
+  ubo: Ubo | null;
+
+  country?: string | null;
+
+  date_of_birth?: string | null;
+
+  gender?: 'male' | 'female' | '' | null;
+}
+
+export interface Ubo {
+  name: string;
+
+  beneficial_ownership_percentage?: number | null;
+
+  birth_date?: string | null;
+
+  degree_of_separation?: number | null;
+
+  direct_ownership_percentage?: number | null;
+
+  implied_beneficial_ownership_percentage?: number | null;
+
+  implied_direct_ownership_percentage?: number | null;
+
+  implied_indirect_ownership_percentage?: number | null;
+
+  indirect_ownership_percentage?: number | null;
+
+  is_beneficiary?: boolean | null;
+
+  is_person_with_significant_control?: boolean | null;
+}
+
 /**
  * ### Compliance Check
  *
@@ -113,7 +175,7 @@ export interface ComplianceCreateResponse {
 }
 
 export interface ComplianceRetrieveResponse {
-  entities: Array<ComplianceRetrieveResponse.Entity>;
+  entities: Array<ComplianceEntityRetrieve>;
 
   external_id: string;
 
@@ -145,70 +207,6 @@ export interface ComplianceRetrieveResponse {
    * - `failed` - Failed
    */
   status?: 'pending' | 'queued' | 'in_progress' | 'searching_directors' | 'completed' | 'failed';
-}
-
-export namespace ComplianceRetrieveResponse {
-  export interface Entity {
-    adverse_media_monitoring_enabled: boolean;
-
-    aliases: Array<string>;
-
-    entity_role: string;
-
-    /**
-     * - `individual` - Individual
-     * - `company` - Company
-     */
-    entity_type: 'individual' | 'company';
-
-    external_id: string;
-
-    name: string;
-
-    sanction_monitoring_enabled: boolean;
-
-    /**
-     * - `on_hold` - On Hold
-     * - `queued` - Queued
-     * - `in_progress` - In Progress
-     * - `completed` - Completed
-     * - `skipped` - Skipped
-     * - `failed` - Failed
-     */
-    status: 'on_hold' | 'queued' | 'in_progress' | 'completed' | 'skipped' | 'failed';
-
-    ubo: Entity.Ubo | null;
-
-    country?: string | null;
-
-    gender?: 'male' | 'female' | '' | null;
-  }
-
-  export namespace Entity {
-    export interface Ubo {
-      name: string;
-
-      beneficial_ownership_percentage?: number | null;
-
-      birth_date?: string | null;
-
-      degree_of_separation?: number | null;
-
-      direct_ownership_percentage?: number | null;
-
-      implied_beneficial_ownership_percentage?: number | null;
-
-      implied_direct_ownership_percentage?: number | null;
-
-      implied_indirect_ownership_percentage?: number | null;
-
-      indirect_ownership_percentage?: number | null;
-
-      is_beneficiary?: boolean | null;
-
-      is_person_with_significant_control?: boolean | null;
-    }
-  }
 }
 
 /**
@@ -538,7 +536,7 @@ export interface ComplianceListResultsResponse {
 
   created_at: string;
 
-  entity: ComplianceListResultsResponse.Entity;
+  entity: ComplianceEntityRetrieve;
 
   external_id: string;
 
@@ -611,7 +609,6 @@ export interface ComplianceListResultsResponse {
     | 'ka'
     | 'kk'
     | 'km'
-    | 'no'
     | 'kn'
     | 'ko'
     | 'ky'
@@ -625,6 +622,7 @@ export interface ComplianceListResultsResponse {
     | 'my'
     | 'ne'
     | 'nl'
+    | 'no'
     | 'os'
     | 'pa'
     | 'pl'
@@ -932,68 +930,6 @@ export namespace ComplianceListResultsResponse {
     street?: string | null;
   }
 
-  export interface Entity {
-    adverse_media_monitoring_enabled: boolean;
-
-    aliases: Array<string>;
-
-    entity_role: string;
-
-    /**
-     * - `individual` - Individual
-     * - `company` - Company
-     */
-    entity_type: 'individual' | 'company';
-
-    external_id: string;
-
-    name: string;
-
-    sanction_monitoring_enabled: boolean;
-
-    /**
-     * - `on_hold` - On Hold
-     * - `queued` - Queued
-     * - `in_progress` - In Progress
-     * - `completed` - Completed
-     * - `skipped` - Skipped
-     * - `failed` - Failed
-     */
-    status: 'on_hold' | 'queued' | 'in_progress' | 'completed' | 'skipped' | 'failed';
-
-    ubo: Entity.Ubo | null;
-
-    country?: string | null;
-
-    gender?: 'male' | 'female' | '' | null;
-  }
-
-  export namespace Entity {
-    export interface Ubo {
-      name: string;
-
-      beneficial_ownership_percentage?: number | null;
-
-      birth_date?: string | null;
-
-      degree_of_separation?: number | null;
-
-      direct_ownership_percentage?: number | null;
-
-      implied_beneficial_ownership_percentage?: number | null;
-
-      implied_direct_ownership_percentage?: number | null;
-
-      implied_indirect_ownership_percentage?: number | null;
-
-      indirect_ownership_percentage?: number | null;
-
-      is_beneficiary?: boolean | null;
-
-      is_person_with_significant_control?: boolean | null;
-    }
-  }
-
   /**
    * Compliance entity result source.
    */
@@ -1179,6 +1115,8 @@ export interface ComplianceListResultsParams extends NextKeyParams {
 export declare namespace Compliance {
   export {
     type ComplianceCheckScoreEnum as ComplianceCheckScoreEnum,
+    type ComplianceEntityRetrieve as ComplianceEntityRetrieve,
+    type Ubo as Ubo,
     type ComplianceCreateResponse as ComplianceCreateResponse,
     type ComplianceRetrieveResponse as ComplianceRetrieveResponse,
     type ComplianceListResponse as ComplianceListResponse,

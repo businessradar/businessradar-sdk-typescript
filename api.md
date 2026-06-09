@@ -39,6 +39,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/news/articles/export.ts">ArticleExport</a></code>
+- <code><a href="./src/resources/news/articles/export.ts">ArticleFilters</a></code>
 - <code><a href="./src/resources/news/articles/export.ts">DataExportFileType</a></code>
 - <code><a href="./src/resources/news/articles/export.ts">MediaTypeEnum</a></code>
 
@@ -54,6 +55,7 @@ Types:
 - <code><a href="./src/resources/companies.ts">BlankEnum</a></code>
 - <code><a href="./src/resources/companies.ts">CountryEnum</a></code>
 - <code><a href="./src/resources/companies.ts">IndustryCode</a></code>
+- <code><a href="./src/resources/companies.ts">PortfolioCompanyDetail</a></code>
 - <code><a href="./src/resources/companies.ts">Registration</a></code>
 - <code><a href="./src/resources/companies.ts">RegistrationRequest</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyRetrieveResponse</a></code>
@@ -81,6 +83,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/compliance.ts">ComplianceCheckScoreEnum</a></code>
+- <code><a href="./src/resources/compliance.ts">ComplianceEntityRetrieve</a></code>
+- <code><a href="./src/resources/compliance.ts">Ubo</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceCreateResponse</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceRetrieveResponse</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceListResponse</a></code>

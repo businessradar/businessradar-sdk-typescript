@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@businessradar/businessradar/internal/to-file';
 import { toFile } from '@businessradar/businessradar/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';

@@ -22,6 +22,7 @@ export {
 export {
   Export,
   type ArticleExport,
+  type ArticleFilters,
   type DataExportFileType,
   type MediaTypeEnum,
   type ExportCreateParams,

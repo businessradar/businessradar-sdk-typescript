@@ -6,6 +6,7 @@ export {
   type BlankEnum,
   type CountryEnum,
   type IndustryCode,
+  type PortfolioCompanyDetail,
   type Registration,
   type RegistrationRequest,
   type CompanyRetrieveResponse,
@@ -28,6 +29,8 @@ export {
 export {
   Compliance,
   type ComplianceCheckScoreEnum,
+  type ComplianceEntityRetrieve,
+  type Ubo,
   type ComplianceCreateResponse,
   type ComplianceRetrieveResponse,
   type ComplianceListResponse,
