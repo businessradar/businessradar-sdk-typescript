@@ -1058,7 +1058,7 @@ export namespace ArticleRetrieveRelatedResponse {
 
 export interface ArticleListParams extends NextKeyParams {
   /**
-   * Filter by one or more article Category IDs (UUIDs).
+   * Filter by article Category IDs (UUIDs).
    */
   category?: Array<string>;
 

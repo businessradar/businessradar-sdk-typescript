@@ -40,7 +40,7 @@ export namespace AnalyticsGetCountByDateResponse {
 
 export interface AnalyticsGetCountByDateParams {
   /**
-   * Filter by one or more article Category IDs (UUIDs).
+   * Filter by article Category IDs (UUIDs).
    */
   category?: Array<string>;
 
