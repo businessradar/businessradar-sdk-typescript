@@ -82,6 +82,32 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('createFeedback: only required params', async () => {
+    const responsePromise = client.companies.createFeedback({
+      company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      feedback_type: 'NOT_ENOUGH_NEWS',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createFeedback: required and optional params', async () => {
+    const response = await client.companies.createFeedback({
+      company: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      feedback_type: 'NOT_ENOUGH_NEWS',
+      comment: 'comment',
+      notification_email: 'dev@stainless.com',
+      trade_name: 'trade_name',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('createMissingCompanyInvestigation: only required params', async () => {
     const responsePromise = client.companies.createMissingCompanyInvestigation({
       country: 'AF',

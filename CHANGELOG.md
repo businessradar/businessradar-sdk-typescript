@@ -1,5 +1,57 @@
 # Changelog
 
+## 0.8.0 (2026-04-29)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** api update ([b5177f8](https://github.com/businessradar/businessradar-sdk-typescript/commit/b5177f8f6ee3597d108c72942fb8aab2d72850d6))
+* **api:** api update ([c7cf553](https://github.com/businessradar/businessradar-sdk-typescript/commit/c7cf5537887974ea5bdfd86925b3eefabbf5913f))
+* **api:** api update ([354a86b](https://github.com/businessradar/businessradar-sdk-typescript/commit/354a86be4fd279853b07b3b6d942b27185c3e6d3))
+* **api:** api update ([11ba4ad](https://github.com/businessradar/businessradar-sdk-typescript/commit/11ba4ad03504200603d639a6ffdede589f32c937))
+* **api:** api update ([6f82fdf](https://github.com/businessradar/businessradar-sdk-typescript/commit/6f82fdfc0d3f5fcc8b69c4b7cdee2b1d5a8594d6))
+* **api:** api update ([047dc50](https://github.com/businessradar/businessradar-sdk-typescript/commit/047dc50ccf4953b68508ea1803039709a99230a1))
+* **api:** manual updates ([a7da4b8](https://github.com/businessradar/businessradar-sdk-typescript/commit/a7da4b864d5f0f3ffc5035de2d8d3509d1bf89ab))
+* **api:** manual updates ([bddee22](https://github.com/businessradar/businessradar-sdk-typescript/commit/bddee229470a2158cb09fbee833934c5799a62ae))
+* support setting headers via env ([db70d4c](https://github.com/businessradar/businessradar-sdk-typescript/commit/db70d4c70344c1e1f36c4ee45a249bce228e2b78))
+
+
+### Bug Fixes
+
+* **internal:** gitignore generated `oidc` dir ([c1223ba](https://github.com/businessradar/businessradar-sdk-typescript/commit/c1223bad4f165904064e12384c982fe8421dece1))
+
+
+### Chores
+
+* **ci:** escape input path in publish-npm workflow ([80bb45a](https://github.com/businessradar/businessradar-sdk-typescript/commit/80bb45a662528143b3cbeb4011b3a17298dedf87))
+* **ci:** skip lint on metadata-only changes ([7ae1e46](https://github.com/businessradar/businessradar-sdk-typescript/commit/7ae1e46a0123c0d62193fdf0304cd7bb0a2fe563))
+* **format:** run eslint and prettier separately ([a08da25](https://github.com/businessradar/businessradar-sdk-typescript/commit/a08da25382108b09979424db038762d96bdcec07))
+* **formatter:** run prettier and eslint separately ([dc12ca7](https://github.com/businessradar/businessradar-sdk-typescript/commit/dc12ca7075401bdeb1e81744a247eddc54a311b8))
+* **internal:** codegen related update ([7900f6d](https://github.com/businessradar/businessradar-sdk-typescript/commit/7900f6d6806b59dc1d88e8c323c61541b76ee89d))
+* **internal:** codegen related update ([48319ae](https://github.com/businessradar/businessradar-sdk-typescript/commit/48319ae3dfb8edbd28657f917b4f6098ebd204cf))
+* **internal:** codegen related update ([34b09c8](https://github.com/businessradar/businessradar-sdk-typescript/commit/34b09c8cd99e440c1137b33636dcbc23a7f08cb8))
+* **internal:** fix MCP server import ordering ([ef14256](https://github.com/businessradar/businessradar-sdk-typescript/commit/ef14256911f7993b5a0068a079d33ab51f0e4f5f))
+* **internal:** fix MCP server TS errors that occur with required client options ([17cadd5](https://github.com/businessradar/businessradar-sdk-typescript/commit/17cadd5e839c5ed1c41d616e0c953c0e7c1b5e2e))
+* **internal:** improve local docs search for MCP servers ([72ebc01](https://github.com/businessradar/businessradar-sdk-typescript/commit/72ebc015bb178ea847ee13c298be280756d6ed1a))
+* **internal:** improve local docs search for MCP servers ([c799d0e](https://github.com/businessradar/businessradar-sdk-typescript/commit/c799d0e3447c7e86c7cd77c14b4df995fc64a836))
+* **internal:** make generated MCP servers compatible with Cloudflare worker environments ([20cc631](https://github.com/businessradar/businessradar-sdk-typescript/commit/20cc6316539342876c561c6e59bb93f52981eb01))
+* **internal:** more robust bootstrap script ([22ccf4c](https://github.com/businessradar/businessradar-sdk-typescript/commit/22ccf4c6951b944ee510bae493ea674a607870c4))
+* **internal:** show error causes in MCP servers when running in local mode ([df6439e](https://github.com/businessradar/businessradar-sdk-typescript/commit/df6439e987f7fa58928a31e3c700b0faceec4a9e))
+* **internal:** support custom-instructions-path flag in MCP servers ([7ebd54d](https://github.com/businessradar/businessradar-sdk-typescript/commit/7ebd54de7793e0e6909df137b2efc8ac3e130aa2))
+* **internal:** support local docs search in MCP servers ([947fc57](https://github.com/businessradar/businessradar-sdk-typescript/commit/947fc573bf0ec45d9380cec939a57a7c8b723700))
+* **internal:** support type annotations when running MCP in local execution mode ([d433cab](https://github.com/businessradar/businessradar-sdk-typescript/commit/d433cab618f8e4d472632d4c473077484e4184b8))
+* **internal:** support x-stainless-mcp-client-envs header in MCP servers ([678f6aa](https://github.com/businessradar/businessradar-sdk-typescript/commit/678f6aa7e22bdb18e0b0d9db10cf45b7972602d9))
+* **internal:** support x-stainless-mcp-client-permissions headers in MCP servers ([22cd7bd](https://github.com/businessradar/businessradar-sdk-typescript/commit/22cd7bd0ac28aae67d339d1f5457e1d8cb57c21b))
+* **internal:** tweak CI branches ([91de58e](https://github.com/businessradar/businessradar-sdk-typescript/commit/91de58ea757590553863532b8ad24e6572d17e09))
+* **internal:** update docs ordering ([d872fe1](https://github.com/businessradar/businessradar-sdk-typescript/commit/d872fe190fed7de9f984c8857a5d6a980443ff8f))
+* **internal:** update gitignore ([b46c5c1](https://github.com/businessradar/businessradar-sdk-typescript/commit/b46c5c1ed957f433dd985fe0e2e565bbcc9c644d))
+* **internal:** update lockfile ([bd260a2](https://github.com/businessradar/businessradar-sdk-typescript/commit/bd260a233c755731e5814af4ddb95e18fe81ea07))
+* **mcp-server:** add support for session id, forward client info ([e5bacbe](https://github.com/businessradar/businessradar-sdk-typescript/commit/e5bacbe7f01c3c887d73b57e3f09e10c356c1e5f))
+* **mcp-server:** increase local docs search result count from 5 to 10 ([6a8e0e1](https://github.com/businessradar/businessradar-sdk-typescript/commit/6a8e0e129aba84e726f36381b8c8dbcb36e121f5))
+* **mcp-server:** log client info ([1493db6](https://github.com/businessradar/businessradar-sdk-typescript/commit/1493db6664488802e49bc2042389f4486f0144c7))
+* restructure docs search code ([dc7aafa](https://github.com/businessradar/businessradar-sdk-typescript/commit/dc7aafaba4dd7bf18d9df86f05e8ec1d7d72c88d))
+
 ## 0.7.0 (2026-03-13)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.6.0...v0.7.0)

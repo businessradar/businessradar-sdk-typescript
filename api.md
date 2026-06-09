@@ -12,7 +12,6 @@ Types:
 
 - <code><a href="./src/resources/news/articles/articles.ts">Article</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">CategoryTree</a></code>
-- <code><a href="./src/resources/news/articles/articles.ts">FeedbackTypeEnum</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">LanguageEnum</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleCreateFeedbackResponse</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleListSavedArticleFiltersResponse</a></code>
@@ -59,6 +58,7 @@ Types:
 - <code><a href="./src/resources/companies.ts">RegistrationRequest</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyRetrieveResponse</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
+- <code><a href="./src/resources/companies.ts">CompanyCreateFeedbackResponse</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyCreateMissingCompanyInvestigationResponse</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListAttributeChangesResponse</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListMissingCompanyInvestigationsResponse</a></code>
@@ -69,6 +69,7 @@ Methods:
 - <code title="post /ext/v3/companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Registration</code>
 - <code title="get /ext/v3/companies/{external_id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(externalID) -> CompanyRetrieveResponse</code>
 - <code title="get /ext/v3/companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesNextKey</code>
+- <code title="post /ext/v3/companies/feedback/">client.companies.<a href="./src/resources/companies.ts">createFeedback</a>({ ...params }) -> CompanyCreateFeedbackResponse</code>
 - <code title="post /ext/v3/companies/investigations">client.companies.<a href="./src/resources/companies.ts">createMissingCompanyInvestigation</a>({ ...params }) -> CompanyCreateMissingCompanyInvestigationResponse</code>
 - <code title="get /ext/v3/companies/attribute_changes">client.companies.<a href="./src/resources/companies.ts">listAttributeChanges</a>({ ...params }) -> CompanyListAttributeChangesResponsesNextKey</code>
 - <code title="get /ext/v3/companies/investigations">client.companies.<a href="./src/resources/companies.ts">listMissingCompanyInvestigations</a>({ ...params }) -> CompanyListMissingCompanyInvestigationsResponsesNextKey</code>
@@ -82,12 +83,14 @@ Types:
 - <code><a href="./src/resources/compliance.ts">ComplianceCheckScoreEnum</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceCreateResponse</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceRetrieveResponse</a></code>
+- <code><a href="./src/resources/compliance.ts">ComplianceListResponse</a></code>
 - <code><a href="./src/resources/compliance.ts">ComplianceListResultsResponse</a></code>
 
 Methods:
 
 - <code title="post /ext/v3/compliance">client.compliance.<a href="./src/resources/compliance.ts">create</a>({ ...params }) -> ComplianceCreateResponse</code>
 - <code title="get /ext/v3/compliance/{external_id}">client.compliance.<a href="./src/resources/compliance.ts">retrieve</a>(externalID) -> ComplianceRetrieveResponse</code>
+- <code title="get /ext/v3/compliance">client.compliance.<a href="./src/resources/compliance.ts">list</a>({ ...params }) -> ComplianceListResponsesNextKey</code>
 - <code title="get /ext/v3/compliance/{external_id}/results">client.compliance.<a href="./src/resources/compliance.ts">listResults</a>(externalID, { ...params }) -> ComplianceListResultsResponsesNextKey</code>
 
 # Portfolios

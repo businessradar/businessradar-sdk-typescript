@@ -22,6 +22,8 @@ import { APIPromise } from './core/api-promise';
 import {
   BlankEnum,
   Companies,
+  CompanyCreateFeedbackParams,
+  CompanyCreateFeedbackResponse,
   CompanyCreateMissingCompanyInvestigationParams,
   CompanyCreateMissingCompanyInvestigationResponse,
   CompanyCreateParams,
@@ -46,6 +48,9 @@ import {
   ComplianceCheckScoreEnum,
   ComplianceCreateParams,
   ComplianceCreateResponse,
+  ComplianceListParams,
+  ComplianceListResponse,
+  ComplianceListResponsesNextKey,
   ComplianceListResultsParams,
   ComplianceListResultsResponse,
   ComplianceListResultsResponsesNextKey,
@@ -209,6 +214,18 @@ export class BusinessRadar {
     this.maxRetries = options.maxRetries ?? 2;
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
     this.#encoder = Opts.FallbackEncoder;
+
+    const customHeadersEnv = readEnv('BUSINESS_RADAR_CUSTOM_HEADERS');
+    if (customHeadersEnv) {
+      const parsed: Record<string, string> = {};
+      for (const line of customHeadersEnv.split('\n')) {
+        const colon = line.indexOf(':');
+        if (colon >= 0) {
+          parsed[line.substring(0, colon).trim()] = line.substring(colon + 1).trim();
+        }
+      }
+      options.defaultHeaders = { ...parsed, ...options.defaultHeaders };
+    }
 
     this._options = options;
 
@@ -809,6 +826,7 @@ export declare namespace BusinessRadar {
     type RegistrationRequest as RegistrationRequest,
     type CompanyRetrieveResponse as CompanyRetrieveResponse,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateFeedbackResponse as CompanyCreateFeedbackResponse,
     type CompanyCreateMissingCompanyInvestigationResponse as CompanyCreateMissingCompanyInvestigationResponse,
     type CompanyListAttributeChangesResponse as CompanyListAttributeChangesResponse,
     type CompanyListMissingCompanyInvestigationsResponse as CompanyListMissingCompanyInvestigationsResponse,
@@ -818,6 +836,7 @@ export declare namespace BusinessRadar {
     type CompanyListMissingCompanyInvestigationsResponsesNextKey as CompanyListMissingCompanyInvestigationsResponsesNextKey,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyListParams as CompanyListParams,
+    type CompanyCreateFeedbackParams as CompanyCreateFeedbackParams,
     type CompanyCreateMissingCompanyInvestigationParams as CompanyCreateMissingCompanyInvestigationParams,
     type CompanyListAttributeChangesParams as CompanyListAttributeChangesParams,
     type CompanyListMissingCompanyInvestigationsParams as CompanyListMissingCompanyInvestigationsParams,
@@ -828,9 +847,12 @@ export declare namespace BusinessRadar {
     type ComplianceCheckScoreEnum as ComplianceCheckScoreEnum,
     type ComplianceCreateResponse as ComplianceCreateResponse,
     type ComplianceRetrieveResponse as ComplianceRetrieveResponse,
+    type ComplianceListResponse as ComplianceListResponse,
     type ComplianceListResultsResponse as ComplianceListResultsResponse,
+    type ComplianceListResponsesNextKey as ComplianceListResponsesNextKey,
     type ComplianceListResultsResponsesNextKey as ComplianceListResultsResponsesNextKey,
     type ComplianceCreateParams as ComplianceCreateParams,
+    type ComplianceListParams as ComplianceListParams,
     type ComplianceListResultsParams as ComplianceListResultsParams,
   };
 

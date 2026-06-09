@@ -71,6 +71,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ext/v3/companies',
   },
   {
+    clientCallName: 'client.companies.createFeedback',
+    fullyQualifiedName: 'companies.createFeedback',
+    httpMethod: 'post',
+    httpPath: '/ext/v3/companies/feedback/',
+  },
+  {
     clientCallName: 'client.companies.createMissingCompanyInvestigation',
     fullyQualifiedName: 'companies.createMissingCompanyInvestigation',
     httpMethod: 'post',
@@ -111,6 +117,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'compliance.retrieve',
     httpMethod: 'get',
     httpPath: '/ext/v3/compliance/{external_id}',
+  },
+  {
+    clientCallName: 'client.compliance.list',
+    fullyQualifiedName: 'compliance.list',
+    httpMethod: 'get',
+    httpPath: '/ext/v3/compliance',
   },
   {
     clientCallName: 'client.compliance.listResults',
