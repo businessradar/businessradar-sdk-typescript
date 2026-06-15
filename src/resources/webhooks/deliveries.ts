@@ -10,7 +10,11 @@ import { path } from '../../internal/utils/path';
 
 export class Deliveries extends APIResource {
   /**
-   * List delivery history for a specific webhook.
+   * List deliveries newest first.
+   *
+   * The default cursor pagination ignores the queryset ordering and applies its own
+   * `ordering` attribute, so set it on the paginator here. The `-id` tiebreaker
+   * keeps cursor paging stable when deliveries share a `created_at` timestamp.
    */
   list(
     webhookExternalID: string,
