@@ -68,6 +68,20 @@ import {
   Portfolios,
   PortfoliosNextKey,
 } from './resources/portfolios/portfolios';
+import {
+  Webhook,
+  WebhookCreateParams,
+  WebhookDelivery,
+  WebhookDeliveryStatusEnum,
+  WebhookListParams,
+  WebhookPartialUpdateParams,
+  WebhookRegenerateSecretResponse,
+  WebhookSubscription,
+  WebhookSubscriptionRequest,
+  WebhookUpdateParams,
+  Webhooks,
+  WebhooksNextKey,
+} from './resources/webhooks/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -805,12 +819,14 @@ export class BusinessRadar {
   companies: API.Companies = new API.Companies(this);
   compliance: API.Compliance = new API.Compliance(this);
   portfolios: API.Portfolios = new API.Portfolios(this);
+  webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
 BusinessRadar.News = News;
 BusinessRadar.Companies = Companies;
 BusinessRadar.Compliance = Compliance;
 BusinessRadar.Portfolios = Portfolios;
+BusinessRadar.Webhooks = Webhooks;
 
 export declare namespace BusinessRadar {
   export type RequestOptions = Opts.RequestOptions;
@@ -869,6 +885,21 @@ export declare namespace BusinessRadar {
     type PortfoliosNextKey as PortfoliosNextKey,
     type PortfolioCreateParams as PortfolioCreateParams,
     type PortfolioListParams as PortfolioListParams,
+  };
+
+  export {
+    Webhooks as Webhooks,
+    type Webhook as Webhook,
+    type WebhookDelivery as WebhookDelivery,
+    type WebhookDeliveryStatusEnum as WebhookDeliveryStatusEnum,
+    type WebhookSubscription as WebhookSubscription,
+    type WebhookSubscriptionRequest as WebhookSubscriptionRequest,
+    type WebhookRegenerateSecretResponse as WebhookRegenerateSecretResponse,
+    type WebhooksNextKey as WebhooksNextKey,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
+    type WebhookPartialUpdateParams as WebhookPartialUpdateParams,
   };
 
   export type PortfolioCompanyDetailRequest = API.PortfolioCompanyDetailRequest;

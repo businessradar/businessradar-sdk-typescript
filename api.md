@@ -120,3 +120,40 @@ Methods:
 - <code title="post /ext/v3/portfolios/{portfolio_id}/companies">client.portfolios.companies.<a href="./src/resources/portfolios/companies.ts">create</a>(portfolioID, { ...params }) -> Registration</code>
 - <code title="get /ext/v3/portfolios/{portfolio_id}/companies">client.portfolios.companies.<a href="./src/resources/portfolios/companies.ts">list</a>(portfolioID, { ...params }) -> CompanyListResponsesNextKey</code>
 - <code title="delete /ext/v3/portfolios/{portfolio_id}/companies/{external_id}">client.portfolios.companies.<a href="./src/resources/portfolios/companies.ts">delete</a>(externalID, { ...params }) -> void</code>
+
+# Webhooks
+
+Types:
+
+- <code><a href="./src/resources/webhooks/webhooks.ts">Webhook</a></code>
+- <code><a href="./src/resources/webhooks/webhooks.ts">WebhookDelivery</a></code>
+- <code><a href="./src/resources/webhooks/webhooks.ts">WebhookDeliveryStatusEnum</a></code>
+- <code><a href="./src/resources/webhooks/webhooks.ts">WebhookSubscription</a></code>
+- <code><a href="./src/resources/webhooks/webhooks.ts">WebhookSubscriptionRequest</a></code>
+- <code><a href="./src/resources/webhooks/webhooks.ts">WebhookRegenerateSecretResponse</a></code>
+
+Methods:
+
+- <code title="post /ext/v3/webhooks/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">create</a>({ ...params }) -> Webhook</code>
+- <code title="get /ext/v3/webhooks/{webhook_external_id}/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">retrieve</a>(webhookExternalID) -> Webhook</code>
+- <code title="put /ext/v3/webhooks/{webhook_external_id}/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">update</a>(webhookExternalID, { ...params }) -> Webhook</code>
+- <code title="get /ext/v3/webhooks/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">list</a>({ ...params }) -> WebhooksNextKey</code>
+- <code title="delete /ext/v3/webhooks/{webhook_external_id}/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">delete</a>(webhookExternalID) -> void</code>
+- <code title="patch /ext/v3/webhooks/{webhook_external_id}/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">partialUpdate</a>(webhookExternalID, { ...params }) -> Webhook</code>
+- <code title="post /ext/v3/webhooks/{webhook_external_id}/regenerate_secret/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">regenerateSecret</a>(webhookExternalID) -> WebhookRegenerateSecretResponse</code>
+- <code title="get /ext/v3/webhooks/event_types/">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">retrieveEventTypes</a>() -> void</code>
+
+## Deliveries
+
+Methods:
+
+- <code title="get /ext/v3/webhooks/{webhook_external_id}/deliveries/">client.webhooks.deliveries.<a href="./src/resources/webhooks/deliveries.ts">list</a>(webhookExternalID, { ...params }) -> WebhookDeliveriesNextKey</code>
+- <code title="post /ext/v3/webhooks/{webhook_external_id}/deliveries/test/">client.webhooks.deliveries.<a href="./src/resources/webhooks/deliveries.ts">test</a>(webhookExternalID, { ...params }) -> WebhookDelivery</code>
+
+## Subscriptions
+
+Methods:
+
+- <code title="post /ext/v3/webhooks/{webhook_external_id}/subscriptions/">client.webhooks.subscriptions.<a href="./src/resources/webhooks/subscriptions.ts">create</a>(webhookExternalID, { ...params }) -> WebhookSubscription</code>
+- <code title="get /ext/v3/webhooks/{webhook_external_id}/subscriptions/">client.webhooks.subscriptions.<a href="./src/resources/webhooks/subscriptions.ts">list</a>(webhookExternalID, { ...params }) -> WebhookSubscriptionsNextKey</code>
+- <code title="delete /ext/v3/webhooks/{webhook_external_id}/subscriptions/{subscription_external_id}/">client.webhooks.subscriptions.<a href="./src/resources/webhooks/subscriptions.ts">delete</a>(subscriptionExternalID, { ...params }) -> void</code>

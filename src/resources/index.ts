@@ -50,3 +50,19 @@ export {
   type PortfolioListParams,
   type PortfoliosNextKey,
 } from './portfolios/portfolios';
+export {
+  Webhooks,
+  type Webhook,
+  type WebhookDelivery,
+  type WebhookDeliveryStatusEnum,
+  type WebhookSubscription,
+  type WebhookSubscriptionRequest,
+  type WebhookRegenerateSecretResponse,
+  type WebhookCreateParams,
+  type WebhookUpdateParams,
+  type WebhookListParams,
+  type WebhookPartialUpdateParams,
+  type WebhookDeliveriesNextKey,
+  type WebhookSubscriptionsNextKey,
+  type WebhooksNextKey,
+} from './webhooks/webhooks';
