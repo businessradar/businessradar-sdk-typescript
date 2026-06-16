@@ -34,7 +34,7 @@ describe('resource compliance', () => {
               name: 'x',
               aliases: ['x'],
               country: 'xx',
-              date_of_birth: '2019-12-27',
+              date_of_birth: 'date_of_birth',
               entity_type: 'individual',
               first_name: 'first_name',
               last_name: 'last_name',
