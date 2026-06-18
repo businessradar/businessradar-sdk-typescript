@@ -1010,6 +1010,10 @@ export namespace ComplianceCreateParams {
 
     country?: string | null;
 
+    /**
+     * Date of birth. Accepts a full or partial date in YYYY, YYYY-MM or YYYY-MM-DD
+     * format (e.g. when only the year is known).
+     */
     date_of_birth?: string | null;
 
     /**

@@ -10,7 +10,11 @@ import { path } from '../../internal/utils/path';
 
 export class Deliveries extends APIResource {
   /**
-   * List delivery history for a specific webhook.
+   * List deliveries newest first.
+   *
+   * The default cursor pagination ignores the queryset ordering and applies its own
+   * `ordering` attribute, so set it on the paginator here. The `-id` tiebreaker
+   * keeps cursor paging stable when deliveries share a `created_at` timestamp.
    */
   list(
     webhookExternalID: string,
@@ -45,6 +49,7 @@ export interface DeliveryTestParams {
   /**
    * - `compliance_check.status_changed` - Compliance Check Status Changed
    * - `compliance_check.status_completed` - Compliance Check Status Completed
+   * - `compliance_check.results.new` - Compliance Check Results New
    * - `company_registration.status_changed` - Company Registration Status Changed
    * - `company_registration.status_registered` - Company Registration Status
    *   Registered
@@ -52,6 +57,7 @@ export interface DeliveryTestParams {
   event_type?:
     | 'compliance_check.status_changed'
     | 'compliance_check.status_completed'
+    | 'compliance_check.results.new'
     | 'company_registration.status_changed'
     | 'company_registration.status_registered';
 }
