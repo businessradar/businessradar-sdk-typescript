@@ -281,6 +281,7 @@ export type BlankEnum = '';
  * - `KI` - Kiribati
  * - `KP` - Korea (the Democratic People's Republic of)
  * - `KR` - Korea (the Republic of)
+ * - `XK` - Kosovo
  * - `KW` - Kuwait
  * - `KG` - Kyrgyzstan
  * - `LA` - Lao People's Democratic Republic
@@ -532,6 +533,7 @@ export type CountryEnum =
   | 'KI'
   | 'KP'
   | 'KR'
+  | 'XK'
   | 'KW'
   | 'KG'
   | 'LA'
@@ -801,6 +803,7 @@ export interface PortfolioCompanyDetail {
    * - `KI` - Kiribati
    * - `KP` - Korea (the Democratic People's Republic of)
    * - `KR` - Korea (the Republic of)
+   * - `XK` - Kosovo
    * - `KW` - Kuwait
    * - `KG` - Kyrgyzstan
    * - `LA` - Lao People's Democratic Republic
@@ -1137,6 +1140,7 @@ export interface Registration {
     | 'KI'
     | 'KP'
     | 'KR'
+    | 'XK'
     | 'KW'
     | 'KG'
     | 'LA'
@@ -1417,6 +1421,7 @@ export interface RegistrationRequest {
     | 'KI'
     | 'KP'
     | 'KR'
+    | 'XK'
     | 'KW'
     | 'KG'
     | 'LA'
@@ -1693,6 +1698,7 @@ export interface CompanyRetrieveResponse {
    * - `KI` - Kiribati
    * - `KP` - Korea (the Democratic People's Republic of)
    * - `KR` - Korea (the Republic of)
+   * - `XK` - Kosovo
    * - `KW` - Kuwait
    * - `KG` - Kyrgyzstan
    * - `LA` - Lao People's Democratic Republic
@@ -2149,6 +2155,7 @@ export interface CompanyCreateMissingCompanyInvestigationResponse {
    * - `KI` - Kiribati
    * - `KP` - Korea (the Democratic People's Republic of)
    * - `KR` - Korea (the Republic of)
+   * - `XK` - Kosovo
    * - `KW` - Kuwait
    * - `KG` - Kyrgyzstan
    * - `LA` - Lao People's Democratic Republic
@@ -2488,6 +2495,7 @@ export interface CompanyListMissingCompanyInvestigationsResponse {
    * - `KI` - Kiribati
    * - `KP` - Korea (the Democratic People's Republic of)
    * - `KR` - Korea (the Republic of)
+   * - `XK` - Kosovo
    * - `KW` - Kuwait
    * - `KG` - Kyrgyzstan
    * - `LA` - Lao People's Democratic Republic
@@ -2809,6 +2817,7 @@ export interface CompanyRetrieveMissingCompanyInvestigationResponse {
    * - `KI` - Kiribati
    * - `KP` - Korea (the Democratic People's Republic of)
    * - `KR` - Korea (the Republic of)
+   * - `XK` - Kosovo
    * - `KW` - Kuwait
    * - `KG` - Kyrgyzstan
    * - `LA` - Lao People's Democratic Republic
@@ -3129,6 +3138,7 @@ export interface CompanyCreateParams {
     | 'KI'
     | 'KP'
     | 'KR'
+    | 'XK'
     | 'KW'
     | 'KG'
     | 'LA'
@@ -3464,6 +3474,7 @@ export interface CompanyCreateMissingCompanyInvestigationParams {
    * - `KI` - Kiribati
    * - `KP` - Korea (the Democratic People's Republic of)
    * - `KR` - Korea (the Republic of)
+   * - `XK` - Kosovo
    * - `KW` - Kuwait
    * - `KG` - Kyrgyzstan
    * - `LA` - Lao People's Democratic Republic
