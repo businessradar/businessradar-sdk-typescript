@@ -113,8 +113,9 @@ export interface ComplianceEntityRetrieve {
   /**
    * - `individual` - Individual
    * - `company` - Company
+   * - `vessel` - Vessel
    */
-  entity_type: 'individual' | 'company';
+  entity_type: 'individual' | 'company' | 'vessel';
 
   external_id: string;
 
@@ -1021,8 +1022,9 @@ export namespace ComplianceCreateParams {
     /**
      * - `individual` - Individual
      * - `company` - Company
+     * - `vessel` - Vessel
      */
-    entity_type?: 'individual' | 'company';
+    entity_type?: 'individual' | 'company' | 'vessel';
 
     first_name?: string | null;
 
