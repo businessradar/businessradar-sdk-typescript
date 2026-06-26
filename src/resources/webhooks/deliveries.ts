@@ -53,13 +53,15 @@ export interface DeliveryTestParams {
    * - `company_registration.status_changed` - Company Registration Status Changed
    * - `company_registration.status_registered` - Company Registration Status
    *   Registered
+   * - `company.updated` - Company Updated
    */
   event_type?:
     | 'compliance_check.status_changed'
     | 'compliance_check.status_completed'
     | 'compliance_check.results.new'
     | 'company_registration.status_changed'
-    | 'company_registration.status_registered';
+    | 'company_registration.status_registered'
+    | 'company.updated';
 }
 
 export declare namespace Deliveries {

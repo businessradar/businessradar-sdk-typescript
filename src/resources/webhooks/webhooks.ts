@@ -155,15 +155,23 @@ export interface WebhookSubscription {
    * - `company_registration.status_changed` - Company Registration Status Changed
    * - `company_registration.status_registered` - Company Registration Status
    *   Registered
+   * - `company.updated` - Company Updated
    */
   event_type:
     | 'compliance_check.status_changed'
     | 'compliance_check.status_completed'
     | 'compliance_check.results.new'
     | 'company_registration.status_changed'
-    | 'company_registration.status_registered';
+    | 'company_registration.status_registered'
+    | 'company.updated';
 
   external_id: string;
+
+  /**
+   * Portfolio external_id. Required for portfolio-scoped events (e.g.
+   * company.updated); must be omitted for all other events.
+   */
+  portfolio?: string | null;
 }
 
 export interface WebhookSubscriptionRequest {
@@ -174,13 +182,21 @@ export interface WebhookSubscriptionRequest {
    * - `company_registration.status_changed` - Company Registration Status Changed
    * - `company_registration.status_registered` - Company Registration Status
    *   Registered
+   * - `company.updated` - Company Updated
    */
   event_type:
     | 'compliance_check.status_changed'
     | 'compliance_check.status_completed'
     | 'compliance_check.results.new'
     | 'company_registration.status_changed'
-    | 'company_registration.status_registered';
+    | 'company_registration.status_registered'
+    | 'company.updated';
+
+  /**
+   * Portfolio external_id. Required for portfolio-scoped events (e.g.
+   * company.updated); must be omitted for all other events.
+   */
+  portfolio?: string | null;
 }
 
 export interface WebhookRegenerateSecretResponse {

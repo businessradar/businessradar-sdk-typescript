@@ -26,6 +26,7 @@ describe('resource subscriptions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.webhooks.subscriptions.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       event_type: 'compliance_check.status_changed',
+      portfolio: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 

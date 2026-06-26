@@ -26,7 +26,9 @@ describe('resource webhooks', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.webhooks.create({
-      subscriptions: [{ event_type: 'compliance_check.status_changed' }],
+      subscriptions: [
+        { event_type: 'compliance_check.status_changed', portfolio: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+      ],
       url: 'https://example.com',
       enabled: true,
     });
@@ -62,7 +64,9 @@ describe('resource webhooks', () => {
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.webhooks.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      subscriptions: [{ event_type: 'compliance_check.status_changed' }],
+      subscriptions: [
+        { event_type: 'compliance_check.status_changed', portfolio: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+      ],
       url: 'https://example.com',
       enabled: true,
     });
@@ -120,7 +124,12 @@ describe('resource webhooks', () => {
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
           enabled: true,
-          subscriptions: [{ event_type: 'compliance_check.status_changed' }],
+          subscriptions: [
+            {
+              event_type: 'compliance_check.status_changed',
+              portfolio: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            },
+          ],
           url: 'https://example.com',
         },
         { path: '/_stainless_unknown_path' },
