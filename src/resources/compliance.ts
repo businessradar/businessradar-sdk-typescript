@@ -123,6 +123,14 @@ export interface ComplianceEntityRetrieve {
 
   sanction_monitoring_enabled: boolean;
 
+  ubo: Ubo | null;
+
+  country?: string | null;
+
+  date_of_birth?: string | null;
+
+  gender?: 'male' | 'female' | '' | null;
+
   /**
    * - `on_hold` - On Hold
    * - `queued` - Queued
@@ -131,15 +139,7 @@ export interface ComplianceEntityRetrieve {
    * - `skipped` - Skipped
    * - `failed` - Failed
    */
-  status: 'on_hold' | 'queued' | 'in_progress' | 'completed' | 'skipped' | 'failed';
-
-  ubo: Ubo | null;
-
-  country?: string | null;
-
-  date_of_birth?: string | null;
-
-  gender?: 'male' | 'female' | '' | null;
+  status?: 'on_hold' | 'queued' | 'in_progress' | 'completed' | 'skipped' | 'failed';
 }
 
 export interface Ubo {
