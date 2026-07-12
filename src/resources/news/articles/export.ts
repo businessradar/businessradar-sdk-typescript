@@ -48,10 +48,19 @@ export interface ArticleExport {
    * - `COMPANIES` - Companies
    * - `REGISTRATIONS` - Registrations
    * - `COMPLIANCE` - Compliance
+   * - `COMPLIANCE_CHANGELOG` - Compliance changelog
    * - `BILLING` - Billing
    * - `KEY_EVENTS` - Key Events
    */
-  export_type: 'NEWS' | 'BINDER' | 'COMPANIES' | 'REGISTRATIONS' | 'COMPLIANCE' | 'BILLING' | 'KEY_EVENTS';
+  export_type:
+    | 'NEWS'
+    | 'BINDER'
+    | 'COMPANIES'
+    | 'REGISTRATIONS'
+    | 'COMPLIANCE'
+    | 'COMPLIANCE_CHANGELOG'
+    | 'BILLING'
+    | 'KEY_EVENTS';
 
   external_id: string;
 

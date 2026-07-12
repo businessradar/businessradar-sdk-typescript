@@ -676,6 +676,35 @@ export interface ComplianceListResultsResponse {
    */
   pep_tier?: 'TIER_1' | 'TIER_2' | 'TIER_3' | 'INTERNATIONAL_ORG' | '' | null;
 
+  /**
+   * Percentage of government ownership, when reported.
+   */
+  soe_ownership_percentage?: number | null;
+
+  /**
+   * Immediate parent or controlling government entity.
+   */
+  soe_parent_entity?: string | null;
+
+  /**
+   * Nature of this match's government relationship (ownership level or control
+   * without ownership).
+   *
+   * - `WHOLLY_OWNED` - Wholly state-owned
+   * - `MAJORITY_OWNED` - Majority state-owned
+   * - `MINORITY_OWNED` - Minority state-owned
+   * - `STATE_CONTROLLED` - State-controlled
+   * - `GOVERNMENT_LINKED` - Government-linked
+   */
+  soe_relationship_type?:
+    | 'WHOLLY_OWNED'
+    | 'MAJORITY_OWNED'
+    | 'MINORITY_OWNED'
+    | 'STATE_CONTROLLED'
+    | 'GOVERNMENT_LINKED'
+    | ''
+    | null;
+
   source_date?: string | null;
 
   source_name?: string | null;
