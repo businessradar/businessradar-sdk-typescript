@@ -1150,7 +1150,10 @@ export interface ComplianceListResultsParams extends NextKeyParams {
   entity?: string;
 
   /**
-   * Filter out automated false positive rated results
+   * Filter out automated false positive rated results. While a check is still
+   * running, only AI-validated results are returned, so the result count grows
+   * monotonically. Set to `false` to get the raw unfiltered set, including results
+   * that have not been validated yet.
    */
   exclude_automated_false_positives?: boolean;
 
