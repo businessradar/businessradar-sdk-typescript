@@ -697,6 +697,13 @@ export interface CompanyCreateParams {
   primary_name?: string | null;
 
   registration_number?: string | null;
+
+  /**
+   * With this option enabled a missing company investigation is submitted
+   * automatically when the registration cannot be identified, instead of failing
+   * with company not found.
+   */
+  submit_investigation_when_not_identified?: boolean;
 }
 
 export interface CompanyListParams extends NextKeyParams {}
