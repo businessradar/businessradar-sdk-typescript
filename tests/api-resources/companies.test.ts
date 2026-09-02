@@ -32,6 +32,7 @@ describe('resource companies', () => {
           duns_number: 'duns_number',
           primary_name: 'primary_name',
           registration_number: 'registration_number',
+          submit_investigation_when_not_identified: true,
         },
         { path: '/_stainless_unknown_path' },
       ),
