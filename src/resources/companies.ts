@@ -128,6 +128,41 @@ export class Companies extends APIResource {
   }
 
   /**
+   * ### Match a Single Company
+   *
+   * Resolve a set of identifying details to the single best-matching company.
+   *
+   * Provide as many identifying details as you have. At least one of `name`,
+   * `duns_number`, `registration_number` or `customer_reference` is required, and a
+   * `country` must accompany a `name` or `registration_number` lookup. More fields
+   * (address, telephone, url, email) yield a more confident match.
+   *
+   * Matching happens in two stages:
+   *
+   * - **Internal first.** A `customer_reference` mapped to one of your portfolio
+   *   companies, or a `duns_number` we already track, returns that Business Radar
+   *   company immediately — no Dun & Bradstreet lookup is performed.
+   *
+   * - **Dun & Bradstreet fallback.** Otherwise the details are matched against Dun &
+   *   Bradstreet's Cleanse Match API and the single best candidate is returned, even
+   *   if the company is not yet registered in Business Radar.
+   *
+   * The result is a company object. When the company is already tracked in Business
+   * Radar its `external_id` is populated; when it only exists at Dun & Bradstreet
+   * the `external_id` is `null` and you can register it via
+   * [POST /companies](/ext/v3/#/ext/ext_v3_companies_create) using the returned
+   * `duns_number`.
+   *
+   * Returns `404` when no company can be matched.
+   */
+  match(
+    query: CompanyMatchParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CompanyMatchResponse> {
+    return this._client.get('/ext/v3/companies/match/', { query, ...options });
+  }
+
+  /**
    * ### Retrieve Missing Company Investigation
    *
    * Fetch details about a specific missing company investigation using its
@@ -2701,6 +2736,50 @@ export interface CompanyListMissingCompanyInvestigationsResponse {
 }
 
 /**
+ * ### Universal Company Data
+ *
+ * Handles company data from both internal and external sources (e.g., Dun &
+ * Bradstreet). Provides a unified representation of a company.
+ *
+ * - **DUNS Number**: Unique 9-digit identifier. - **External ID**: Internal unique
+ *   identifier if the company is registered. - **Industry Codes**: List of
+ *   industry classifications.
+ */
+export interface CompanyMatchResponse {
+  address_place: string;
+
+  address_postal: string;
+
+  address_region: string;
+
+  address_street: string;
+
+  country: string;
+
+  duns_number: string;
+
+  external_id: string | null;
+
+  industry_codes: Array<CompanyMatchResponse.IndustryCode>;
+
+  name: string;
+
+  social_logo: string | null;
+
+  website_icon_url: string | null;
+
+  is_out_of_business?: boolean | null;
+}
+
+export namespace CompanyMatchResponse {
+  export interface IndustryCode {
+    code: string;
+
+    description: string;
+  }
+}
+
+/**
  * ### Missing Company Investigation
  *
  * Used to request and track investigations for companies not currently in the
@@ -3689,6 +3768,88 @@ export interface CompanyListAttributeChangesParams extends NextKeyParams {
 
 export interface CompanyListMissingCompanyInvestigationsParams extends NextKeyParams {}
 
+export interface CompanyMatchParams {
+  /**
+   * County.
+   */
+  address_county?: string;
+
+  /**
+   * City / locality.
+   */
+  address_locality?: string;
+
+  /**
+   * Region / state / province.
+   */
+  address_region?: string;
+
+  /**
+   * Minimum Dun & Bradstreet confidence code (1-10).
+   */
+  confidence_lower_level_threshold_value?: number;
+
+  /**
+   * ISO 2-letter Country Code (e.g., NL, US).
+   */
+  country?: string;
+
+  /**
+   * Your own reference linking to a tracked company.
+   */
+  customer_reference?: string;
+
+  /**
+   * 9-digit Dun And Bradstreet Number to match.
+   */
+  duns_number?: string;
+
+  /**
+   * Company email address.
+   */
+  email?: string;
+
+  /**
+   * Company name to match.
+   */
+  name?: string;
+
+  /**
+   * Postal / ZIP code.
+   */
+  postal_code?: string;
+
+  /**
+   * Local Registration Number.
+   */
+  registration_number?: string;
+
+  /**
+   * Type of the registration number.
+   */
+  registration_number_type?: string;
+
+  /**
+   * First line of the street address.
+   */
+  street_address_line1?: string;
+
+  /**
+   * Second line of the street address.
+   */
+  street_address_line2?: string;
+
+  /**
+   * Telephone number.
+   */
+  telephone_number?: string;
+
+  /**
+   * Company website URL.
+   */
+  url?: string;
+}
+
 export declare namespace Companies {
   export {
     type BlankEnum as BlankEnum,
@@ -3703,6 +3864,7 @@ export declare namespace Companies {
     type CompanyCreateMissingCompanyInvestigationResponse as CompanyCreateMissingCompanyInvestigationResponse,
     type CompanyListAttributeChangesResponse as CompanyListAttributeChangesResponse,
     type CompanyListMissingCompanyInvestigationsResponse as CompanyListMissingCompanyInvestigationsResponse,
+    type CompanyMatchResponse as CompanyMatchResponse,
     type CompanyRetrieveMissingCompanyInvestigationResponse as CompanyRetrieveMissingCompanyInvestigationResponse,
     type CompanyListResponsesNextKey as CompanyListResponsesNextKey,
     type CompanyListAttributeChangesResponsesNextKey as CompanyListAttributeChangesResponsesNextKey,
@@ -3713,5 +3875,6 @@ export declare namespace Companies {
     type CompanyCreateMissingCompanyInvestigationParams as CompanyCreateMissingCompanyInvestigationParams,
     type CompanyListAttributeChangesParams as CompanyListAttributeChangesParams,
     type CompanyListMissingCompanyInvestigationsParams as CompanyListMissingCompanyInvestigationsParams,
+    type CompanyMatchParams as CompanyMatchParams,
   };
 }

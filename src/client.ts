@@ -36,6 +36,8 @@ import {
   CompanyListParams,
   CompanyListResponse,
   CompanyListResponsesNextKey,
+  CompanyMatchParams,
+  CompanyMatchResponse,
   CompanyRetrieveMissingCompanyInvestigationResponse,
   CompanyRetrieveResponse,
   CountryEnum,
@@ -858,6 +860,7 @@ export declare namespace BusinessRadar {
     type CompanyCreateMissingCompanyInvestigationResponse as CompanyCreateMissingCompanyInvestigationResponse,
     type CompanyListAttributeChangesResponse as CompanyListAttributeChangesResponse,
     type CompanyListMissingCompanyInvestigationsResponse as CompanyListMissingCompanyInvestigationsResponse,
+    type CompanyMatchResponse as CompanyMatchResponse,
     type CompanyRetrieveMissingCompanyInvestigationResponse as CompanyRetrieveMissingCompanyInvestigationResponse,
     type CompanyListResponsesNextKey as CompanyListResponsesNextKey,
     type CompanyListAttributeChangesResponsesNextKey as CompanyListAttributeChangesResponsesNextKey,
@@ -868,6 +871,7 @@ export declare namespace BusinessRadar {
     type CompanyCreateMissingCompanyInvestigationParams as CompanyCreateMissingCompanyInvestigationParams,
     type CompanyListAttributeChangesParams as CompanyListAttributeChangesParams,
     type CompanyListMissingCompanyInvestigationsParams as CompanyListMissingCompanyInvestigationsParams,
+    type CompanyMatchParams as CompanyMatchParams,
   };
 
   export {
