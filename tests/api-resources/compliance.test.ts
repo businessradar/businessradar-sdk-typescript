@@ -124,6 +124,7 @@ describe('resource compliance', () => {
           order: 'asc',
           result_type: 'adverse_media',
           sorting: 'confidence',
+          source_type: 'enforcement',
         },
         { path: '/_stainless_unknown_path' },
       ),
