@@ -709,6 +709,18 @@ export interface ComplianceListResultsResponse {
 
   source_name?: string | null;
 
+  /**
+   * - `news` - News
+   * - `icij` - ICIJ
+   * - `enforcement` - Enforcement
+   */
+  source_type?: 'news' | 'icij' | 'enforcement';
+
+  /**
+   * Generic entity_document/v1 payload (enforcement/sanctions listings).
+   */
+  structured?: unknown;
+
   text?: string | null;
 
   text_en?: string | null;
@@ -1176,6 +1188,11 @@ export interface ComplianceListResultsParams extends NextKeyParams {
    * Sorting field
    */
   sorting?: 'confidence' | 'created_at' | 'source_date';
+
+  /**
+   * Filter adverse media results by sub-source (news / icij / enforcement)
+   */
+  source_type?: 'enforcement' | 'icij' | 'news';
 }
 
 export declare namespace Compliance {
