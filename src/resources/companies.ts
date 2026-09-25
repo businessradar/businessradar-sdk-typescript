@@ -2020,6 +2020,8 @@ export interface CompanyListResponse {
   website_icon_url: string | null;
 
   is_out_of_business?: boolean | null;
+
+  ticker_symbol?: string | null;
 }
 
 export namespace CompanyListResponse {
@@ -2769,6 +2771,8 @@ export interface CompanyMatchResponse {
   website_icon_url: string | null;
 
   is_out_of_business?: boolean | null;
+
+  ticker_symbol?: string | null;
 }
 
 export namespace CompanyMatchResponse {
@@ -3393,6 +3397,11 @@ export interface CompanyListParams extends NextKeyParams {
    * 9-digit Dun And Bradstreet Number (can be multiple)
    */
   duns_number?: Array<string>;
+
+  /**
+   * Filter on publicly listed companies (has a `ticker_symbol`)
+   */
+  is_listed?: boolean;
 
   /**
    * Filter companies belonging to specific Portfolio IDs (UUID)

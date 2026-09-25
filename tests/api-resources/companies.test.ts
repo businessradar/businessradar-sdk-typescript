@@ -71,6 +71,7 @@ describe('resource companies', () => {
         {
           country: ['string'],
           duns_number: ['string'],
+          is_listed: true,
           next_key: 'next_key',
           portfolio_id: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
           query: 'query',
