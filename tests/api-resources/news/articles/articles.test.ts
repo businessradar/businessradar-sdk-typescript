@@ -40,6 +40,7 @@ describe('resource articles', () => {
           min_creation_date: '2019-12-27T18:11:19.117Z',
           min_publication_date: '2019-12-27T18:11:19.117Z',
           next_key: 'next_key',
+          page_size: 0,
           portfolio_id: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
           query: 'query',
           registration_number: ['string'],
@@ -94,7 +95,7 @@ describe('resource articles', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.news.articles.listSavedArticleFilters(
-        { next_key: 'next_key' },
+        { next_key: 'next_key', page_size: 0 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(BusinessRadar.NotFoundError);

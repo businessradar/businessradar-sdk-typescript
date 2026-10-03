@@ -43,7 +43,12 @@ export class Deliveries extends APIResource {
   }
 }
 
-export interface DeliveryListParams extends NextKeyParams {}
+export interface DeliveryListParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 export interface DeliveryTestParams {
   /**

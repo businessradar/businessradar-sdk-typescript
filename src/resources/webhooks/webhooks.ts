@@ -219,7 +219,12 @@ export interface WebhookUpdateParams {
   enabled?: boolean;
 }
 
-export interface WebhookListParams extends NextKeyParams {}
+export interface WebhookListParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 export interface WebhookPartialUpdateParams {
   enabled?: boolean;

@@ -1129,6 +1129,11 @@ export interface ComplianceListParams extends NextKeyParams {
   order?: 'asc' | 'desc';
 
   /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+
+  /**
    * Filter checks with results changed at or after this time.
    */
   results_changed_at__gte?: string;
@@ -1178,6 +1183,11 @@ export interface ComplianceListResultsParams extends NextKeyParams {
    * Sorting order
    */
   order?: 'asc' | 'desc';
+
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
 
   /**
    * Filter by result type

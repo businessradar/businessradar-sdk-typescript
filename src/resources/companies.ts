@@ -42,14 +42,25 @@ export class Companies extends APIResource {
    *
    * Search for companies across internal and external databases.
    *
-   * - If `query` and an optional `country` are provided, the search is primarily
-   *   conducted via Dun & Bradstreet.
+   * - A nonempty `query` with at most one `country` uses Dun & Bradstreet unless a
+   *   website domain or additional filters require internal search.
    *
-   * - If other filters (like `portfolio_id`) are provided, the search is limited to
-   *   our internal database.
+   * - A resolved website domain, multiple countries, no query, or additional filters
+   *   (like `portfolio_id`) select internal search. `registration_number`,
+   *   `include_annotations`, `page_size`, and `next_key` do not change routing.
    *
    * The results include an `external_id` if the company is already registered in
    * Business Radar.
+   *
+   * `page_size` defaults to 50 and accepts integers from 1 through 100; invalid
+   * sizes or filters raise `ValidationError` (400). Internal results support
+   * `next_key` continuation; undecodable cursors raise `ValidationError`. Dun &
+   * Bradstreet requests are capped at 50, ignore `next_key`, and return a null
+   * cursor with `total_results` equal to the returned result count.
+   *
+   * Dun & Bradstreet 404 responses become empty results. Its throttling,
+   * invalid-input, and connection exceptions propagate, as do internal search
+   * errors. Website parsing failures fall back to the supplied URL unchanged.
    */
   list(
     query: CompanyListParams | null | undefined = {},
@@ -3404,6 +3415,13 @@ export interface CompanyListParams extends NextKeyParams {
   is_listed?: boolean;
 
   /**
+   * Number of results per page. Default 50, max 100. Dun & Bradstreet results (no
+   * other filters besides `query`/`country`) are capped at 50 and do not support
+   * continuation.
+   */
+  page_size?: number;
+
+  /**
    * Filter companies belonging to specific Portfolio IDs (UUID)
    */
   portfolio_id?: Array<string>;
@@ -3773,9 +3791,19 @@ export interface CompanyListAttributeChangesParams extends NextKeyParams {
    * Filter updates created at or after this time.
    */
   min_created_at?: string;
+
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
 }
 
-export interface CompanyListMissingCompanyInvestigationsParams extends NextKeyParams {}
+export interface CompanyListMissingCompanyInvestigationsParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 export interface CompanyMatchParams {
   /**

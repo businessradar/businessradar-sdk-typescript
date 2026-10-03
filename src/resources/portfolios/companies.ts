@@ -706,7 +706,12 @@ export interface CompanyCreateParams {
   submit_investigation_when_not_identified?: boolean;
 }
 
-export interface CompanyListParams extends NextKeyParams {}
+export interface CompanyListParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 export interface CompanyDeleteParams {
   portfolio_id: string;
