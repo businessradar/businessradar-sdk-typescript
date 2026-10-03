@@ -88,7 +88,7 @@ describe('resource webhooks', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.list({ next_key: 'next_key' }, { path: '/_stainless_unknown_path' }),
+      client.webhooks.list({ next_key: 'next_key', page_size: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(BusinessRadar.NotFoundError);
   });
 

@@ -28,6 +28,15 @@ export class Articles extends APIResource {
    *
    * Retrieve articles matching the specified search criteria. Advanced queries and
    * incremental checks (using publication/creation dates) are supported.
+   *
+   * Return `results`, `total_results`, and a `next_key` for continuation.
+   * `page_size` defaults to 30 and accepts integers from 1 through 100. Invalid page
+   * sizes, filters, or undecodable cursors raise `ValidationError` (400).
+   * Company-specific filters also enforce available company credits, raising
+   * `CreditsExhausted` (403) when blocked.
+   *
+   * Query parse and tokenizer errors from OpenSearch become
+   * `InvalidArticleFiltersError` (400); other search errors propagate.
    */
   list(
     query: ArticleListParams | null | undefined = {},
@@ -1126,6 +1135,11 @@ export interface ArticleListParams extends NextKeyParams {
   min_publication_date?: string;
 
   /**
+   * Number of results per page. Default 30, max 100.
+   */
+  page_size?: number;
+
+  /**
    * Filter articles related to companies in specific Portfolios (UUIDs).
    */
   portfolio_id?: Array<string>;
@@ -1185,7 +1199,12 @@ export interface ArticleCreateFeedbackParams {
   feedback_type?: 'false_positive' | 'no_risk' | 'risk_confirmed';
 }
 
-export interface ArticleListSavedArticleFiltersParams extends NextKeyParams {}
+export interface ArticleListSavedArticleFiltersParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 Articles.Analytics = Analytics;
 Articles.Export = Export;

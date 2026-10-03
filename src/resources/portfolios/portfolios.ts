@@ -97,7 +97,12 @@ export interface PortfolioCreateParams {
   default_permission?: 'view_only' | 'write' | 'admin' | 'owner' | '' | null;
 }
 
-export interface PortfolioListParams extends NextKeyParams {}
+export interface PortfolioListParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 Portfolios.Companies = Companies;
 

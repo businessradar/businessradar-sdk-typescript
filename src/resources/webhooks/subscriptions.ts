@@ -80,7 +80,12 @@ export interface SubscriptionCreateParams {
   portfolio?: string | null;
 }
 
-export interface SubscriptionListParams extends NextKeyParams {}
+export interface SubscriptionListParams extends NextKeyParams {
+  /**
+   * Number of results per page. Default 50, max 100.
+   */
+  page_size?: number;
+}
 
 export interface SubscriptionDeleteParams {
   webhook_external_id: string;

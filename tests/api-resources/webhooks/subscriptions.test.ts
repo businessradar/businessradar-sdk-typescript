@@ -48,7 +48,7 @@ describe('resource subscriptions', () => {
     await expect(
       client.webhooks.subscriptions.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { next_key: 'next_key' },
+        { next_key: 'next_key', page_size: 0 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(BusinessRadar.NotFoundError);

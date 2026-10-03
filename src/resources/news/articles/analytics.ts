@@ -111,6 +111,11 @@ export interface AnalyticsGetCountByDateParams {
   min_publication_date?: string;
 
   /**
+   * Number of results per page. Default 30, max 100.
+   */
+  page_size?: number;
+
+  /**
    * Filter articles related to companies in specific Portfolios (UUIDs).
    */
   portfolio_id?: Array<string>;
