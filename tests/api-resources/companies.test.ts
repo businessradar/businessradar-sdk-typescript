@@ -72,6 +72,10 @@ describe('resource companies', () => {
           country: ['string'],
           duns_number: ['string'],
           is_listed: true,
+          max_created_at: '2019-12-27T18:11:19.117Z',
+          max_updated_at: '2019-12-27T18:11:19.117Z',
+          min_created_at: '2019-12-27T18:11:19.117Z',
+          min_updated_at: '2019-12-27T18:11:19.117Z',
           next_key: 'next_key',
           page_size: 0,
           portfolio_id: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
@@ -190,46 +194,6 @@ describe('resource companies', () => {
     await expect(
       client.companies.listMissingCompanyInvestigations(
         { next_key: 'next_key', page_size: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(BusinessRadar.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('match', async () => {
-    const responsePromise = client.companies.match();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('match: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.companies.match(
-        {
-          address_county: 'x',
-          address_locality: 'x',
-          address_region: 'x',
-          confidence_lower_level_threshold_value: 0,
-          country: 'x',
-          customer_reference: 'x',
-          duns_number: 'x',
-          email: 'x',
-          name: 'x',
-          postal_code: 'x',
-          registration_number: 'x',
-          registration_number_type: 'x',
-          street_address_line1: 'x',
-          street_address_line2: 'x',
-          telephone_number: 'x',
-          url: 'x',
-        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(BusinessRadar.NotFoundError);

@@ -61,6 +61,11 @@ export class Companies extends APIResource {
    * Dun & Bradstreet 404 responses become empty results. Its throttling,
    * invalid-input, and connection exceptions propagate, as do internal search
    * errors. Website parsing failures fall back to the supplied URL unchanged.
+   *
+   * `min_created_at`, `max_created_at`, `min_updated_at` and `max_updated_at` filter
+   * on when a company was added or last updated (inclusive, ISO 8601, UTC). They use
+   * internal search, sort results by that timestamp, and cannot be combined with
+   * `query`.
    */
   list(
     query: CompanyListParams | null | undefined = {},
@@ -3413,6 +3418,30 @@ export interface CompanyListParams extends NextKeyParams {
    * Filter on publicly listed companies (has a `ticker_symbol`)
    */
   is_listed?: boolean;
+
+  /**
+   * Companies added at or before this time (inclusive). ISO 8601, UTC when no offset
+   * is given, millisecond precision. Cannot be combined with `query`.
+   */
+  max_created_at?: string;
+
+  /**
+   * Companies updated at or before this time (inclusive). ISO 8601, UTC when no
+   * offset is given, millisecond precision. Cannot be combined with `query`.
+   */
+  max_updated_at?: string;
+
+  /**
+   * Companies added at or after this time (inclusive). ISO 8601, UTC when no offset
+   * is given, millisecond precision. Cannot be combined with `query`.
+   */
+  min_created_at?: string;
+
+  /**
+   * Companies updated at or after this time (inclusive). ISO 8601, UTC when no
+   * offset is given, millisecond precision. Cannot be combined with `query`.
+   */
+  min_updated_at?: string;
 
   /**
    * Number of results per page. Default 50, max 100. Dun & Bradstreet results (no
