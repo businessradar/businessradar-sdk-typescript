@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.9.0...v0.10.0) (2026-10-15)
+
+
+### Features
+
+* sync API from production ([#38](https://github.com/businessradar/businessradar-sdk-typescript/issues/38)) ([753acfb](https://github.com/businessradar/businessradar-sdk-typescript/commit/753acfb3df2f2d693bbe2db9152fe54235b631fc))
+* sync API from production ([#40](https://github.com/businessradar/businessradar-sdk-typescript/issues/40)) ([ac94097](https://github.com/businessradar/businessradar-sdk-typescript/commit/ac94097123285ff0d307820857174d7345946755))
+
 ## [0.9.0](https://github.com/businessradar/businessradar-sdk-typescript/compare/v0.8.0...v0.9.0) (2026-10-05)
 
 
