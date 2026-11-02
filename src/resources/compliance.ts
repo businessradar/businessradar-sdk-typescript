@@ -108,6 +108,11 @@ export interface ComplianceEntityRetrieve {
 
   aliases: Array<string>;
 
+  /**
+   * Custom Serializer for the Director Model.
+   */
+  director: ComplianceEntityRetrieve.Director | null;
+
   entity_role: string;
 
   /**
@@ -140,6 +145,66 @@ export interface ComplianceEntityRetrieve {
    * - `failed` - Failed
    */
   status?: 'on_hold' | 'queued' | 'in_progress' | 'completed' | 'skipped' | 'failed';
+}
+
+export namespace ComplianceEntityRetrieve {
+  /**
+   * Custom Serializer for the Director Model.
+   */
+  export interface Director {
+    created_at: string;
+
+    full_name: string;
+
+    management_responsibilities: Array<Director.ManagementResponsibility>;
+
+    /**
+     * Get Source Name.
+     */
+    source_name: string;
+
+    updated_at: string;
+
+    external_id?: string;
+
+    first_name?: string | null;
+
+    gender?: 'M' | 'F' | '' | null;
+
+    /**
+     * Indicate if the director is no longer active for this company.
+     */
+    inactive_since?: string | null;
+
+    is_most_senior?: boolean;
+
+    last_name?: string | null;
+
+    middle_name?: string | null;
+
+    /**
+     * - `BOARD` - Board
+     * - `MANAGEMENT` - Management
+     * - `OFFICER` - Officer / Signatory
+     * - `OTHER` - Other
+     */
+    role_group?: 'BOARD' | 'MANAGEMENT' | 'OFFICER' | 'OTHER';
+
+    /**
+     * Function title within this organization.
+     */
+    title?: string | null;
+
+    url?: string | null;
+  }
+
+  export namespace Director {
+    export interface ManagementResponsibility {
+      description: string;
+
+      mrcCode: string;
+    }
+  }
 }
 
 export interface Ubo {
@@ -1032,6 +1097,13 @@ export interface ComplianceCreateParams {
   adverse_media_monitoring_enabled?: boolean;
 
   company_id?: string | null;
+
+  /**
+   * Providing director role groups enables director screening. Null selects all
+   * roles; an empty list selects none. Cannot be combined with
+   * directors_screening_enabled=false.
+   */
+  director_role_groups?: Array<'BOARD' | 'MANAGEMENT' | 'OFFICER' | 'OTHER'> | null;
 
   /**
    * If directors should be screened.

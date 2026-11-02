@@ -28,6 +28,7 @@ describe('resource compliance', () => {
         {
           adverse_media_monitoring_enabled: true,
           company_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          director_role_groups: ['BOARD'],
           directors_screening_enabled: true,
           entities: [
             {
