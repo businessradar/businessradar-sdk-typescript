@@ -121,6 +121,7 @@ describe('resource compliance', () => {
         {
           entity: 'entity',
           exclude_automated_false_positives: true,
+          is_cluster_head: true,
           min_confidence: 0,
           next_key: 'next_key',
           order: 'asc',
