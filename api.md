@@ -16,6 +16,7 @@ Types:
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleCreateFeedbackResponse</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleListSavedArticleFiltersResponse</a></code>
 - <code><a href="./src/resources/news/articles/articles.ts">ArticleRetrieveRelatedResponse</a></code>
+- <code><a href="./src/resources/news/articles/articles.ts">ArticleRetrieveSavedArticleFilterResponse</a></code>
 
 Methods:
 
@@ -23,6 +24,7 @@ Methods:
 - <code title="post /ext/v3/articles/feedback/">client.news.articles.<a href="./src/resources/news/articles/articles.ts">createFeedback</a>({ ...params }) -> ArticleCreateFeedbackResponse</code>
 - <code title="get /ext/v3/saved_article_filters">client.news.articles.<a href="./src/resources/news/articles/articles.ts">listSavedArticleFilters</a>({ ...params }) -> ArticleListSavedArticleFiltersResponsesNextKey</code>
 - <code title="get /ext/v3/articles/{article_id}/related/">client.news.articles.<a href="./src/resources/news/articles/articles.ts">retrieveRelated</a>(articleID) -> ArticleRetrieveRelatedResponse</code>
+- <code title="get /ext/v3/saved_article_filters/{external_id}">client.news.articles.<a href="./src/resources/news/articles/articles.ts">retrieveSavedArticleFilter</a>(externalID) -> ArticleRetrieveSavedArticleFilterResponse</code>
 
 ### Analytics
 
