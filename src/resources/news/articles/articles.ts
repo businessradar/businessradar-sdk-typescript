@@ -85,6 +85,19 @@ export class Articles extends APIResource {
   retrieveRelated(articleID: string, options?: RequestOptions): APIPromise<ArticleRetrieveRelatedResponse> {
     return this._client.get(path`/ext/v3/articles/${articleID}/related/`, options);
   }
+
+  /**
+   * ### Saved Article Filter
+   *
+   * Retrieve a saved article filter of the current profile, including the filters
+   * applied by `saved_article_filter_id` on article search requests.
+   */
+  retrieveSavedArticleFilter(
+    externalID: string,
+    options?: RequestOptions,
+  ): APIPromise<ArticleRetrieveSavedArticleFilterResponse> {
+    return this._client.get(path`/ext/v3/saved_article_filters/${externalID}`, options);
+  }
 }
 
 export type ArticlesNextKey = NextKey<Article>;
@@ -1067,6 +1080,27 @@ export namespace ArticleRetrieveRelatedResponse {
   }
 }
 
+/**
+ * ### Saved Article Filter Detail
+ *
+ * A saved article filter with the filters it applies, in the same format as the
+ * `filters` of an article export. Article search parameters such as `category`
+ * replace the matching saved filter values.
+ */
+export interface ArticleRetrieveSavedArticleFilterResponse {
+  external_id: string;
+
+  /**
+   * ### Article Filters
+   *
+   * Used to validate and process filters for article searches. Supports filtering by
+   * query text, countries, languages, specific companies (DUNS), and portfolios.
+   */
+  filters: ExportAPI.ArticleFilters;
+
+  name: string;
+}
+
 export interface ArticleListParams extends NextKeyParams {
   /**
    * Filter by article Category IDs (UUIDs).
@@ -1217,6 +1251,7 @@ export declare namespace Articles {
     type ArticleCreateFeedbackResponse as ArticleCreateFeedbackResponse,
     type ArticleListSavedArticleFiltersResponse as ArticleListSavedArticleFiltersResponse,
     type ArticleRetrieveRelatedResponse as ArticleRetrieveRelatedResponse,
+    type ArticleRetrieveSavedArticleFilterResponse as ArticleRetrieveSavedArticleFilterResponse,
     type ArticlesNextKey as ArticlesNextKey,
     type ArticleListSavedArticleFiltersResponsesNextKey as ArticleListSavedArticleFiltersResponsesNextKey,
     type ArticleListParams as ArticleListParams,

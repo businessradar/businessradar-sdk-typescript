@@ -13,6 +13,7 @@ export {
   type ArticleCreateFeedbackResponse,
   type ArticleListSavedArticleFiltersResponse,
   type ArticleRetrieveRelatedResponse,
+  type ArticleRetrieveSavedArticleFilterResponse,
   type ArticleListParams,
   type ArticleCreateFeedbackParams,
   type ArticleListSavedArticleFiltersParams,
