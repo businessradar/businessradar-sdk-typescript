@@ -601,11 +601,26 @@ export interface ComplianceListResultsResponse {
 
   automated_false_positive_rating_comments: string | null;
 
+  /**
+   * Opaque group key from the Compliance API: results sharing the same cluster_id
+   * form one best-effort semantic similarity group within the same screened subject.
+   * Not an identifier of any other result (not an external_id). Null when ungrouped
+   * or not adverse media.
+   */
+  cluster_id: string | null;
+
   created_at: string;
 
   entity: ComplianceEntityRetrieve;
 
   external_id: string;
+
+  /**
+   * True for the one representative result per similarity group, plus all ungrouped
+   * results. `true` gives a condensed, deduplicated reading view, not a complete
+   * screening set — use the unfiltered list for screening.
+   */
+  is_cluster_head: boolean;
 
   name: string;
 
@@ -1751,6 +1766,13 @@ export interface ComplianceListResultsParams extends NextKeyParams {
    * that have not been validated yet.
    */
   exclude_automated_false_positives?: boolean;
+
+  /**
+   * Filter by whether a result is the one representative of its similarity group,
+   * plus all ungrouped results. `true` gives a condensed, deduplicated reading view,
+   * not a complete screening set — use the unfiltered list for screening.
+   */
+  is_cluster_head?: boolean;
 
   /**
    * Filter by minimum confidence score (0.0 - 1.0)
