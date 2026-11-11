@@ -35,8 +35,8 @@ export class Articles extends APIResource {
    * Company-specific filters also enforce available company credits, raising
    * `CreditsExhausted` (403) when blocked.
    *
-   * Query parse and tokenizer errors from OpenSearch become
-   * `InvalidArticleFiltersError` (400); other search errors propagate.
+   * Query parse and tokenizer errors from OpenSearch become a `ValidationError`
+   * (400); other search errors propagate.
    */
   list(
     query: ArticleListParams | null | undefined = {},
