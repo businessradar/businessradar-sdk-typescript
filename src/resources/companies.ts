@@ -2286,7 +2286,7 @@ export interface CompanyListResponse {
 
   country: string;
 
-  duns_number: string;
+  duns_number: string | null;
 
   external_id: string | null;
 
@@ -2299,6 +2299,13 @@ export interface CompanyListResponse {
   website_icon_url: string | null;
 
   is_out_of_business?: boolean | null;
+
+  /**
+   * Reference number for this company. Always present. Pass it as
+   * `registration_candidate_id` to POST /companies or POST
+   * /portfolios/{id}/companies to register it.
+   */
+  registration_candidate_id?: string;
 
   ticker_symbol?: string | null;
 }
@@ -3037,7 +3044,7 @@ export interface CompanyMatchResponse {
 
   country: string;
 
-  duns_number: string;
+  duns_number: string | null;
 
   external_id: string | null;
 
@@ -3050,6 +3057,13 @@ export interface CompanyMatchResponse {
   website_icon_url: string | null;
 
   is_out_of_business?: boolean | null;
+
+  /**
+   * Reference number for this company. Always present. Pass it as
+   * `registration_candidate_id` to POST /companies or POST
+   * /portfolios/{id}/companies to register it.
+   */
+  registration_candidate_id?: string;
 
   ticker_symbol?: string | null;
 }
@@ -3655,6 +3669,12 @@ export interface CompanyCreateParams {
   duns_number?: string | null;
 
   primary_name?: string | null;
+
+  /**
+   * The reference number of the company to register, as returned by a company search
+   * or match result.
+   */
+  registration_candidate_id?: string;
 
   registration_number?: string | null;
 
