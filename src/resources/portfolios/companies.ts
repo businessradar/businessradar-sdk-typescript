@@ -696,6 +696,12 @@ export interface CompanyCreateParams {
 
   primary_name?: string | null;
 
+  /**
+   * The reference number of the company to register, as returned by a company search
+   * or match result.
+   */
+  registration_candidate_id?: string;
+
   registration_number?: string | null;
 
   /**
