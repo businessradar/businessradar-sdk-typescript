@@ -11,8 +11,13 @@ export class Companies extends APIResource {
   /**
    * ### Register Company (Asynchronous)
    *
-   * Register a new company to Business Radar using its identification details. Once
-   * posted, Business Radar processes the request in the background.
+   * Register a new company to Business Radar. The main way is the
+   * `registration_candidate_id` returned by
+   * [GET /companies](/ext/v3/#/ext/ext_v3_companies_list) or
+   * [GET /companies/match](/ext/v3/#/ext/ext_v3_companies_match_retrieve);
+   * `registration_number` (with `country`) or `primary_name` (with `country`) are
+   * also accepted. Once posted, Business Radar processes the request in the
+   * background.
    *
    * To check the progress and/or retrieve the final result, you can use the
    * [GET /registrations/{registration_id}](/ext/v3/#/ext/ext_v3_registrations_retrieve)
@@ -50,7 +55,9 @@ export class Companies extends APIResource {
    *   `include_annotations`, `page_size`, and `next_key` do not change routing.
    *
    * The results include an `external_id` if the company is already registered in
-   * Business Radar.
+   * Business Radar, and always a `registration_candidate_id`: register or add a
+   * result via [POST /companies](/ext/v3/#/ext/ext_v3_companies_create) using that
+   * id.
    *
    * `page_size` defaults to 50 and accepts integers from 1 through 100; invalid
    * sizes or filters raise `ValidationError` (400). Internal results support
@@ -163,11 +170,10 @@ export class Companies extends APIResource {
    *   Bradstreet's Cleanse Match API and the single best candidate is returned, even
    *   if the company is not yet registered in Business Radar.
    *
-   * The result is a company object. When the company is already tracked in Business
-   * Radar its `external_id` is populated; when it only exists at Dun & Bradstreet
-   * the `external_id` is `null` and you can register it via
-   * [POST /companies](/ext/v3/#/ext/ext_v3_companies_create) using the returned
-   * `duns_number`.
+   * The result is a company object. `external_id` is set when the company is already
+   * tracked in Business Radar and `null` when it only exists at Dun & Bradstreet.
+   * Every result also carries a `registration_candidate_id`: register or add it via
+   * [POST /companies](/ext/v3/#/ext/ext_v3_companies_create) using that id.
    *
    * Returns `404` when no company can be matched.
    */
@@ -997,8 +1003,9 @@ export interface PortfolioCompanyDetail {
 /**
  * ### Company Registration
  *
- * Handles the registration of companies for monitoring. New companies can be
- * identified by DUNS number, local registration number, or name and country.
+ * Handles the registration of companies for monitoring. Identify the company with
+ * the `registration_candidate_id` from a company search or match result, or by
+ * local registration number or name and country.
  */
 export interface Registration {
   external_id: string;
@@ -1346,8 +1353,9 @@ export interface Registration {
 /**
  * ### Company Registration
  *
- * Handles the registration of companies for monitoring. New companies can be
- * identified by DUNS number, local registration number, or name and country.
+ * Handles the registration of companies for monitoring. Identify the company with
+ * the `registration_candidate_id` from a company search or match result, or by
+ * local registration number or name and country.
  */
 export interface RegistrationRequest {
   /**
